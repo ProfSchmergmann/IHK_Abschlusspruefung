@@ -311,15 +311,19 @@ Pakete
 \end_layout
 
 \begin_layout Subsubsection
-Writer
+Utils
+\end_layout
+
+\begin_layout Paragraph
+IO
+\end_layout
+
+\begin_layout Paragraph
+Algorithms
 \end_layout
 
 \begin_layout Subsubsection
-Reader
-\end_layout
-
-\begin_layout Subsubsection
-Main
+Models
 \end_layout
 
 \begin_layout Subsection
@@ -356,10 +360,6 @@ Benötigte Programme
 
 \begin_layout Subsection
 Installation
-\end_layout
-
-\begin_layout Subsection
-Einbinden als Bibliothek
 \end_layout
 
 \begin_layout Subsection
