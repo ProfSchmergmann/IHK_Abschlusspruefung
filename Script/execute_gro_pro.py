@@ -7,17 +7,22 @@ if __name__ == '__main__':
     LOG_STRING = '-log'
     outputfolder = 'output'
     inputfolder = 'input'
-    logoption = 'false'
+    logoption = 'true'
 
     if len(sys.argv) > 0:
-        for i in range(len(sys.argv)):
+        i = 0
+        while i < len(sys.argv):
             if i < len(sys.argv) - 1:
                 if sys.argv[i] == INPUT_FOLDER_STRING:
                     inputfolder = sys.argv[i + 1]
+                    i += 1
                 elif sys.argv[i] == OUTPUT_FOLDER_STRING:
                     outputfolder = sys.argv[i + 1]
+                    i += 1
                 elif sys.argv[i] == LOG_STRING:
                     logoption = sys.argv[i + 1]
+                    i += 1
+            i += 1
 
     subprocess.call(['java', '-jar', 'IHK_Abschlusspruefung.jar',
                      INPUT_FOLDER_STRING, inputfolder,

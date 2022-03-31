@@ -3,6 +3,7 @@ package com.cae.de;
 import com.cae.de.utils.LogOption;
 import com.cae.de.utils.io.ExternalStringFileReader;
 import com.cae.de.utils.io.ExternalStringFileWriter;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,7 +28,7 @@ public class Main {
   public static void main(String[] args) {
     var inputFolder = "input";
     var outputFolder = "output";
-    var logOption = LogOption.FALSE;
+    var logOption = LogOption.TRUE;
     for (var i = 0; i < args.length; i++) {
       if (i + 1 < args.length) {
         switch (args[i]) {
