@@ -25,6 +25,13 @@ tasks.named('jar') {
                 'Main-Class': 'com.cae.de.Main',
                 'archivesBaseName': 'IHK_Abschlusspruefung')
     }
+    delete "$buildDir/libs/execute_gro_pro.py"
+    doLast {
+        copy {
+            from("Script/execute_gro_pro.py")
+            into("$buildDir/libs")
+        }
+    }
 }
 
 java {

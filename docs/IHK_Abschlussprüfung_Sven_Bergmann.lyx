@@ -5,6 +5,10 @@
 \save_transient_properties true
 \origin unavailable
 \textclass scrartcl
+\begin_preamble
+\usepackage{csquotes}
+\end_preamble
+\options numbers=noendperiod
 \use_default_options true
 \maintain_unincluded_children false
 \language ngerman
@@ -37,7 +41,7 @@
 \pdf_bookmarksnumbered false
 \pdf_bookmarksopen false
 \pdf_bookmarksopenlevel 1
-\pdf_breaklinks false
+\pdf_breaklinks true
 \pdf_pdfborder false
 \pdf_colorlinks false
 \pdf_backref false
@@ -80,6 +84,7 @@
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
+\listings_params "basicstyle={\small\ttfamily},columns=flexible,breaklines=true"
 \tracking_changes false
 \output_changes false
 \html_math_output 0
@@ -314,20 +319,85 @@ Pakete
 Utils
 \end_layout
 
+\begin_layout Standard
+Das Paket 
+\begin_inset Quotes gld
+\end_inset
+
+com.cae.de.utils
+\begin_inset Quotes grd
+\end_inset
+
+ beinhaltet weitere Pakete, welche Klassen beinhalten, die in irgendeiner
+ Art zum Oberbegriff 
+\begin_inset Quotes gld
+\end_inset
+
+Utilities
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+Werkzeuge
+\begin_inset Quotes grd
+\end_inset
+
+ gehören.
+\end_layout
+
 \begin_layout Paragraph
 IO
+\end_layout
+
+\begin_layout Standard
+Wie der Name schon sagt, ist dies das Paket für die Ein- und Ausgabe von
+ Daten.
+ Es existieren vor allem die Interfaces 
+\begin_inset Quotes gld
+\end_inset
+
+Reader
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+Writer
+\begin_inset Quotes grd
+\end_inset
+
+, welche beide generisch geschrieben sind, sodass in den implementierenden
+ Klassen angegeben werden kann, welche Objekte eingelesen oder geschrieben
+ werden.
+ 
 \end_layout
 
 \begin_layout Paragraph
 Algorithms
 \end_layout
 
-\begin_layout Subsubsection
-Models
+\begin_layout Standard
+Das Paket Algorithms ist auch selbstsprechend und behinhaltet Klassen, welche
+ bekannte Algorithmen implementieren.
 \end_layout
 
-\begin_layout Subsection
-Kommandozeilentool
+\begin_layout Paragraph
+LogOption
+\end_layout
+
+\begin_layout Standard
+Die Klasse LogOption wird in der Main Methode genutzt um die Option für
+ das Logging festlegen zu können.
+ Der Nutzer hat dabei die Möglichkeit die Logging Ausgabe zu modifizieren.
+\end_layout
+
+\begin_layout Subsubsection
+Models
 \end_layout
 
 \begin_layout Section
@@ -354,24 +424,356 @@ Benutzeranleitung
 Ordnerstruktur
 \end_layout
 
+\begin_layout Standard
+An sich sollten die fertig gebaute 
+\begin_inset Quotes gld
+\end_inset
+
+.jar
+\begin_inset Quotes grd
+\end_inset
+
+ Datei zusammen mit dem ausführbaren Python Skript in einem Ordner liegen.
+ Die Testbeispiele sollten ebenfalls auf der gleichen Ebene in einem Ordner
+ vorhanden sein, wobei der Ordnername in beim Programmstart oder in dem
+ Skript angegeben werden kann.
+ Der Ordner für alle Ausgabe Dateien wird dann ebenso in dieser Ebene erstellt.
+ 
+\end_layout
+
 \begin_layout Subsection
 Benötigte Programme
 \end_layout
 
-\begin_layout Subsection
-Installation
+\begin_layout Standard
+Für die Ausführung der 
+\begin_inset Quotes gld
+\end_inset
+
+.jar
+\begin_inset Quotes grd
+\end_inset
+
+ Datei benötigt der Zielrechner zwingend eine Installation des Open JDK
+ 17
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://www.oracle.com/java/technologies/downloads/#java17
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, da das Java-Sprachlevel auf 17 gesetzt wurde.
+ Um das Python Skript auszuführen wird eine Python Installation gebraucht,
+ wobei ich die Version 3.10
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://www.python.org/downloads/release/python-3100/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ benutzt habe.
+ Um das Projekt zu bauen, wird 
+\begin_inset Quotes gld
+\end_inset
+
+gradle
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://gradle.org/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ genutzt.
 \end_layout
 
 \begin_layout Subsection
 Ausführen als Kommandozeilenprogramm
 \end_layout
 
+\begin_layout Standard
+Es gibt zwei Wege das Programm auszuführen, einmal direkt über Java und
+ einmal über das Python Skript, welches intern die 
+\begin_inset Quotes gld
+\end_inset
+
+.jar
+\begin_inset Quotes grd
+\end_inset
+
+ Datei aufruft.
+\end_layout
+
+\begin_layout Standard
+Das Programm nimmt Argumente entgegen, welche sind:
+\end_layout
+
+\begin_layout Itemize
+-inputfolder {
+\begin_inset Quotes gld
+\end_inset
+
+Name des Ordners mit den Eingabedateien
+\begin_inset Quotes grd
+\end_inset
+
+}
+\end_layout
+
+\begin_layout Itemize
+-outputfolder {
+\begin_inset Quotes gld
+\end_inset
+
+Name des Ordners, wohin die Ausgabedateien geschrieben werden
+\begin_inset Quotes grd
+\end_inset
+
+}
+\end_layout
+
+\begin_layout Itemize
+-log {
+\begin_inset Quotes gld
+\end_inset
+
+true
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+false
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+file
+\begin_inset Quotes grd
+\end_inset
+
+}
+\end_layout
+
+\begin_layout Standard
+Die Namen der Ordner werden immer relativ zum derzeitigen Ordnerpfad ausgewertet.
+ Ohne den Parameter 
+\begin_inset Quotes gld
+\end_inset
+
+-inputfolder
+\begin_inset Quotes grd
+\end_inset
+
+ wird das Programm den Ordner 
+\begin_inset Quotes gld
+\end_inset
+
+input
+\begin_inset Quotes grd
+\end_inset
+
+ auf der gleichen Ebene suchen und wenn dieser vorhanden ist, das Programm
+ ausführen, ansonsten das Programm direkt beenden.
+ Der Parameter 
+\begin_inset Quotes gld
+\end_inset
+
+-outputfolder
+\begin_inset Quotes grd
+\end_inset
+
+ muss nicht zwingend angegeben werden, da ohne diese Angabe alle Ausgabedaten
+ in den Ordner 
+\begin_inset Quotes gld
+\end_inset
+
+output
+\begin_inset Quotes grd
+\end_inset
+
+ geschrieben werden.
+ Die Option 
+\begin_inset Quotes gld
+\end_inset
+
+-log
+\begin_inset Quotes grd
+\end_inset
+
+ gibt an, ob der Benutzer Loggingausgaben in der Kommandozeile haben möchte
+ oder nicht, der default Wert hierfür ist 
+\begin_inset Quotes gld
+\end_inset
+
+false
+\begin_inset Quotes grd
+\end_inset
+
+, also kein Loggingoutput.
+ Falls die Option 
+\begin_inset Quotes gld
+\end_inset
+
+file
+\begin_inset Quotes grd
+\end_inset
+
+ angeben wurde, werden alle Logs in eine Datei 
+\begin_inset Quotes gld
+\end_inset
+
+log.txt
+\begin_inset Quotes grd
+\end_inset
+
+ auf der gleichen Ebene geschrieben.
+ 
+\end_layout
+
 \begin_layout Subsubsection
 Ausführen der JAR
 \end_layout
 
+\begin_layout Standard
+Um die 
+\begin_inset Quotes gld
+\end_inset
+
+.jar
+\begin_inset Quotes grd
+\end_inset
+
+ ausführen zu können, muss zumindest unter Windows der Pfad zum JDK 17 in
+ den Umgebungsvariablen gesetzt sein.
+ Mit einem Doppelklick auf die Datei wird der Code mit Standardargumenten
+ ausgeführt.
+ Ansonsten könnte der Benutzer auch über die Kommandozeile gehen und die
+ Programmargumente selbst setzen.
+ Das würde dann beispielsweise so aussehen: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lstlisting}
+\end_layout
+
+\begin_layout Plain Layout
+
+	java -jar IHK_Abschlusspruefung.jar -inputfolder input -outputfolder output
+ -log false
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lstlisting}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Ausführen des Python-Skripts
+\end_layout
+
+\begin_layout Standard
+Der Benutzer kann zusätzlich auch noch das Python-Skript 
+\begin_inset Quotes gld
+\end_inset
+
+execute_gro_pro.py
+\begin_inset Quotes grd
+\end_inset
+
+ ausführen, um das Program mit den Standardargumenten zu starten.
+ Hierfür ist eine Installation von Python notwendig, sowie die Verlinkung
+ zur Umgebungsvariablen.
+ Der Kommandozeilencode sieht dann beispielsweise so aus:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lstlisting}
+\end_layout
+
+\begin_layout Plain Layout
+
+	python execute_gro_pro.py
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lstlisting}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
