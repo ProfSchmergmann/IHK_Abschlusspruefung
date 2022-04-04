@@ -5,7 +5,7 @@ package com.cae.de.utils.io;
  *
  * @param <T> the object where the input should be parsed to
  */
-public interface Reader<T> {
+public interface IReader<T> {
 
   /**
    * Reads a specific object from a given source.

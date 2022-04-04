@@ -3,7 +3,6 @@ package com.cae.de;
 import com.cae.de.utils.LogOption;
 import com.cae.de.utils.io.ExternalStringFileReader;
 import com.cae.de.utils.io.ExternalStringFileWriter;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -23,7 +22,9 @@ public class Main {
   private static final String LOG_STRING = "-log";
   private static final Logger ROOT_LOGGER = Logger.getLogger("");
   private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
+  private static final String ITERATIONEN = "-i";
   public static FileHandler FILE_HANDLER;
+  private static int iterationen = 100;
 
   public static void main(String[] args) {
     var inputFolder = "input";
@@ -42,6 +43,7 @@ public class Main {
                   + "LOG_OPTIONS are \"true\", \"false\", \"file\". Default value is \"false\".");
             }
           }
+          case ITERATIONEN -> iterationen = Integer.parseInt(args[++i]);
         }
       }
     }

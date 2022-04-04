@@ -5,7 +5,7 @@ package com.cae.de.utils.io;
  *
  * @param <T> the object to be written
  */
-public interface Writer<T> {
+public interface IWriter<T> {
 
   /**
    * Writes a given object.
