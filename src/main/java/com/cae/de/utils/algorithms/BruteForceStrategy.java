@@ -9,7 +9,9 @@ public class BruteForceStrategy implements IStrategy {
   private static final Logger LOGGER = Logger.getLogger(BruteForceStrategy.class.getName());
 
   @Override
-  public void rechne(Landkarte landkarte) {}
+  public void rechne(Landkarte landkarte) {
+
+  }
 
   public String toString() {
     return this.getClass().getName();

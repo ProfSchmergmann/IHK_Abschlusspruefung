@@ -41,12 +41,19 @@ public class FileLandkartenReader implements IReader<Landkarte> {
         if (!beziehungen.containsKey(firstIdent)) {
           beziehungen.put(firstIdent, new HashSet<>());
         }
+        var staat = staatenListe.stream()
+            .filter(staat1 -> staat1.getIdentifier().equals(firstIdent))
+            .findFirst()
+            .get();
         for (var ident : splittedLine[1].split("\s")) {
-          beziehungen.get(firstIdent).add(ident);
-          if (!beziehungen.containsKey(ident)) {
-            beziehungen.put(ident, new HashSet<>());
+          var identifier = ident.trim();
+          if (identifier.equals(" ") || identifier.equals("")) continue;
+          staat.addNachbar(identifier);
+          beziehungen.get(firstIdent).add(identifier);
+          if (!beziehungen.containsKey(identifier)) {
+            beziehungen.put(identifier, new HashSet<>());
           }
-          beziehungen.get(ident).add(firstIdent);
+          beziehungen.get(identifier).add(firstIdent);
         }
       }
       return new Landkarte(staatenListe, kenngroesse, beziehungen, new BruteForceStrategy());

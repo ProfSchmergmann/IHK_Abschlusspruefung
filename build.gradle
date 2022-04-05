@@ -19,6 +19,7 @@ test {
 }
 
 tasks.named('jar') {
+    delete "$buildDir/libs/IHK_Abschlusspruefung.jar"
     manifest {
         attributes('Implementation-Title': project.name,
                 'Implementation-Version': project.version,
