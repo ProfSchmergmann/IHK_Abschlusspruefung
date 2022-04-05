@@ -12,9 +12,9 @@ import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class FileLandkartenReader  implements IReader<Landkarte> {
+public class FileLandkartenReader implements IReader<Landkarte> {
 
-  private final Logger LOGGER = Logger.getLogger(this.getClass().getName());
+  private static final Logger LOGGER = Logger.getLogger(FileLandkartenReader.class.getName());
 
   @Override
   public Landkarte readObject(String pathToFile) {

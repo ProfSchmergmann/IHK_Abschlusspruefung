@@ -10,11 +10,12 @@ import java.util.logging.Logger;
 /** Klasse zur Representation aller gegebenen Staaten und deren Beziehungen. */
 public class Landkarte {
 
+  private static final Logger LOGGER = Logger.getLogger(Landkarte.class.getName());
   private final ArrayList<Staat> staaten;
   private final String kenngroesse;
   private final HashMap<String, HashSet<String>> beziehungen;
   private final IStrategy strategy;
-  private final Logger LOGGER = Logger.getLogger(this.getClass().getName());
+  private int iterationen;
 
   /**
    * Konstruktor, welcher die Liste der Staaten, die Kenngröße, die Beziehungen und die Strategie
@@ -34,20 +35,31 @@ public class Landkarte {
     this.kenngroesse = kenngroesse;
     this.beziehungen = beziehungen;
     this.strategy = strategy;
-    LOGGER.log(
-        Level.INFO,
-        "Initialized new Landkarte with following properties:\n"
-            + "Staaten: "
-            + this.staaten
-            + "\n"
-            + "Kenngröße: "
-            + this.kenngroesse
-            + " \n"
-            + "Beziehungen: "
-            + this.beziehungen
-            + "\n"
-            + "Strategie: "
-            + this.strategy);
+    LOGGER.log(Level.INFO, "Initialized new Landkarte with following properties:\n" + this);
+  }
+
+  public int getIterationen() {
+    return this.iterationen;
+  }
+
+  public void setIterationen(int iterationen) {
+    this.iterationen = iterationen;
+  }
+
+  public ArrayList<Staat> getStaaten() {
+    return this.staaten;
+  }
+
+  public String getKenngroesse() {
+    return this.kenngroesse;
+  }
+
+  public HashMap<String, HashSet<String>> getBeziehungen() {
+    return this.beziehungen;
+  }
+
+  public IStrategy getStrategy() {
+    return this.strategy;
   }
 
   /**
@@ -61,5 +73,38 @@ public class Landkarte {
       this.strategy.rechne(this);
     }
     LOGGER.log(Level.INFO, "Finished computing " + iterationen + " Iterations.");
+  }
+
+  @Override
+  public String toString() {
+    return "Landkarte{"
+        + "staaten="
+        + this.staaten
+        + ", kenngroesse='"
+        + this.kenngroesse
+        + '\''
+        + ", beziehungen="
+        + this.beziehungen
+        + ", strategy="
+        + this.strategy
+        + ", iterationen="
+        + this.iterationen
+        + '}';
+  }
+
+  public double getMinX() {
+    return 0;
+  }
+
+  public double getMaxX() {
+    return 0;
+  }
+
+  public double getMinY() {
+    return 0;
+  }
+
+  public double getMaxY() {
+    return 0;
   }
 }

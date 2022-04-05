@@ -1,12 +1,13 @@
 package com.cae.de;
 
+import com.cae.de.models.Landkarte;
 import com.cae.de.utils.LogOption;
-import com.cae.de.utils.io.ExternalStringFileReader;
-import com.cae.de.utils.io.ExternalStringFileWriter;
+import com.cae.de.utils.io.FileLandkartenReader;
+import com.cae.de.utils.io.GnuPlotWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -66,27 +67,37 @@ public class Main {
       }
     }
 
-    var reader = new ExternalStringFileReader();
-    var fileContents = new ArrayList<String>();
+    var reader = new FileLandkartenReader();
+    var landkarten = new HashSet<Landkarte>();
     try {
-      fileContents.addAll(Files.list(Path.of(inputFolder))
-          .map(f -> reader.read(f.toString())).toList());
-    } catch (IOException e) {
+      landkarten.addAll(Files.list(Path.of(inputFolder))
+          .parallel()
+          .map(f -> reader.readObject(f.toString()))
+          .toList());
+    } catch (IOException  e) {
       LOGGER.log(Level.SEVERE, "Could not read input files inside " + inputFolder);
       System.exit(1);
     }
 
-    var writer = new ExternalStringFileWriter();
+    landkarten.stream()
+        .parallel()
+        .forEach(landkarte -> landkarte.setIterationen(iterationen));
+
+    landkarten.stream()
+        .parallel()
+        .forEach(landkarte -> landkarte.rechne(iterationen));
+
+    var writer = new GnuPlotWriter();
     try {
       if (!Files.exists(Path.of(outputFolder))) {
         Files.createDirectory(Path.of(outputFolder));
       }
-      for (var i = 0; i < fileContents.size(); i++) {
-        var outputPath = outputFolder + "/" + "test" + "_" + i + "_out.txt";
+      for (var i = 0; i < landkarten.size(); i++) {
+        var outputPath = outputFolder + "/" + "landkarte" + "_" + i + "_out.txt";
         if (Files.exists(Path.of(outputPath))) {
           LOGGER.log(Level.WARNING, "File " + outputPath + " exists. Going to override it.");
         }
-        writer.write(fileContents.get(i), outputPath);
+        landkarten.forEach(landkarte -> writer.write(landkarte, outputPath));
       }
     } catch (IOException e) {
       LOGGER.log(Level.SEVERE, "Could not write files to output folder: " + outputFolder);
