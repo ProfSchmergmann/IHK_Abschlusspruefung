@@ -42,21 +42,20 @@ public class FileLandkartenReader implements IReader<Landkarte> {
         for (var ident : splittedLine[1].split("\s")) {
           var identifier = ident.trim();
           if (identifier.equals(" ") || identifier.equals("")) continue;
-          var nachbarStaat = beziehungen
+          var nachbarStaatEntry = beziehungen
               .entrySet()
               .stream()
               .filter(entry -> entry.getKey().getIdentifier().equals(identifier))
               .findFirst()
-              .get()
-              .getKey();
-          beziehungen
+              .get();
+          var staatEntry = beziehungen
               .entrySet()
               .stream()
               .filter(entry -> entry.getKey().getIdentifier().equals(firstIdent))
               .findFirst()
-              .get()
-              .getValue()
-              .add(nachbarStaat);
+              .get();
+          staatEntry.getValue().add(nachbarStaatEntry.getKey());
+          nachbarStaatEntry.getValue().add(staatEntry.getKey());
         }
       }
       return new Landkarte(kenngroesse, beziehungen, new BruteForceStrategy());

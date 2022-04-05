@@ -5,31 +5,19 @@ import java.util.HashMap;
 public class Staat {
 
   private final String identifier;
-  private final double kenngroesse;
-  private final HashMap<String, Double> kreafte;
+  private double kenngroesse;
   private double laengengrad;
   private double breitengrad;
   private double x;
   private double y;
-  private double r;
 
   public Staat(String identifier, double kenngroesse, double laengengrad, double breitengrad) {
     this.identifier = identifier;
     this.kenngroesse = kenngroesse;
-    this.kreafte = new HashMap<>();
     this.laengengrad = laengengrad;
     this.y = laengengrad;
     this.breitengrad = breitengrad;
     this.x = breitengrad;
-    this.r = kenngroesse;
-  }
-
-  public double getR() {
-    return this.r;
-  }
-
-  public void setR(double r) {
-    this.r = r;
   }
 
   public String getIdentifier() {
@@ -40,8 +28,8 @@ public class Staat {
     return this.kenngroesse;
   }
 
-  public HashMap<String, Double> getKreafte() {
-    return this.kreafte;
+  public void setKenngroesse(double kenngroesse) {
+    this.kenngroesse = kenngroesse;
   }
 
   public double getLaengengrad() {
@@ -84,8 +72,6 @@ public class Staat {
         + '\''
         + ", kenngroesse="
         + this.kenngroesse
-        + ", kreafte="
-        + this.kreafte
         + ", laengengrad="
         + this.laengengrad
         + ", breitengrad="
@@ -94,8 +80,6 @@ public class Staat {
         + this.x
         + ", y="
         + this.y
-        + ", r="
-        + this.r
         + '}';
   }
 }

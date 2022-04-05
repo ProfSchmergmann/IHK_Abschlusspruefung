@@ -75,17 +75,16 @@ public class Main {
           .map(f -> reader.readObject(f.toString()))
           .toList());
     } catch (IOException  e) {
-      LOGGER.log(Level.SEVERE, "Konnte input Dateien innerhalb " + inputFolder + " nicht lesen.");
+      LOGGER.log(Level.SEVERE,
+          "Konnte input Dateien innerhalb " + inputFolder + " nicht lesen.");
       System.exit(1);
     }
 
-    landkarten.stream()
-        .parallel()
-        .forEach(landkarte -> landkarte.setIterationen(iterationen));
+    landkarten.forEach(Landkarte::normalisiereKenngroesse);
 
-    landkarten.stream()
-        .parallel()
-        .forEach(landkarte -> landkarte.rechne(iterationen));
+    landkarten.forEach(landkarte -> landkarte.setIterationen(iterationen));
+
+    landkarten.forEach(landkarte -> landkarte.rechne(iterationen));
 
     var writer = new GnuPlotWriter();
     try {
@@ -95,12 +94,14 @@ public class Main {
       for (var i = 0; i < landkarten.size(); i++) {
         var outputPath = outputFolder + "/" + "landkarte" + "_" + i + "_out.txt";
         if (Files.exists(Path.of(outputPath))) {
-          LOGGER.log(Level.WARNING, "Datei " + outputPath + " existiert. Sie wird überschrieben.");
+          LOGGER.log(Level.WARNING,
+              "Datei " + outputPath + " existiert. Sie wird überschrieben.");
         }
          writer.write(landkarten.get(i), outputPath);
       }
     } catch (IOException e) {
-      LOGGER.log(Level.SEVERE, "Konnte keine Dateien in den output Ordner: " + outputFolder + " schreiben.");
+      LOGGER.log(Level.SEVERE,
+          "Konnte keine Dateien in den output Ordner: " + outputFolder + " schreiben.");
       System.exit(1);
     }
   }

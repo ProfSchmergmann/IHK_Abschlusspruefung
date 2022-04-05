@@ -51,7 +51,7 @@ public class GnuPlotWriter implements IWriter<Landkarte> {
           .append("\s")
           .append(staat.getY())
           .append("\s")
-          .append(staat.getR())
+          .append(staat.getKenngroesse())
           .append("\s")
           .append(staat.getIdentifier())
           .append("\s")

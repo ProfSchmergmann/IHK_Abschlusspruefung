@@ -1,0 +1,14 @@
+reset
+set xrange [3.5000000000000004:6.833333333333333]
+set yrange [-2.666666666666666:2.666666666666666]
+set size ratio 1.0
+set title "Test, Iterationen: 100"
+unset xtics
+unset ytics
+$data << EOD
+5.833333333333333 0.0 1.0 2 0
+4.166666666666667 0.0 0.6666666666666666 1 1
+EOD
+plot \
+'$data' using 1:2:3:5 with circles lc var notitle, \
+'$data' using 1:2:4:5 with labels font "arial,9" tc variable notitle

@@ -34,7 +34,22 @@ public class Landkarte {
     this.kreafte = new HashMap<>();
     this.beziehungen.forEach((key, value) -> this.kreafte.put(key, new HashMap<>()));
     LOGGER.log(
-        Level.INFO, "Neue Landkarte mit der Kenngröße: " + this.kenngroesse + " initialisiert.");
+        Level.INFO,
+        "Neue Landkarte mit der Kenngröße: "
+            + this.kenngroesse
+            + " und den Beziehungen: "
+            + this.getBeziehungentoString()
+            + " initialisiert.");
+  }
+
+  public void normalisiereKenngroesse() {
+    var maxKenngroesse = this.getStaaten().get(0).getKenngroesse();
+    for (var staat : this.getStaaten()) {
+      if (staat.getKenngroesse() > maxKenngroesse) maxKenngroesse = staat.getKenngroesse();
+    }
+    for (var staat : this.getStaaten()) {
+      staat.setKenngroesse(staat.getKenngroesse() / maxKenngroesse);
+    }
   }
 
   public void addKraft(Staat staat, Staat nachbarStaat, double kraft) {
@@ -74,36 +89,36 @@ public class Landkarte {
   }
 
   public double getMinX() {
-    double minX = this.getStaaten().get(0).getX() - this.getStaaten().get(0).getR();
+    double minX = this.getStaaten().get(0).getX() - this.getStaaten().get(0).getKenngroesse();
     for (var staat : this.getStaaten()) {
-      var value = staat.getX() - staat.getR();
+      var value = staat.getX() - staat.getKenngroesse();
       if (value < minX) minX = value;
     }
     return minX;
   }
 
   public double getMaxX() {
-    double maxX = this.getStaaten().get(0).getX() + this.getStaaten().get(0).getR();
+    double maxX = this.getStaaten().get(0).getX() + this.getStaaten().get(0).getKenngroesse();
     for (var staat : this.getStaaten()) {
-      var value = staat.getX() + staat.getR();
+      var value = staat.getX() + staat.getKenngroesse();
       if (value > maxX) maxX = value;
     }
     return maxX;
   }
 
   public double getMinY() {
-    double minY = this.getStaaten().get(0).getY() - this.getStaaten().get(0).getR();
+    double minY = this.getStaaten().get(0).getY() - this.getStaaten().get(0).getKenngroesse();
     for (var staat : this.getStaaten()) {
-      var value = staat.getY() - staat.getR();
+      var value = staat.getY() - staat.getKenngroesse();
       if (value < minY) minY = value;
     }
     return minY;
   }
 
   public double getMaxY() {
-    double maxY = this.getStaaten().get(0).getY() + this.getStaaten().get(0).getR();
+    double maxY = this.getStaaten().get(0).getY() + this.getStaaten().get(0).getKenngroesse();
     for (var staat : this.getStaaten()) {
-      var value = staat.getY() + staat.getR();
+      var value = staat.getY() + staat.getKenngroesse();
       if (value > maxY) maxY = value;
     }
     return maxY;
@@ -145,6 +160,22 @@ public class Landkarte {
         + ", iterationen="
         + this.iterationen
         + '}';
+  }
+
+  public String getBeziehungentoString() {
+    var s = new StringBuilder();
+    for (var entry : this.beziehungen.entrySet()) {
+      s.append(entry.getKey().getIdentifier()).append(": [");
+      boolean appended = false;
+      for (var nachbar : entry.getValue()) {
+        s.append(nachbar.getIdentifier()).append(", ");
+        appended = true;
+      }
+      if (appended) s.delete(s.length() - 2, s.length());
+      s.append("]").append(", ");
+    }
+    s.delete(s.length() - 2, s.length());
+    return s.toString();
   }
 
   public HashMap<Staat, HashMap<Staat, Double>> getKreafte() {

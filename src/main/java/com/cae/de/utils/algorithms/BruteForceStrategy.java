@@ -15,20 +15,20 @@ public class BruteForceStrategy implements IStrategy {
 
     for (var entry : landkarte.getBeziehungen().entrySet()) {
       var staat = entry.getKey();
-      var k1 = new Kreis(staat.getX(), staat.getY(), staat.getR());
+      var k1 = new Kreis(staat.getX(), staat.getY(), staat.getKenngroesse());
       for (var n : entry.getValue()) {
-        var k2 = new Kreis(n.getX(), n.getY(), n.getR());
+        var k2 = new Kreis(n.getX(), n.getY(), n.getKenngroesse());
         landkarte.addKraft(staat, n, k1.getAbstand(k2));
       }
     }
 
     for (var entry : landkarte.getBeziehungen().entrySet()) {
       var staat = entry.getKey();
-      var k1 = new Kreis(staat.getX(), staat.getY(), staat.getR());
+      var k1 = new Kreis(staat.getX(), staat.getY(), staat.getKenngroesse());
       for (var n : landkarte.getBeziehungen().entrySet()) {
         var staat2 = n.getKey();
-        if (staat == staat2) continue;
-        var k2 = new Kreis(staat2.getX(), staat2.getY(), staat2.getR());
+        if (staat == staat2 || landkarte.getBeziehungen().get(staat).contains(staat2)) continue;
+        var k2 = new Kreis(staat2.getX(), staat2.getY(), staat2.getKenngroesse());
         if (k1.getAbstand(k2) < 0) landkarte.addKraft(staat, staat2, k1.getAbstand(k2));
       }
     }
@@ -39,12 +39,14 @@ public class BruteForceStrategy implements IStrategy {
         var p1 = new Punkt(staat.getX(), staat.getY());
         var nachbarstaat = n.getKey();
         var p2 = new Punkt(nachbarstaat.getX(), nachbarstaat.getY());
-        var p1new = (n.getValue() > 0) ?
-            p1.verschiebeInRichtung(p2, n.getValue() / 2) :
-            p1.verschiebeInGegenrichtung(p2, n.getValue() / 2);
-        var p2new = (n.getValue() > 0) ?
-            p2.verschiebeInRichtung(p1, n.getValue() / 2) :
-            p2.verschiebeInGegenrichtung(p1, n.getValue() / 2);
+        var p1new =
+            (n.getValue() > 0)
+                ? p1.verschiebeInRichtung(p2, n.getValue() / 2)
+                : p1.verschiebeInGegenrichtung(p2, n.getValue() / 2);
+        var p2new =
+            (n.getValue() > 0)
+                ? p2.verschiebeInRichtung(p1, n.getValue() / 2)
+                : p2.verschiebeInGegenrichtung(p1, n.getValue() / 2);
         staat.setX(p1new.x());
         staat.setY(p1new.y());
         nachbarstaat.setX(p2new.x());

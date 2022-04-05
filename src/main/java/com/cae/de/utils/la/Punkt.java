@@ -16,11 +16,15 @@ public record Punkt(double x, double y) {
   }
 
   public Punkt verschiebeInGegenrichtung(Punkt p, double wert) {
-    return this.addiere(
-        new Punkt(this.x - p.x, this.y - p.y)
+    return this.subtrahiere(
+        new Punkt(p.x - this.x, p.y - this.y)
             .normalisiere()
             .multipliziereMitSkalar(wert)
     );
+  }
+
+  private Punkt subtrahiere(Punkt p) {
+    return new Punkt(this.x - p.x, this.y - p.y);
   }
 
   private Punkt normalisiere() {

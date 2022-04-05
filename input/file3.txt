@@ -1,0 +1,6 @@
+Test
+# Staat Bierkonsum Längengrad Breitengrad
+1	200	0	0
+2	300	10	10
+# Nachbarschaften
+1: 2
