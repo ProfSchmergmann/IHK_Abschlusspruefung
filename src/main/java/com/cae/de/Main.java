@@ -7,7 +7,7 @@ import com.cae.de.utils.io.GnuPlotWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,8 +40,8 @@ public class Main {
             try {
               logOption = LogOption.getOption(args[++i]);
             } catch (IllegalArgumentException e) {
-              LOGGER.log(Level.WARNING, "Could not cast \"" + args[i] + "\" to any LOG_OPTION."
-                  + "LOG_OPTIONS are \"true\", \"false\", \"file\". Default value is \"false\".");
+              LOGGER.log(Level.WARNING, "Konnte \"" + args[i] + "\" keiner LOG_OPTION zuordnen."
+                  + "LOG_OPTIONen sind \"true\", \"false\", \"file\". Der default Wert ist \"false\".");
             }
           }
           case ITERATIONEN -> iterationen = Integer.parseInt(args[++i]);
@@ -56,8 +56,8 @@ public class Main {
           FILE_HANDLER = new FileHandler("IHK_Abschlusspruefung.log", true);
           ROOT_LOGGER.addHandler(FILE_HANDLER);
         } catch (IOException e) {
-          ROOT_LOGGER.log(Level.WARNING, "Could not attach FileHandler to Logger. "
-              + "Logs are written to the console now.");
+          ROOT_LOGGER.log(Level.WARNING, "Konnte keinen FileHandler zum Logger hinzufügen. "
+              + "Logs werden in die Konsole geschrieben.");
         }
       }
       case FALSE -> {
@@ -68,14 +68,14 @@ public class Main {
     }
 
     var reader = new FileLandkartenReader();
-    var landkarten = new HashSet<Landkarte>();
+    var landkarten = new ArrayList<Landkarte>();
     try {
       landkarten.addAll(Files.list(Path.of(inputFolder))
           .parallel()
           .map(f -> reader.readObject(f.toString()))
           .toList());
     } catch (IOException  e) {
-      LOGGER.log(Level.SEVERE, "Could not read input files inside " + inputFolder);
+      LOGGER.log(Level.SEVERE, "Konnte input Dateien innerhalb " + inputFolder + " nicht lesen.");
       System.exit(1);
     }
 
@@ -95,12 +95,12 @@ public class Main {
       for (var i = 0; i < landkarten.size(); i++) {
         var outputPath = outputFolder + "/" + "landkarte" + "_" + i + "_out.txt";
         if (Files.exists(Path.of(outputPath))) {
-          LOGGER.log(Level.WARNING, "File " + outputPath + " exists. Going to override it.");
+          LOGGER.log(Level.WARNING, "Datei " + outputPath + " existiert. Sie wird überschrieben.");
         }
-        landkarten.forEach(landkarte -> writer.write(landkarte, outputPath));
+         writer.write(landkarten.get(i), outputPath);
       }
     } catch (IOException e) {
-      LOGGER.log(Level.SEVERE, "Could not write files to output folder: " + outputFolder);
+      LOGGER.log(Level.SEVERE, "Konnte keine Dateien in den output Ordner: " + outputFolder + " schreiben.");
       System.exit(1);
     }
   }

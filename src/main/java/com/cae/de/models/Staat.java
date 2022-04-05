@@ -1,15 +1,12 @@
 package com.cae.de.models;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class Staat {
 
   private final String identifier;
   private final double kenngroesse;
-  private final HashSet<String> nachbarn;
-  private final HashMap<String, Double> abstossungsKreafte;
-  private final HashMap<String, Double> anziehungsKreafte;
+  private final HashMap<String, Double> kreafte;
   private double laengengrad;
   private double breitengrad;
   private double x;
@@ -19,22 +16,12 @@ public class Staat {
   public Staat(String identifier, double kenngroesse, double laengengrad, double breitengrad) {
     this.identifier = identifier;
     this.kenngroesse = kenngroesse;
-    this.nachbarn = new HashSet<>();
-    this.abstossungsKreafte = new HashMap<>();
-    this.anziehungsKreafte = new HashMap<>();
+    this.kreafte = new HashMap<>();
     this.laengengrad = laengengrad;
     this.y = laengengrad;
     this.breitengrad = breitengrad;
     this.x = breitengrad;
     this.r = kenngroesse;
-  }
-
-  public HashSet<String> getNachbarn() {
-    return this.nachbarn;
-  }
-
-  public boolean addNachbar(String identifier) {
-    return this.nachbarn.add(identifier);
   }
 
   public double getR() {
@@ -53,12 +40,8 @@ public class Staat {
     return this.kenngroesse;
   }
 
-  public HashMap<String, Double> getAbstossungsKreafte() {
-    return this.abstossungsKreafte;
-  }
-
-  public HashMap<String, Double> getAnziehungsKreafte() {
-    return this.anziehungsKreafte;
+  public HashMap<String, Double> getKreafte() {
+    return this.kreafte;
   }
 
   public double getLaengengrad() {
@@ -101,12 +84,8 @@ public class Staat {
         + '\''
         + ", kenngroesse="
         + this.kenngroesse
-        + ", nachbarn="
-        + this.nachbarn
-        + ", abstossungsKreafte="
-        + this.abstossungsKreafte
-        + ", anziehungsKreafte="
-        + this.anziehungsKreafte
+        + ", kreafte="
+        + this.kreafte
         + ", laengengrad="
         + this.laengengrad
         + ", breitengrad="

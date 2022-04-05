@@ -14,19 +14,20 @@ public class GnuPlotWriter implements IWriter<Landkarte> {
 
   @Override
   public boolean write(Landkarte landkarte, String pathToFile) {
+    var range = landkarte.getRangeForGnuPlot();
     var s = new StringBuilder();
     s.append("reset")
         .append("\n")
         .append("set xrange [")
-        .append(landkarte.getMinX())
+        .append(range.key().key())
         .append(":")
-        .append(landkarte.getMaxX())
+        .append(range.key().value())
         .append("]")
         .append("\n")
         .append("set yrange [")
-        .append(landkarte.getMinY())
+        .append(range.value().key())
         .append(":")
-        .append(landkarte.getMaxY())
+        .append(range.value().value())
         .append("]")
         .append("\n")
         .append("set size ratio 1.0")
@@ -62,16 +63,16 @@ public class GnuPlotWriter implements IWriter<Landkarte> {
         .append("\n")
         .append("plot \\")
         .append("\n")
-        .append("'$data' using 1:2:3:5 with circles 1c var notitle, \\")
+        .append("'$data' using 1:2:3:5 with circles lc var notitle, \\")
         .append("\n")
         .append("'$data' using 1:2:4:5 with labels font \"arial,9\" tc variable notitle");
 
     try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(pathToFile))) {
-      LOGGER.log(Level.INFO, "Writing to file: " + pathToFile);
+      LOGGER.log(Level.INFO, "Schreibe Landkarte mit Kenngröße: " + landkarte.getKenngroesse() + " in die Datei: " + pathToFile);
       bufferedWriter.write(s.toString());
       return true;
     } catch (IOException e) {
-      LOGGER.log(Level.WARNING, "Could not write to file: " + pathToFile);
+      LOGGER.log(Level.WARNING, "Konnte nicht in die Datei: " + pathToFile + " schreiben.");
       return false;
     }
   }

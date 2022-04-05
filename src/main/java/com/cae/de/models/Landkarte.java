@@ -1,9 +1,10 @@
 package com.cae.de.models;
 
+import com.cae.de.utils.Pair;
 import com.cae.de.utils.algorithms.IStrategy;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,9 +12,9 @@ import java.util.logging.Logger;
 public class Landkarte {
 
   private static final Logger LOGGER = Logger.getLogger(Landkarte.class.getName());
-  private final ArrayList<Staat> staaten;
   private final String kenngroesse;
-  private final HashMap<String, HashSet<String>> beziehungen;
+  private final HashMap<Staat, HashSet<Staat>> beziehungen;
+  private final HashMap<Staat, HashMap<Staat, Double>> kreafte;
   private final IStrategy strategy;
   private int iterationen;
 
@@ -21,21 +22,27 @@ public class Landkarte {
    * Konstruktor, welcher die Liste der Staaten, die Kenngröße, die Beziehungen und die Strategie
    * setzt.
    *
-   * @param staaten die Staaten, welche vorher eingelesen werden
    * @param kenngroesse die Kenngröße (z. B.: Bierkonsum)
-   * @param beziehungen die Nachbarschaftsbeziehungen
+   * @param beziehungen die Nachbarschaftsbeziehungen der Staaten
    * @param strategy die Strategie für die Bewegung der Mittelpunkte
    */
   public Landkarte(
-      ArrayList<Staat> staaten,
-      String kenngroesse,
-      HashMap<String, HashSet<String>> beziehungen,
-      IStrategy strategy) {
-    this.staaten = staaten;
+      String kenngroesse, HashMap<Staat, HashSet<Staat>> beziehungen, IStrategy strategy) {
     this.kenngroesse = kenngroesse;
     this.beziehungen = beziehungen;
     this.strategy = strategy;
-    LOGGER.log(Level.INFO, "Initialized new Landkarte with following properties:\n" + this);
+    this.kreafte = new HashMap<>();
+    this.beziehungen.forEach((key, value) -> this.kreafte.put(key, new HashMap<>()));
+    LOGGER.log(
+        Level.INFO, "Neue Landkarte mit der Kenngröße: " + this.kenngroesse + " initialisiert.");
+  }
+
+  public void addKraft(Staat staat, Staat nachbarStaat, double kraft) {
+    this.kreafte.get(staat).put(nachbarStaat, kraft);
+  }
+
+  public void removeKraefte() {
+    this.kreafte.forEach((key, value) -> value.clear());
   }
 
   public int getIterationen() {
@@ -46,16 +53,8 @@ public class Landkarte {
     this.iterationen = iterationen;
   }
 
-  public ArrayList<Staat> getStaaten() {
-    return this.staaten;
-  }
-
   public String getKenngroesse() {
     return this.kenngroesse;
-  }
-
-  public HashMap<String, HashSet<String>> getBeziehungen() {
-    return this.beziehungen;
   }
 
   public IStrategy getStrategy() {
@@ -69,22 +68,78 @@ public class Landkarte {
    */
   public void rechne(int iterationen) {
     for (var i = 0; i < iterationen; i++) {
-      LOGGER.log(Level.INFO, "Doing " + i + " Iteration.");
       this.strategy.rechne(this);
     }
-    LOGGER.log(Level.INFO, "Finished computing " + iterationen + " Iterations.");
+    LOGGER.log(Level.INFO, "Fertig mit " + iterationen + " Iterationen.");
+  }
+
+  public double getMinX() {
+    double minX = this.getStaaten().get(0).getX() - this.getStaaten().get(0).getR();
+    for (var staat : this.getStaaten()) {
+      var value = staat.getX() - staat.getR();
+      if (value < minX) minX = value;
+    }
+    return minX;
+  }
+
+  public double getMaxX() {
+    double maxX = this.getStaaten().get(0).getX() + this.getStaaten().get(0).getR();
+    for (var staat : this.getStaaten()) {
+      var value = staat.getX() + staat.getR();
+      if (value > maxX) maxX = value;
+    }
+    return maxX;
+  }
+
+  public double getMinY() {
+    double minY = this.getStaaten().get(0).getY() - this.getStaaten().get(0).getR();
+    for (var staat : this.getStaaten()) {
+      var value = staat.getY() - staat.getR();
+      if (value < minY) minY = value;
+    }
+    return minY;
+  }
+
+  public double getMaxY() {
+    double maxY = this.getStaaten().get(0).getY() + this.getStaaten().get(0).getR();
+    for (var staat : this.getStaaten()) {
+      var value = staat.getY() + staat.getR();
+      if (value > maxY) maxY = value;
+    }
+    return maxY;
+  }
+
+  public Pair<Pair<Double, Double>, Pair<Double, Double>> getRangeForGnuPlot() {
+    var xMin = this.getMinX();
+    var xMax = this.getMaxX();
+    var yMin = this.getMinY();
+    var yMax = this.getMaxY();
+    var absX = Math.abs(xMax - xMin);
+    var absY = Math.abs(yMax - yMin);
+    var diff = Double.compare(absX, absY);
+    LOGGER.log(Level.INFO, "Die Differenz zwischen den x und y Werten war: " + diff);
+    if (diff > 0) {
+      LOGGER.log(Level.INFO, "Daher wird y mit " + absX / 2 + " angepasst");
+      yMin -= absX / 2;
+      yMax += absX / 2;
+    } else if (diff < 0) {
+      LOGGER.log(Level.INFO, "Daher wird x mit " + absY / 2 + " angepasst");
+      xMin -= absY / 2;
+      xMax += absX / 2;
+    }
+    return new Pair<>(new Pair<>(xMin, xMax), new Pair<>(yMin, yMax));
   }
 
   @Override
   public String toString() {
     return "Landkarte{"
-        + "staaten="
-        + this.staaten
-        + ", kenngroesse='"
+        + "kenngroesse='"
         + this.kenngroesse
         + '\''
         + ", beziehungen="
         + this.beziehungen
+        + ", kreafte="
+        + this.kreafte
         + ", strategy="
         + this.strategy
         + ", iterationen="
@@ -92,19 +147,15 @@ public class Landkarte {
         + '}';
   }
 
-  public double getMinX() {
-    return 0;
+  public HashMap<Staat, HashMap<Staat, Double>> getKreafte() {
+    return this.kreafte;
   }
 
-  public double getMaxX() {
-    return 0;
+  public HashMap<Staat, HashSet<Staat>> getBeziehungen() {
+    return this.beziehungen;
   }
 
-  public double getMinY() {
-    return 0;
-  }
-
-  public double getMaxY() {
-    return 0;
+  public List<Staat> getStaaten() {
+    return this.beziehungen.keySet().stream().toList();
   }
 }
