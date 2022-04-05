@@ -16,6 +16,7 @@ public record Kreis(double x, double y, double r) {
    */
   public double getAbstand(Kreis k) {
     var dM1M2 = Math.sqrt((k.x - this.x) * (k.x - this.x) + (k.y - this.y) * (k.y - this.y));
+    if (dM1M2 < (k.r + this.r)) return -dM1M2;
     return dM1M2 - (this.r + k.r);
   }
 

@@ -39,6 +39,7 @@ public class BruteForceStrategy implements IStrategy {
         var p1 = new Punkt(staat.getX(), staat.getY());
         var nachbarstaat = n.getKey();
         var p2 = new Punkt(nachbarstaat.getX(), nachbarstaat.getY());
+        if (staat.getKenngroesse() + nachbarstaat.getKenngroesse() > n.getValue()) continue;
         var p1new =
             (n.getValue() > 0)
                 ? p1.verschiebeInRichtung(p2, n.getValue() / 2)
