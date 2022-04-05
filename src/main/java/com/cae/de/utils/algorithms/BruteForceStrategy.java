@@ -43,14 +43,8 @@ public class BruteForceStrategy implements IStrategy {
             (n.getValue() > 0)
                 ? p1.verschiebeInRichtung(p2, n.getValue() / 2)
                 : p1.verschiebeInGegenrichtung(p2, n.getValue() / 2);
-        var p2new =
-            (n.getValue() > 0)
-                ? p2.verschiebeInRichtung(p1, n.getValue() / 2)
-                : p2.verschiebeInGegenrichtung(p1, n.getValue() / 2);
         staat.setX(p1new.x());
         staat.setY(p1new.y());
-        nachbarstaat.setX(p2new.x());
-        nachbarstaat.setY(p2new.y());
       }
     }
 
