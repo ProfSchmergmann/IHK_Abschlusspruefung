@@ -26,7 +26,8 @@ public class Staat {
   }
 
   public double getR() {
-    return this.r;
+    return this.kenngroesse;
+    //    return this.r;
   }
 
   public void setR(double r) {

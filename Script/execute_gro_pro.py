@@ -9,7 +9,7 @@ if __name__ == '__main__':
     outputfolder = 'output'
     inputfolder = 'input'
     logoption = 'true'
-    iterationen = 100
+    iterationen = '100'
 
     if len(sys.argv) > 0:
         i = 0

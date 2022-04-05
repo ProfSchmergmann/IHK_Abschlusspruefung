@@ -36,6 +36,7 @@ public class GnuPlotWriter implements IWriter<Landkarte> {
         .append(", Iterationen: ")
         .append(landkarte.getIterationen())
         .append("\"")
+        .append("\n")
         .append("unset xtics")
         .append("\n")
         .append("unset ytics")
