@@ -68,6 +68,9 @@ public class BruteForceStrategy implements IStrategy {
 
     // Setze für jeden Staat einen neuen Mittelpunkt, basieren auf den vorher ausgerechneten Punkten
     for (var staat : landkarte.getSortedStaaten()) {
+      // Bewege den Staat mit den meisten Nachbarn nicht
+      if (staat.getIdentifier().equals(landkarte.getStaatMitMeistenNachbarn().getIdentifier()))
+        continue;
       var p = Punkt.getMittelpunkt(verschiebungen.get(staat.getIdentifier()));
       LOGGER.log(
           Level.INFO,
@@ -80,6 +83,8 @@ public class BruteForceStrategy implements IStrategy {
       staat.setX(p.x());
       staat.setY(p.y());
     }
+
+    landkarte.removeKraefte();
   }
 
   public String toString() {

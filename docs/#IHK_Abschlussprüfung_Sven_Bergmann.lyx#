@@ -546,7 +546,27 @@ Beziehungen
 
  eingelesen, wobei pro Zeile zuerst nach dem Schlüssel gesucht wird, und
  danach jeweils der Staat dem Set hinzugefügt wird.
+ Eine Darstellung als Nassi-Shneiderman Diagram ist in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Einlesen-der-Landkarte"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
  
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Einlesen-der-Landkarte"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ vorhanden.
 \end_layout
 
 \begin_layout Subsection
@@ -561,7 +581,38 @@ Der Algorithmus orientiert sich sehr an der Angabe des Verlaufsdiagramms
  So wird dem Problem aus dem Weg gegangen, dass schon direkt am Anfang Kreise
  überlappen.
  Der Algorithmus startet nun und berechnet bei jedem Durchlauf zuerst die
- Kräfte der sich überlappenden Kreise.
+ Kräfte der sich überlappenden Kreise
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Berechnung-der-Kräfte"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Berechnung-der-Kräfte"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
  Sind also die Staaten keine direkten Nachbarn voneinander, überlappen sich
  aber die von den Kenngrößen und Mittelpunktskoordinaten aufgespannten Kreise,
  wird dem Attribut 
@@ -622,7 +673,30 @@ Landkarte
 \end_inset
 
  ausgelesen.
- Die Liste kann danach zusammen mit allen anderen Attribu
+ Die Liste kann danach zusammen mit allen anderen Attributen geschrieben
+ werden.
+ Der Workflow hierfür ist ebenfalls in einem Nassi-Shneiderman Diagram in
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Ausgabe-der-Landkarte"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Ausgabe-der-Landkarte"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ dargestellt.
 \end_layout
 
 \begin_layout Section
@@ -645,7 +719,7 @@ Main
 
  Klasse zusammen mit zwei anderen Paketen
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 s.
@@ -685,7 +759,7 @@ models
 
 
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 s.
@@ -741,7 +815,7 @@ utils
 
 
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 s.
@@ -796,7 +870,7 @@ algorithm
 
 
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 s.
@@ -834,12 +908,33 @@ io
 \end_inset
 
 
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand formatted
 reference "fig:Paket-io"
 plural "false"
 caps "false"
 noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Paket-io"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -852,12 +947,33 @@ la
 \end_inset
 
 
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand formatted
 reference "fig:Paket-la"
 plural "false"
 caps "false"
 noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Paket-la"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -1845,6 +1961,86 @@ name "fig:Einlesen-der-Landkarte"
 
 \begin_inset Graphics
 	filename umls/Einlesen_der_Landkarte_nassi.pdf
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Ausgabe der Landkarte
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Ausgabe-der-Landkarte"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename umls/Ausgabe_der_Landkarte_nassi.pdf
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Berechnung der Kräfte
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Berechnung-der-Kräfte"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename umls/Berechnung_der_Kräfte_nassi.pdf
 	width 100text%
 
 \end_inset

@@ -17,7 +17,12 @@ public class Landkarte {
   private final HashMap<Staat, HashSet<Staat>> beziehungen;
   private final HashMap<Staat, HashMap<Staat, Double>> kreafte;
   private final IStrategy strategy;
+  private final Staat staatMitMeisstenNachbarn;
   private int iterationen;
+
+  public Staat getStaatMitMeistenNachbarn() {
+    return this.staatMitMeisstenNachbarn;
+  }
 
   /**
    * Konstruktor, welcher die Liste der Staaten, die Kenngröße, die Beziehungen und die Strategie
@@ -34,6 +39,12 @@ public class Landkarte {
     this.strategy = strategy;
     this.kreafte = new HashMap<>();
     this.beziehungen.forEach((key, value) -> this.kreafte.put(key, new HashMap<>()));
+    this.staatMitMeisstenNachbarn =
+        this.getBeziehungen().entrySet().stream()
+            .sorted(Comparator.comparingInt(e -> e.getValue().size()))
+            .toList()
+            .get(0)
+            .getKey();
     LOGGER.log(
         Level.INFO,
         "Neue Landkarte mit der Kenngröße: "
