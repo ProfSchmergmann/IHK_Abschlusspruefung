@@ -1,11 +1,23 @@
 package com.cae.de.utils.la;
 
+import java.util.HashSet;
+
 /**
  * Record Punkt für Berechnungen.
  * @param x die x Koordinate
  * @param y die y Koordinate
  */
 public record Punkt(double x, double y) {
+
+  public static Punkt getMittelpunkt(HashSet<Punkt> punkte) {
+    var x = 0.0;
+    var y = 0.0;
+    for (var punkt: punkte) {
+      x+= punkt.x;
+      y+= punkt.y;
+    }
+    return new Punkt(x / punkte.size(), y / punkte.size());
+  }
 
   public Punkt verschiebeInRichtung(Punkt p, double wert) {
     return this.addiere(
@@ -21,6 +33,10 @@ public record Punkt(double x, double y) {
             .normalisiere()
             .multipliziereMitSkalar(wert)
     );
+  }
+
+  public double getAbstand(Punkt p) {
+    return new Punkt(p.x - this.x,p.y - this.y).getBetrag();
   }
 
   private Punkt subtrahiere(Punkt p) {
@@ -50,8 +66,8 @@ public record Punkt(double x, double y) {
   @Override
   public String toString() {
     return "Punkt{" +
-        "x=" + this.x +
-        ", y=" + this.y +
+        "x=" + String.format("%.2f", this.x) +
+        ", y=" + String.format("%.2f", this.y) +
         '}';
   }
 }

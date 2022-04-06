@@ -45,8 +45,8 @@ public class GnuPlotWriter implements IWriter<Landkarte> {
         .append("$data << EOD")
         .append("\n");
 
-    for (int i = 0; i < landkarte.getStaaten().size(); i++) {
-      var staat = landkarte.getStaaten().get(i);
+    for (int i = 0; i < landkarte.getSortedStaaten().size(); i++) {
+      var staat = landkarte.getSortedStaaten().get(i);
       s.append(staat.getX())
           .append("\s")
           .append(staat.getY())

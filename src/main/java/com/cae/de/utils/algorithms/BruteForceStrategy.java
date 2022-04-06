@@ -3,6 +3,9 @@ package com.cae.de.utils.algorithms;
 import com.cae.de.models.Landkarte;
 import com.cae.de.utils.la.Kreis;
 import com.cae.de.utils.la.Punkt;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /** Eine erste Strategie, welche wahrscheinlich noch nicht optimal ist, deshalb der Name. */
@@ -13,43 +16,70 @@ public class BruteForceStrategy implements IStrategy {
   @Override
   public void rechne(Landkarte landkarte) {
 
-    for (var entry : landkarte.getBeziehungen().entrySet()) {
-      var staat = entry.getKey();
-      var k1 = new Kreis(staat.getX(), staat.getY(), staat.getKenngroesse());
-      for (var n : entry.getValue()) {
-        var k2 = new Kreis(n.getX(), n.getY(), n.getKenngroesse());
-        landkarte.addKraft(staat, n, k1.getAbstand(k2));
-      }
-    }
+    var epsilon = 1e-10;
 
+    // Abstoßungskräfte der Staaten bestimmen, bei denen die Kreise überlappen
     for (var entry : landkarte.getBeziehungen().entrySet()) {
       var staat = entry.getKey();
       var k1 = new Kreis(staat.getX(), staat.getY(), staat.getKenngroesse());
       for (var n : landkarte.getBeziehungen().entrySet()) {
         var staat2 = n.getKey();
         if (staat == staat2 || landkarte.getBeziehungen().get(staat).contains(staat2)) continue;
-        var k2 = new Kreis(staat2.getX(), staat2.getY(), staat2.getKenngroesse());
-        if (k1.getAbstand(k2) < 0) landkarte.addKraft(staat, staat2, k1.getAbstand(k2));
+        if (k1.isInnerhalb(new Punkt(staat2.getX(), staat2.getY()))) {
+          landkarte.addKraft(
+              staat, staat2, (-1) * (staat.getKenngroesse() + staat2.getKenngroesse()));
+        }
       }
     }
 
-    for (var entry : landkarte.getKreafte().entrySet()) {
+    // Anziehungs-/ Abstoßungskräfte der Nachbarstaaten bestimmen
+    for (var entry : landkarte.getBeziehungen().entrySet()) {
       var staat = entry.getKey();
-      for (var n : entry.getValue().entrySet()) {
-        var p1 = new Punkt(staat.getX(), staat.getY());
-        var nachbarstaat = n.getKey();
-        var p2 = new Punkt(nachbarstaat.getX(), nachbarstaat.getY());
-        if (staat.getKenngroesse() + nachbarstaat.getKenngroesse() > n.getValue()) continue;
-        var p1new =
-            (n.getValue() > 0)
-                ? p1.verschiebeInRichtung(p2, n.getValue() / 2)
-                : p1.verschiebeInGegenrichtung(p2, n.getValue() / 2);
-        staat.setX(p1new.x());
-        staat.setY(p1new.y());
+      var k1 = new Kreis(staat.getX(), staat.getY(), staat.getKenngroesse());
+      for (var staat2 : entry.getValue()) {
+        landkarte.addKraft(
+            staat,
+            staat2,
+            k1.getAbstandZwischenKreisen(
+                new Kreis(staat2.getX(), staat2.getY(), staat2.getKenngroesse())));
       }
     }
 
-    landkarte.removeKraefte();
+    var verschiebungen = new HashMap<String, HashSet<Punkt>>();
+    landkarte
+        .getSortedStaaten()
+        .forEach(staat -> verschiebungen.put(staat.getIdentifier(), new HashSet<>()));
+
+    // Kräfte auf sortierte Liste der Staaten anwenden und neue Punkte der HashMap hinzufügen
+    for (var staat : landkarte.getSortedStaaten()) {
+      for (var n : landkarte.getKreafte().get(staat).entrySet()) {
+        if (n.getValue() > epsilon || n.getValue() < -epsilon) {
+          var m1 = new Punkt(staat.getX(), staat.getY());
+          var nachbarstaat = n.getKey();
+          var m2 = new Punkt(nachbarstaat.getX(), nachbarstaat.getY());
+          var m1new =
+              (n.getValue() > 0)
+                  ? m1.verschiebeInRichtung(m2, n.getValue() / 2)
+                  : m1.verschiebeInGegenrichtung(m2, -n.getValue() / 2);
+          verschiebungen.get(staat.getIdentifier()).add(m1new);
+        }
+      }
+    }
+
+    // Setze für jeden Staat einen neuen Mittelpunkt, basieren auf den vorher ausgerechneten Punkten
+    for (var staat : landkarte.getSortedStaaten()) {
+      var p = Punkt.getMittelpunkt(verschiebungen.get(staat.getIdentifier()));
+      LOGGER.log(
+          Level.INFO,
+          "Verschiebe: "
+              + staat.getIdentifier()
+              + " von "
+              + new Punkt(staat.getX(), staat.getY())
+              + " nach "
+              + p);
+      staat.setX(p.x());
+      staat.setY(p.y());
+    }
   }
 
   public String toString() {

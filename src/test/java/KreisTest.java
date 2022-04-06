@@ -8,6 +8,6 @@ public class KreisTest {
   public void getAbstand() {
     var k1 = new Kreis(0, 0, 10);
     var k2 = new Kreis(0, 5, 10);
-    Assertions.assertEquals(-5, k1.getAbstand(k2));
+    Assertions.assertEquals(-5, k1.getAbstandZwischenKreisen(k2));
   }
 }

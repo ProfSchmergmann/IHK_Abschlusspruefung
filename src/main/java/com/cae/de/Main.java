@@ -21,6 +21,7 @@ public class Main {
   private static final String INPUT_FOLDER_STRING = "-inputfolder";
   private static final String OUTPUT_FOLDER_STRING = "-outputfolder";
   private static final String LOG_STRING = "-log";
+  private static final String LOG_LEVEL_STRING = "-loglvl";
   private static final Logger ROOT_LOGGER = Logger.getLogger("");
   private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
   private static final String ITERATIONEN = "-i";
@@ -45,6 +46,14 @@ public class Main {
             }
           }
           case ITERATIONEN -> iterationen = Integer.parseInt(args[++i]);
+          case LOG_LEVEL_STRING -> {
+            Level logLevel = switch (args[++i]) {
+              case "info" -> Level.INFO;
+              case "warning" -> Level.WARNING;
+              default -> Level.ALL;
+            };
+            ROOT_LOGGER.setLevel(logLevel);
+          }
         }
       }
     }

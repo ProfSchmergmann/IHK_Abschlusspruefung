@@ -2,6 +2,7 @@ package com.cae.de.models;
 
 import com.cae.de.utils.Pair;
 import com.cae.de.utils.algorithms.IStrategy;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -43,13 +44,21 @@ public class Landkarte {
   }
 
   public void normalisiereKenngroesse() {
-    var maxKenngroesse = this.getStaaten().get(0).getKenngroesse();
-    for (var staat : this.getStaaten()) {
+    var maxKenngroesse = this.getSortedStaaten().get(0).getKenngroesse();
+    for (var staat : this.getSortedStaaten()) {
       if (staat.getKenngroesse() > maxKenngroesse) maxKenngroesse = staat.getKenngroesse();
     }
-    for (var staat : this.getStaaten()) {
+    for (var staat : this.getSortedStaaten()) {
       staat.setKenngroesse(staat.getKenngroesse() / maxKenngroesse);
     }
+  }
+
+  public double getMinKenngroesse() {
+    var minKenngroesse = this.getSortedStaaten().get(0).getKenngroesse();
+    for (var staat : this.getSortedStaaten()) {
+      if (staat.getKenngroesse() < minKenngroesse) minKenngroesse = staat.getKenngroesse();
+    }
+    return minKenngroesse;
   }
 
   public void addKraft(Staat staat, Staat nachbarStaat, double kraft) {
@@ -84,13 +93,15 @@ public class Landkarte {
   public void rechne(int iterationen) {
     for (var i = 0; i < iterationen; i++) {
       this.strategy.rechne(this);
+      LOGGER.log(Level.INFO, i + "te Iteration abgeschlossen.");
     }
     LOGGER.log(Level.INFO, "Fertig mit " + iterationen + " Iterationen.");
   }
 
   public double getMinX() {
-    double minX = this.getStaaten().get(0).getX() - this.getStaaten().get(0).getKenngroesse();
-    for (var staat : this.getStaaten()) {
+    double minX =
+        this.getSortedStaaten().get(0).getX() - this.getSortedStaaten().get(0).getKenngroesse();
+    for (var staat : this.getSortedStaaten()) {
       var value = staat.getX() - staat.getKenngroesse();
       if (value < minX) minX = value;
     }
@@ -98,8 +109,9 @@ public class Landkarte {
   }
 
   public double getMaxX() {
-    double maxX = this.getStaaten().get(0).getX() + this.getStaaten().get(0).getKenngroesse();
-    for (var staat : this.getStaaten()) {
+    double maxX =
+        this.getSortedStaaten().get(0).getX() + this.getSortedStaaten().get(0).getKenngroesse();
+    for (var staat : this.getSortedStaaten()) {
       var value = staat.getX() + staat.getKenngroesse();
       if (value > maxX) maxX = value;
     }
@@ -107,8 +119,9 @@ public class Landkarte {
   }
 
   public double getMinY() {
-    double minY = this.getStaaten().get(0).getY() - this.getStaaten().get(0).getKenngroesse();
-    for (var staat : this.getStaaten()) {
+    double minY =
+        this.getSortedStaaten().get(0).getY() - this.getSortedStaaten().get(0).getKenngroesse();
+    for (var staat : this.getSortedStaaten()) {
       var value = staat.getY() - staat.getKenngroesse();
       if (value < minY) minY = value;
     }
@@ -116,8 +129,9 @@ public class Landkarte {
   }
 
   public double getMaxY() {
-    double maxY = this.getStaaten().get(0).getY() + this.getStaaten().get(0).getKenngroesse();
-    for (var staat : this.getStaaten()) {
+    double maxY =
+        this.getSortedStaaten().get(0).getY() + this.getSortedStaaten().get(0).getKenngroesse();
+    for (var staat : this.getSortedStaaten()) {
       var value = staat.getY() + staat.getKenngroesse();
       if (value > maxY) maxY = value;
     }
@@ -186,7 +200,9 @@ public class Landkarte {
     return this.beziehungen;
   }
 
-  public List<Staat> getStaaten() {
-    return this.beziehungen.keySet().stream().toList();
+  public List<Staat> getSortedStaaten() {
+    return this.beziehungen.keySet().stream()
+        .sorted(Comparator.comparingDouble(Staat::getKenngroesse))
+        .toList();
   }
 }

@@ -546,27 +546,7 @@ Beziehungen
 
  eingelesen, wobei pro Zeile zuerst nach dem Schlüssel gesucht wird, und
  danach jeweils der Staat dem Set hinzugefügt wird.
- Eine Darstellung als Nassi-Shneiderman Diagram ist in 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "fig:Einlesen-der-Landkarte"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
  
-\begin_inset CommandInset ref
-LatexCommand vpageref
-reference "fig:Einlesen-der-Landkarte"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- vorhanden.
 \end_layout
 
 \begin_layout Subsection
@@ -642,8 +622,7 @@ Landkarte
 \end_inset
 
  ausgelesen.
- Die Liste kann danach zusammen mit allen anderen Attributen geschrieben
- werden.
+ Die Liste kann danach zusammen mit allen anderen Attribu
 \end_layout
 
 \begin_layout Section
@@ -666,7 +645,7 @@ Main
 
  Klasse zusammen mit zwei anderen Paketen
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 s.
@@ -706,7 +685,7 @@ models
 
 
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 s.
@@ -762,7 +741,7 @@ utils
 
 
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 s.
@@ -817,7 +796,7 @@ algorithm
 
 
 \begin_inset Foot
-status collapsed
+status open
 
 \begin_layout Plain Layout
 s.
@@ -855,33 +834,12 @@ io
 \end_inset
 
 
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-s.
- 
 \begin_inset CommandInset ref
-LatexCommand formatted
+LatexCommand vref
 reference "fig:Paket-io"
 plural "false"
 caps "false"
 noprefix "false"
-
-\end_inset
-
- 
-\begin_inset CommandInset ref
-LatexCommand vpageref
-reference "fig:Paket-io"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-
-\end_layout
 
 \end_inset
 
@@ -894,33 +852,12 @@ la
 \end_inset
 
 
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-s.
- 
 \begin_inset CommandInset ref
-LatexCommand formatted
+LatexCommand vref
 reference "fig:Paket-la"
 plural "false"
 caps "false"
 noprefix "false"
-
-\end_inset
-
- 
-\begin_inset CommandInset ref
-LatexCommand vpageref
-reference "fig:Paket-la"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-
-\end_layout
 
 \end_inset
 
