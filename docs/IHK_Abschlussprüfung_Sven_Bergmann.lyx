@@ -1732,6 +1732,55 @@ Beschreibung, Begründung und Diskussion ausgewählter Beispiele
 Black-Box-Test
 \end_layout
 
+\begin_layout Standard
+Da die folgenden Beispiele, welche auch in der Aufgabenstellung genutzt
+ werden, nicht darauf abziehlen, den Programmcode im Einzelnen zu verstehen
+ und zu testen, fallen diese unter den Bereich der Black-Box-Tests.
+ Des Weiteren werden keine Zwischenschritte geprüft, sondern einzig die
+ Eingabe, sowie die ungefähre Ausgabe vorgegeben.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Beispiel 1: Fläche von 10 Staaten
+\end_layout
+
+\begin_layout Standard
+Das erste Beispiel der Aufgabenstellung beschreibt die Fläche von 10 Staaten
+ in Europa und deren Beziehungen.
+ Hierbei habe ich, wie am Anfang erklärt, auch die Kenngröße normalisiert,
+ da die Kreise der Staaten ansonsten direkt überlappen würden.
+ Das Beispiel war dahingehend gut gewählt, da man die ungefähre Position
+ der Staaten im Hinterkopf hat und dadurch besser evaluieren kann, wie gut
+ oder schlecht, der selbst geschriebene Algorithmus ist.
+ Bisher konnte ich weder mit 100 Iterationen, noch mit einer anderen Zahl
+ an Iterationen das Beispiel reproduzieren.
+\end_layout
+
+\begin_layout Standard
+Das Beispiel ist in der Datei 
+\begin_inset Quotes gld
+\end_inset
+
+beispiel1.txt
+\begin_inset Quotes grd
+\end_inset
+
+ im Ordner 
+\begin_inset Quotes gld
+\end_inset
+
+input
+\begin_inset Quotes grd
+\end_inset
+
+ zu finden.
+\end_layout
+
+\begin_layout Subsubsection
+Beispiel 2: Bierkonsum von 10 Staaten
+\end_layout
+
 \begin_layout Subsubsection
 Äquivalenzklassen
 \end_layout
@@ -1745,7 +1794,37 @@ Kontrollflussgraphen
 \end_layout
 
 \begin_layout Section
-Zusammenfassung und Ausblick
+Zusammenfassung und Ausblicks
+\end_layout
+
+\begin_layout Standard
+In dieser Aufgabe mussten Kenngrößen für Länder mit geografischen Kennwerten
+ dargestellt werden.
+ Das Ziel dabei war, die geografische Anordnung und Nachbarschaftsbeziehungen
+ bei verschieden großen Werten möglichst genau beizubehalten.
+ Hierfür mussten Funktionen definiert werden, welche die Anziehungs- und
+ Abstoßungskräfte der Kreise berechnen und diese dementsprechend verschieben.
+ Mit einer festen Anzahl an Iterationen funktioniert der Algorithmus leider
+ nicht, da dieser durch die Kräfte divergiert, das heißt die Kreise stoßen
+ sich immer wieder ab und ziehen sich zusammen.
+ Durch ein wie auch immer geartetes Qualitätskriterium kann man dieses Problem
+ mehr oder weniger lösen, allerdings ist es nicht ganz eindeutig, wie dieses
+ Kriterium aussehen soll.
+ In meiner Lösung habe ich den Gesamtabstand der Nachbarstaaten voneinander
+ genommen und beim minimalen Abstand die Beziehungen ausgegeben.
+ 
+\end_layout
+
+\begin_layout Standard
+In einer Verbesserung des Programms könnte noch eingebaut werden, dass eine
+ grafische Anzeige vorhanden ist, welche nicht die letzte Iteration anzeigt,
+ sondern durch alle Iterationen durchläuft und jede einzeln anzeigt.
+ Hiermit könnte dann eventuell auch der Algorithmus, oder die Abbruchbedingung
+ verbessert werden, da grafisch genau dargestellt wird, was eigentlich passiert.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Newpage pagebreak
 \end_inset
 
