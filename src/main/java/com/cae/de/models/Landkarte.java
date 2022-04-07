@@ -94,7 +94,7 @@ public class Landkarte {
   public double getAbstandZwischenNachbarStaaten() {
     return this.getBeziehungen().entrySet().stream()
         .map(
-            (staatHashSetEntry) -> {
+            staatHashSetEntry -> {
               var s1 = staatHashSetEntry.getKey();
               var k1 = new Kreis(s1.getX(), s1.getY(), s1.getKenngroesse());
               return staatHashSetEntry.getValue().stream()
@@ -126,7 +126,8 @@ public class Landkarte {
    * sodass alle Kenngrößen im Intervall [0,1] liegen.
    */
   public void normalisiereKenngroesse() {
-    var maxKenngroesse = this.getStaatenNachKenngroesseSortiert().get(0).getKenngroesse();
+    var maxKenngroesse =
+        this.beziehungen.keySet().stream().mapToDouble(Staat::getKenngroesse).max().orElse(1);
     this.beziehungen
         .keySet()
         .forEach(staat -> staat.setKenngroesse(staat.getKenngroesse() / maxKenngroesse));

@@ -1745,7 +1745,37 @@ Kontrollflussgraphen
 \end_layout
 
 \begin_layout Section
-Zusammenfassung und Ausblick
+Zusammenfassung und Ausblicks
+\end_layout
+
+\begin_layout Standard
+In dieser Aufgabe mussten Kenngrößen für Länder mit geografischen Kennwerten
+ dargestellt werden.
+ Das Ziel dabei war, die geografische Anordnung und Nachbarschaftsbeziehungen
+ bei verschieden großen Werten möglichst genau beizubehalten.
+ Hierfür mussten Funktionen definiert werden, welche die Anziehungs- und
+ Abstoßungskräfte der Kreise berechnen und diese dementsprechend verschieben.
+ Mit einer festen Anzahl an Iterationen funktioniert der Algorithmus leider
+ nicht, da dieser durch die Kräfte divergiert, das heißt die Kreise stoßen
+ sich immer wieder ab und ziehen sich zusammen.
+ Durch ein wie auch immer geartetes Qualitätskriterium kann man dieses Problem
+ mehr oder weniger lösen, allerdings ist es nicht ganz eindeutig, wie dieses
+ Kriterium aussehen soll.
+ In meiner Lösung habe ich den Gesamtabstand der Nachbarstaaten voneinander
+ genommen und beim minimalen Abstand die Beziehungen ausgegeben.
+ 
+\end_layout
+
+\begin_layout Standard
+In einer Verbesserung des Programms könnte noch eingebaut werden, dass eine
+ grafische Anzeige vorhanden ist, welche nicht die letzte Iteration anzeigt,
+ sondern durch alle Iterationen durchläuft und jede einzeln anzeigt.
+ Hiermit könnte dann eventuell auch der Algorithmus, oder die Abbruchbedingung
+ verbessert werden, da grafisch genau dargestellt wird, was eigentlich passiert.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Newpage pagebreak
 \end_inset
 
