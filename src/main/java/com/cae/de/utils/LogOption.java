@@ -1,9 +1,14 @@
 package com.cae.de.utils;
 
+import java.util.Arrays;
+
 /** Enumeration für alle Logging Optionen. */
 public enum LogOption {
+  /** Konstante für Logging in die Konsole. */
   TRUE("true"),
+  /** Konstante kein Logging. */
   FALSE("false"),
+  /** Konstante für Logging in eine Datei. */
   FILE("file");
   private final String value;
 
@@ -11,12 +16,16 @@ public enum LogOption {
     this.value = value;
   }
 
+  /**
+   * Versucht aus einem gegebenen String die Option zu parsen und zurückzugeben.
+   *
+   * @param value der string
+   * @return die Konstante
+   */
   public static LogOption getOption(String value) {
-    for (var option : LogOption.values()) {
-      if (option.value.equals(value)) {
-        return option;
-      }
-    }
-    return FALSE;
+    return Arrays.stream(LogOption.values())
+        .filter(option -> option.value.equals(value))
+        .findFirst()
+        .orElse(FALSE);
   }
 }

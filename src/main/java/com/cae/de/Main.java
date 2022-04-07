@@ -24,7 +24,6 @@ public class Main {
   private static final Logger ROOT_LOGGER = Logger.getLogger("");
   private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
   private static final String ITERATIONEN = "-i";
-  public static FileHandler FILE_HANDLER;
   private static int iterationen = 100;
 
   /**
@@ -66,7 +65,7 @@ public class Main {
     switch (logOption) {
       case FILE -> {
         try {
-          FILE_HANDLER = new FileHandler("IHK_Abschlusspruefung.log", true);
+          FileHandler FILE_HANDLER = new FileHandler("IHK_Abschlusspruefung.log", true);
           ROOT_LOGGER.addHandler(FILE_HANDLER);
         } catch (IOException e) {
           ROOT_LOGGER.log(Level.WARNING, "Konnte keinen FileHandler zum Logger hinzufügen. "
