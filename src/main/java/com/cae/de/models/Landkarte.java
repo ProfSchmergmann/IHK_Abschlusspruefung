@@ -52,6 +52,13 @@ public class Landkarte {
             + " initialisiert.");
   }
 
+  /**
+   * Statische Methode, welche dafür da ist eine "DeepCopy" der gegebenen HashMap anzulegen. Diese
+   * Methode nutzt streams und den Copy Konstruktor der Klasse {@link Staat}.
+   *
+   * @param beziehungen die HashMap, die kopiert werden soll
+   * @return eine deep copy der gegebenen HashMap
+   */
   public static HashMap<Staat, HashSet<Staat>> deepCopyBeziehungen(
       HashMap<Staat, HashSet<Staat>> beziehungen) {
     var copyMap = new HashMap<Staat, HashSet<Staat>>();
@@ -76,6 +83,14 @@ public class Landkarte {
     return copyMap;
   }
 
+  /**
+   * Diese Methode berechnet den Abstand aller Nachbarstaaten, also aller Staaten, bei denen der
+   * direkte Nachbar angegeben wurde. Eventuelle andere Beziehungen werden nicht beachtet. Für die
+   * Abstandsberechnung wird die Methode {@link Kreis#getAbstandZwischenKreisen(Kreis)} genutzt,
+   * wobei der Absolutwert des Ergebnisses daraus genommen wird.
+   *
+   * @return den Abstand der zwischen allen benachbarten Staaten
+   */
   public double getAbstandZwischenNachbarStaaten() {
     return this.getBeziehungen().entrySet().stream()
         .map(
@@ -96,48 +111,78 @@ public class Landkarte {
         .sum();
   }
 
+  /**
+   * Getter für den Staat mit den meisten Nachbarn.
+   *
+   * @return der Staat mit den meisten Nachbarn.
+   */
   public Staat getStaatMitMeistenNachbarn() {
     return this.staatMitMeistenNachbarn;
   }
 
+  /**
+   * Methode zum Normalisieren der Kenngröße. Intern werden hier streams genutzt, um zuerst den
+   * maximalen Wert herauszufinden, welcher später als Teiler für alle anderen Werte genutzt wird,
+   * sodass alle Kenngrößen im Intervall [0,1] liegen.
+   */
   public void normalisiereKenngroesse() {
-    var maxKenngroesse = this.getSortedStaaten().get(0).getKenngroesse();
-    for (var staat : this.getSortedStaaten()) {
-      if (staat.getKenngroesse() > maxKenngroesse) maxKenngroesse = staat.getKenngroesse();
-    }
-    for (var staat : this.getSortedStaaten()) {
-      staat.setKenngroesse(staat.getKenngroesse() / maxKenngroesse);
-    }
+    var maxKenngroesse = this.getStaatenNachKenngroesseSortiert().get(0).getKenngroesse();
+    this.beziehungen
+        .keySet()
+        .forEach(staat -> staat.setKenngroesse(staat.getKenngroesse() / maxKenngroesse));
   }
 
-  public double getMinKenngroesse() {
-    var minKenngroesse = this.getSortedStaaten().get(0).getKenngroesse();
-    for (var staat : this.getSortedStaaten()) {
-      if (staat.getKenngroesse() < minKenngroesse) minKenngroesse = staat.getKenngroesse();
-    }
-    return minKenngroesse;
-  }
-
+  /**
+   * Fügt eine Anziehungs- oder Abstoßungskraft zu der {@link #kreafte} Map hinzu.
+   *
+   * @param staat der eine Staat
+   * @param nachbarStaat der andere Staat
+   * @param kraft die zwischen beiden Staaten wirkende Kraft
+   */
   public void addKraft(Staat staat, Staat nachbarStaat, double kraft) {
     this.kreafte.get(staat).put(nachbarStaat, kraft);
   }
 
+  /**
+   * Löscht alle Kräfte aus der {@link #kreafte} Map, wobei allerdings nur die dazugehörigen
+   * HashSets geleert werden.
+   */
   public void removeKraefte() {
     this.kreafte.forEach((key, value) -> value.clear());
   }
 
+  /**
+   * Getter für die Iterationen.
+   *
+   * @return die Anzahl der Iterationen
+   */
   public int getIterationen() {
     return this.iterationen;
   }
 
+  /**
+   * Setter für die Iterationen.
+   *
+   * @param iterationen die Anzahl der Iterationen
+   */
   public void setIterationen(int iterationen) {
     this.iterationen = iterationen;
   }
 
+  /**
+   * Getter für die Kenngröße.
+   *
+   * @return die Kenngröße
+   */
   public String getKenngroesse() {
     return this.kenngroesse;
   }
 
+  /**
+   * Getter für die genutzte Strategie.
+   *
+   * @return die genutzte Strategie
+   */
   public IStrategy getStrategy() {
     return this.strategy;
   }
@@ -151,46 +196,65 @@ public class Landkarte {
     this.strategy.rechne(this, iterationen);
   }
 
+  /**
+   * Berechnet unter Nutzung von streams den minimalen x-Wert. Falls dies nicht funktioniert, wird
+   * {@link Double#MIN_VALUE} zurückgegeben.
+   *
+   * @return der minimale x-Wert
+   */
   public double getMinX() {
-    double minX =
-        this.getSortedStaaten().get(0).getX() - this.getSortedStaaten().get(0).getKenngroesse();
-    for (var staat : this.getSortedStaaten()) {
-      var value = staat.getX() - staat.getKenngroesse();
-      if (value < minX) minX = value;
-    }
-    return minX;
+    return this.beziehungen.keySet().stream()
+        .mapToDouble(staat -> staat.getX() - staat.getKenngroesse())
+        .min()
+        .orElse(Double.MIN_VALUE);
   }
 
+  /**
+   * Berechnet unter Nutzung von streams den maximalen x-Wert. Falls dies nicht funktioniert, wird
+   * {@link Double#MAX_VALUE} zurückgegeben.
+   *
+   * @return der maximale x-Wert
+   */
   public double getMaxX() {
-    double maxX =
-        this.getSortedStaaten().get(0).getX() + this.getSortedStaaten().get(0).getKenngroesse();
-    for (var staat : this.getSortedStaaten()) {
-      var value = staat.getX() + staat.getKenngroesse();
-      if (value > maxX) maxX = value;
-    }
-    return maxX;
+    return this.beziehungen.keySet().stream()
+        .mapToDouble(staat -> staat.getX() + staat.getKenngroesse())
+        .max()
+        .orElse(Double.MAX_VALUE);
   }
 
+  /**
+   * Berechnet unter Nutzung von streams den minimalen y-Wert. Falls dies nicht funktioniert, wird
+   * {@link Double#MIN_VALUE} zurückgegeben.
+   *
+   * @return der minimale y-Wert
+   */
   public double getMinY() {
-    double minY =
-        this.getSortedStaaten().get(0).getY() - this.getSortedStaaten().get(0).getKenngroesse();
-    for (var staat : this.getSortedStaaten()) {
-      var value = staat.getY() - staat.getKenngroesse();
-      if (value < minY) minY = value;
-    }
-    return minY;
+    return this.beziehungen.keySet().stream()
+        .mapToDouble(staat -> staat.getY() - staat.getKenngroesse())
+        .min()
+        .orElse(Double.MIN_VALUE);
   }
 
+  /**
+   * Berechnet unter Nutzung von streams den maximalen y-Wert. Falls dies nicht funktioniert, wird
+   * {@link Double#MAX_VALUE} zurückgegeben.
+   *
+   * @return der maximale y-Wert
+   */
   public double getMaxY() {
-    double maxY =
-        this.getSortedStaaten().get(0).getY() + this.getSortedStaaten().get(0).getKenngroesse();
-    for (var staat : this.getSortedStaaten()) {
-      var value = staat.getY() + staat.getKenngroesse();
-      if (value > maxY) maxY = value;
-    }
-    return maxY;
+    return this.beziehungen.keySet().stream()
+        .mapToDouble(staat -> staat.getY() + staat.getKenngroesse())
+        .max()
+        .orElse(Double.MAX_VALUE);
   }
 
+  /**
+   * Berechnet den Bereich für die Ausgabe von GnuPlot in der Art, dass der x-Bereich genauso groß
+   * wie der y-Bereich ist, sodass beide Achsen gleich lang sind.
+   *
+   * @return den Bereich von x und y, sodass key().key() == xMin, key().value() == xMax,
+   *     value().key() == yMin, value().value() = yMax
+   */
   public Pair<Pair<Double, Double>, Pair<Double, Double>> getRangeForGnuPlot() {
     var xMin = this.getMinX();
     var xMax = this.getMaxX();
@@ -229,6 +293,11 @@ public class Landkarte {
         + '}';
   }
 
+  /**
+   * Berechnet einen schön formatierten String aller Beziehungen. Sinnvoll für Loggingausgaben.
+   *
+   * @return einen formatierten String aller Beziehungen
+   */
   public String getBeziehungentoString() {
     var s = new StringBuilder();
     for (var entry : this.beziehungen.entrySet()) {
@@ -245,19 +314,40 @@ public class Landkarte {
     return s.toString();
   }
 
+  /**
+   * Getter für die Kräfte zwischen den Staaten.
+   *
+   * @return die Kräfte zwischen allen Staaten
+   */
   public HashMap<Staat, HashMap<Staat, Double>> getKreafte() {
     return this.kreafte;
   }
 
+  /**
+   * Getter für die Beziehungen zwischen allen Staaten.
+   *
+   * @return die Beziehungen zwischen allen Staaten
+   */
   public HashMap<Staat, HashSet<Staat>> getBeziehungen() {
     return this.beziehungen;
   }
 
+  /**
+   * Setter für die Beziehungen zwischen den Staaten. Sinnvoll für eine Strategie, welche irgendeine
+   * Art Qualitätskontrolle hat und die Beziehungen am Ende der Iterationen neu setzen möchte.
+   *
+   * @param staatHashSetHashMap die HashMap aller Beziehungen
+   */
   public void setBeziehungen(HashMap<Staat, HashSet<Staat>> staatHashSetHashMap) {
     this.beziehungen = staatHashSetHashMap;
   }
 
-  public List<Staat> getSortedStaaten() {
+  /**
+   * Berechnet eine Liste aller Staaten sortiert nach der Kenngröße.
+   *
+   * @return die Liste der Staaten sortiert nach der Kenngröße
+   */
+  public List<Staat> getStaatenNachKenngroesseSortiert() {
     return this.beziehungen.keySet().stream()
         .sorted(Comparator.comparingDouble(Staat::getKenngroesse))
         .toList();

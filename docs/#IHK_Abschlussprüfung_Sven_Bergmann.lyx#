@@ -1282,6 +1282,30 @@ Landkarte
 
  nur genau eine HashMap mit allen Beziehungen braucht, um die Staaten zu
  speichern.
+ Direkt nach dem Einlesen wird die Kenngröß jedes Staates normalisiert,
+ das heißt 
+\begin_inset Formula $\nabla Staaten:\frac{staat.kenngroesse}{staaten.maximaleKenngroesse}$
+\end_inset
+
+.Weiterhin wurde der Algorithmus in der Art angepasst, dass nun eine Art
+ Qualitätskontrolle stattfindet, welche den derzeitigen Abstand aller Nachbarsta
+aten berechnet und falls dieser geringer ist, als der vorher gespeicherte
+ Abstand, diesen ersetzt und zudem die HashMap aller Beziehungen speichert.
+ Diese HashMap wird dann am Ende genommen, um die eigentliche zu überschreiben
+ und dadurch wird durch das Kommandozeilenargument, welches die Iterationen
+ angibt nur eine maximale Anzahl an Iterationen festgelegt.
+ Es kann dadurch beispielsweise passieren, dass bei einer Angabe von 
+\begin_inset Quotes gld
+\end_inset
+
+-i 500
+\begin_inset Quotes grd
+\end_inset
+
+ die Anzahl 460 an Iterationen rauskommt, da dort der minimalste Abstand
+ der Nachbarstaaten ist.
+ Es fand zudem eine Veränderung der Abstandsberechnung statt, da in irgendeiner
+ Art dargestellt werden musste, dass ein Kreis innerhalb eines anderen liegt.
  
 \end_layout
 

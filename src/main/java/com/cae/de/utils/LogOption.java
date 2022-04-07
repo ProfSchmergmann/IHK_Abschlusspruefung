@@ -1,6 +1,6 @@
 package com.cae.de.utils;
 
-/** Enum for all log options which are true, false or file. */
+/** Enumeration für alle Logging Optionen. */
 public enum LogOption {
   TRUE("true"),
   FALSE("false"),

@@ -6,15 +6,24 @@ import com.cae.de.utils.algorithms.BruteForceStrategy;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Klasse zum Einlesen einer gegebenen Landkarte.
+ */
 public class FileLandkartenReader implements IReader<Landkarte> {
 
   private static final Logger LOGGER = Logger.getLogger(FileLandkartenReader.class.getName());
 
+  /**
+   * Liest ein Objekt des Typs {@link Landkarte} ein.
+   * @param pathToFile der Pfad zur Datei
+   * @return eine Landkarte
+   */
   @Override
   public Landkarte readObject(String pathToFile) {
     LOGGER.log(Level.INFO, "Versuche " + pathToFile + " zu lesen.");
@@ -39,24 +48,23 @@ public class FileLandkartenReader implements IReader<Landkarte> {
         var splittedLine = line.split(":");
         var firstIdent = splittedLine[0];
 
-        for (var ident : splittedLine[1].split("\s")) {
-          var identifier = ident.trim();
-          if (identifier.equals(" ") || identifier.equals("")) continue;
-          var nachbarStaatEntry = beziehungen
-              .entrySet()
-              .stream()
-              .filter(entry -> entry.getKey().getIdentifier().equals(identifier))
-              .findFirst()
-              .get();
-          var staatEntry = beziehungen
-              .entrySet()
-              .stream()
-              .filter(entry -> entry.getKey().getIdentifier().equals(firstIdent))
-              .findFirst()
-              .get();
-          staatEntry.getValue().add(nachbarStaatEntry.getKey());
-          nachbarStaatEntry.getValue().add(staatEntry.getKey());
-        }
+        Arrays.stream(splittedLine[1].split("\s")).map(String::trim)
+            .filter(identifier -> !identifier.equals(" ") && !identifier.equals(""))
+            .map(identifier -> beziehungen
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getKey().getIdentifier().equals(identifier))
+                .findFirst()
+                .get()).forEachOrdered(nachbarStaatEntry -> {
+              var staatEntry = beziehungen
+                  .entrySet()
+                  .stream()
+                  .filter(entry -> entry.getKey().getIdentifier().equals(firstIdent))
+                  .findFirst()
+                  .get();
+              staatEntry.getValue().add(nachbarStaatEntry.getKey());
+              nachbarStaatEntry.getValue().add(staatEntry.getKey());
+            });
       }
       return new Landkarte(kenngroesse, beziehungen, new BruteForceStrategy());
     } catch (IOException e) {

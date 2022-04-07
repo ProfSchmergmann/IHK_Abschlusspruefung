@@ -20,11 +20,13 @@ public record Kreis(double x, double y, double r) {
     return dM1M2 - (this.r + k.r);
   }
 
+  /**
+   * Berechnet ob der gegebene Punkt innerhalb des Kreises liegt.
+   * @param p der Punkt
+   * @return true wenn er innerhalb liegt, andernfalls false
+   */
   public boolean isInnerhalb(Punkt p) {
     return p.getAbstand(new Punkt(this.x, this.y)) <= this.r;
   }
 
-  public double getAbstandZwischenMittelpunkten(Kreis k) {
-    return new Punkt(this.x, this.y).getAbstand(new Punkt(k.x, k.y));
-  }
 }

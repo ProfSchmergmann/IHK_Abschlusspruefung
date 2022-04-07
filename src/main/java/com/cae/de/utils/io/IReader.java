@@ -1,25 +1,25 @@
 package com.cae.de.utils.io;
 
 /**
- * Interface for readers.
+ * Interface für Reader.
  *
- * @param <T> the object where the input should be parsed to
+ * @param <T> das Objekt, welches eingelesen werden soll
  */
 public interface IReader<T> {
 
   /**
-   * Reads a specific object from a given source.
+   * Liest ein Objekt aus der gegebenen Datei.
    *
-   * @param pathToFile the path to file if needed
-   * @return the object
+   * @param pathToFile der Pfad zur Datei
+   * @return das Objekt
    */
   T readObject(String pathToFile);
 
   /**
-   * Reads the whole given source.
+   * Liest einen kompletten String aus der gegebenen Datei.
    *
-   * @param pathToFile the path to the file if needed.
-   * @return the file in a string representation
+   * @param pathToFile der Pfad zur Datei
+   * @return die Datei als String Representation
    */
   String read(String pathToFile);
 }

@@ -13,8 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Main class which is to be started and executed. It evaluates the given arguments and starts the
- * program if everything went right.
+ * Main Klasse welche über den Programmaufruf gestartet wird.
  */
 public class Main {
 
@@ -28,6 +27,11 @@ public class Main {
   public static FileHandler FILE_HANDLER;
   private static int iterationen = 100;
 
+  /**
+   * Main Methode, welche unter anderen alle Programmzeilenargumente prüft und - falls nötig - auch die resultierenden Werte setzt.
+   *
+   * @param args die Programmzeilenargumente
+   */
   public static void main(String[] args) {
     var inputFolder = "input";
     var outputFolder = "output";
@@ -89,11 +93,11 @@ public class Main {
       System.exit(1);
     }
 
-    landkarten.forEach((l,s) -> l.normalisiereKenngroesse());
-
-    landkarten.forEach((l,s) -> l.setIterationen(iterationen));
-
-    landkarten.forEach((l,s) -> l.rechne(iterationen));
+    landkarten.forEach((l,s) -> {
+      l.normalisiereKenngroesse();
+      l.setIterationen(iterationen);
+      l.rechne(iterationen);
+    });
 
     var writer = new GnuPlotWriter();
     try {

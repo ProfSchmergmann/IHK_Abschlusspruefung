@@ -1,26 +1,26 @@
 package com.cae.de.utils.io;
 
 /**
- * Interface for writers.
+ * Interface für Writer.
  *
- * @param <T> the object to be written
+ * @param <T> das zu schreibende Objekt
  */
 public interface IWriter<T> {
 
   /**
-   * Writes a given object.
+   * Schreibt ein gegebenes Objekt
    *
-   * @param t the object to be written
-   * @param pathToFile the path to the file if needed
-   * @return true if it worked, else false
+   * @param t das zu schreibende Objekt
+   * @param pathToFile der Pfad zur Datei
+   * @return true falls es geklappt hat, false andernfalls
    */
   boolean write(T t, String pathToFile);
 
   /**
-   * Writes a given object to a predefined output.
+   * Schreibt ein Objekt zu einem vordefinierten Output-Pfad.
    *
-   * @param t the object to be written
-   * @return true if it worked, else false
+   * @param t das zu schreibende Objekt
+   * @return true falls es geklappt hat, false andernfalls
    */
   boolean write(T t);
 }

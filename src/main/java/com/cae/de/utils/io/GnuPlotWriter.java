@@ -12,6 +12,12 @@ public class GnuPlotWriter implements IWriter<Landkarte> {
 
   private static final Logger LOGGER = Logger.getLogger(GnuPlotWriter.class.getName());
 
+  /**
+   * Schreibt ein Objekt der Klasse {@link Landkarte}, sodass GnuPlot das Objekt lesen kann.
+   * @param landkarte die Landkarte
+   * @param pathToFile der Pfad zur Datei
+   * @return true falls es geklappt hat, false andernfalls
+   */
   @Override
   public boolean write(Landkarte landkarte, String pathToFile) {
     var range = landkarte.getRangeForGnuPlot();
@@ -45,8 +51,8 @@ public class GnuPlotWriter implements IWriter<Landkarte> {
         .append("$data << EOD")
         .append("\n");
 
-    for (int i = 0; i < landkarte.getSortedStaaten().size(); i++) {
-      var staat = landkarte.getSortedStaaten().get(i);
+    for (int i = 0; i < landkarte.getStaatenNachKenngroesseSortiert().size(); i++) {
+      var staat = landkarte.getStaatenNachKenngroesseSortiert().get(i);
       s.append(staat.getX())
           .append("\s")
           .append(staat.getY())

@@ -15,38 +15,59 @@ public class BruteForceStrategy implements IStrategy {
 
   private static final Logger LOGGER = Logger.getLogger(BruteForceStrategy.class.getName());
 
+  /**
+   * Private Hilfsmethode für den Algorithmus. Zuerst werden alle Abstoßungskräfte zwischen den
+   * Staaten berechnet, welche laut der Beziehungen keine Nachbarn sind, bei denen allerdings die
+   * Kreise überlappen. Danach werden alle Abstoßungs- und Anziehungskräfte der Nachbarstaaten jedes
+   * Staats berechnet. Ist die Berechnung der Kräfte fertig, wird für jeden staat ein Eintrag in
+   * einer HashMap angelegt, worin als Wert alle Punkte gespeichert werden, wohin der Staat
+   * potenziell verschoben werden könnte. Daraufhin wird jeder Staat jeweils zum Mittelpunkt dieser
+   * Punkte geschoben, wobei der Staat mit den meisten Nachbarn nie verschoben wird. Anschließend
+   * werden wieder alle Kräfte entfernt.
+   *
+   * @param landkarte die gegebene Landkarte
+   */
   private static void iteriere(Landkarte landkarte) {
     var epsilon = 1e-10;
 
     // Abstoßungskräfte der Staaten bestimmen, bei denen die Kreise überlappen
-    for (var entry : landkarte.getBeziehungen().entrySet()) {
-      var staat = entry.getKey();
-      var k1 = new Kreis(staat.getX(), staat.getY(), staat.getKenngroesse());
-      for (var n : landkarte.getBeziehungen().entrySet()) {
-        var staat2 = n.getKey();
-        if (staat == staat2 || landkarte.getBeziehungen().get(staat).contains(staat2)) continue;
-        if (k1.isInnerhalb(new Punkt(staat2.getX(), staat2.getY()))) {
-          landkarte.addKraft(
-              staat, staat2, (-1) * (staat.getKenngroesse() + staat2.getKenngroesse()));
-        }
-      }
-    }
+    landkarte
+        .getBeziehungen()
+        .forEach(
+            (staat, nachbarn) -> {
+              var k1 = new Kreis(staat.getX(), staat.getY(), staat.getKenngroesse());
+              landkarte.getBeziehungen().keySet().stream()
+                  .filter(
+                      staat2 ->
+                          staat != staat2
+                              && !landkarte.getBeziehungen().get(staat).contains(staat2))
+                  .filter(staat2 -> k1.isInnerhalb(new Punkt(staat2.getX(), staat2.getY())))
+                  .forEach(
+                      nachbar ->
+                          landkarte.addKraft(
+                              staat,
+                              nachbar,
+                              (-1) * (staat.getKenngroesse() + nachbar.getKenngroesse())));
+            });
 
     // Anziehungs-/ Abstoßungskräfte der Nachbarstaaten bestimmen
-    for (var entry : landkarte.getBeziehungen().entrySet()) {
-      var staat = entry.getKey();
-      var k1 = new Kreis(staat.getX(), staat.getY(), staat.getKenngroesse());
-      for (var staat2 : entry.getValue()) {
-        landkarte.addKraft(
-            staat,
-            staat2,
-            k1.getAbstandZwischenKreisen(
-                new Kreis(staat2.getX(), staat2.getY(), staat2.getKenngroesse())));
-      }
-    }
+    landkarte
+        .getBeziehungen()
+        .forEach(
+            (staat, nachbarn) -> {
+              var k1 = new Kreis(staat.getX(), staat.getY(), staat.getKenngroesse());
+              nachbarn.forEach(
+                  nachbar ->
+                      landkarte.addKraft(
+                          staat,
+                          nachbar,
+                          k1.getAbstandZwischenKreisen(
+                              new Kreis(
+                                  nachbar.getX(), nachbar.getY(), nachbar.getKenngroesse()))));
+            });
 
     var verschiebungen =
-        landkarte.getSortedStaaten().stream()
+        landkarte.getStaatenNachKenngroesseSortiert().stream()
             .collect(
                 Collectors.toMap(
                     Staat::getIdentifier,
@@ -55,42 +76,62 @@ public class BruteForceStrategy implements IStrategy {
                     HashMap::new));
 
     // Kräfte auf sortierte Liste der Staaten anwenden und neue Punkte der HashMap hinzufügen
-    for (var staat : landkarte.getSortedStaaten()) {
-      for (var n : landkarte.getKreafte().get(staat).entrySet()) {
-        if (n.getValue() > epsilon || n.getValue() < -epsilon) {
-          var m1 = new Punkt(staat.getX(), staat.getY());
-          var nachbarstaat = n.getKey();
-          var m2 = new Punkt(nachbarstaat.getX(), nachbarstaat.getY());
-          var m1new =
-              (n.getValue() > 0)
-                  ? m1.verschiebeInRichtung(m2, n.getValue() / 2)
-                  : m1.verschiebeInGegenrichtung(m2, -n.getValue() / 2);
-          verschiebungen.get(staat.getIdentifier()).add(m1new);
-        }
-      }
-    }
+    landkarte
+        .getStaatenNachKenngroesseSortiert()
+        .forEach(
+            staat ->
+                landkarte.getKreafte().get(staat).entrySet().stream()
+                    .filter(n -> n.getValue() > epsilon || n.getValue() < -epsilon)
+                    .forEach(
+                        n -> {
+                          var m1 = new Punkt(staat.getX(), staat.getY());
+                          var nachbarstaat = n.getKey();
+                          var m2 = new Punkt(nachbarstaat.getX(), nachbarstaat.getY());
+                          var m1new =
+                              (n.getValue() > 0)
+                                  ? m1.verschiebeInRichtung(m2, n.getValue() / 2)
+                                  : m1.verschiebeInGegenrichtung(m2, -n.getValue() / 2);
+                          verschiebungen.get(staat.getIdentifier()).add(m1new);
+                        }));
 
-    // Setze für jeden Staat einen neuen Mittelpunkt, basieren auf den vorher ausgerechneten Punkten
-    for (var staat : landkarte.getSortedStaaten()) {
-      // Bewege den Staat mit den meisten Nachbarn nicht
-      if (staat.getIdentifier().equals(landkarte.getStaatMitMeistenNachbarn().getIdentifier()))
-        continue;
-      var p = Punkt.getMittelpunkt(verschiebungen.get(staat.getIdentifier()));
-      LOGGER.log(
-          Level.INFO,
-          "Verschiebe: "
-              + staat.getIdentifier()
-              + " von "
-              + new Punkt(staat.getX(), staat.getY())
-              + " nach "
-              + p);
-      staat.setX(p.x());
-      staat.setY(p.y());
-    }
+    // Setze für jeden Staat einen neuen Mittelpunkt, basieren auf den vorher ausgerechneten
+    // Punkten, wobei der Staat mit den meisten Nachbarn nicht beachtet wird
+    landkarte.getStaatenNachKenngroesseSortiert().stream()
+        .filter(
+            staat ->
+                !staat
+                    .getIdentifier()
+                    .equals(landkarte.getStaatMitMeistenNachbarn().getIdentifier()))
+        .forEach(
+            staat -> {
+              var p = Punkt.getMittelpunkt(verschiebungen.get(staat.getIdentifier()));
+              LOGGER.log(
+                  Level.INFO,
+                  "Verschiebe: "
+                      + staat.getIdentifier()
+                      + " von "
+                      + new Punkt(staat.getX(), staat.getY())
+                      + " nach "
+                      + p);
+              staat.setX(p.x());
+              staat.setY(p.y());
+            });
 
     landkarte.removeKraefte();
   }
 
+  /**
+   * Der Algorithmus der {@link BruteForceStrategy} berechnet zuerst den Abstand zwischen allen
+   * Nachbarn und speichert dazu die aktuellen Beziehungen inklusive der Staaten. Dann folgt eine
+   * vorgegebene Anzahl an Iterationen, wobei der neue Abstand der Nachbarstaaten immer mit dem
+   * bisher kleinsten Abstand verglichen wird, und wenn dieser kleiner ist als der andere, wird er
+   * ausgetauscht und auch die Beziehungen dieser Iteration gespeichert. Wenn die vorgegebene Anzahl
+   * an Iterationen erreicht ist, werden die benötigten Iterationen, sowie die Beziehungen in dem
+   * übergebenen Landkarten Objekt gesetzt.
+   *
+   * @param landkarte die Landkarte
+   * @param maxIterationen die maximalen Iterationen bis zum Abbruch
+   */
   @Override
   public void rechne(Landkarte landkarte, int maxIterationen) {
     var i = 0;
@@ -109,9 +150,5 @@ public class BruteForceStrategy implements IStrategy {
     }
     landkarte.setBeziehungen(beziehungenMitKleinstemAbstand);
     landkarte.setIterationen(minimumIterationen);
-  }
-
-  public String toString() {
-    return this.getClass().getSimpleName();
   }
 }
