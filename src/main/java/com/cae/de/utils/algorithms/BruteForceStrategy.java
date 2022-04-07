@@ -1,21 +1,21 @@
 package com.cae.de.utils.algorithms;
 
 import com.cae.de.models.Landkarte;
+import com.cae.de.models.Staat;
 import com.cae.de.utils.la.Kreis;
 import com.cae.de.utils.la.Punkt;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /** Eine erste Strategie, welche wahrscheinlich noch nicht optimal ist, deshalb der Name. */
 public class BruteForceStrategy implements IStrategy {
 
   private static final Logger LOGGER = Logger.getLogger(BruteForceStrategy.class.getName());
 
-  @Override
-  public void rechne(Landkarte landkarte) {
-
+  private static void iteriere(Landkarte landkarte) {
     var epsilon = 1e-10;
 
     // Abstoßungskräfte der Staaten bestimmen, bei denen die Kreise überlappen
@@ -45,10 +45,14 @@ public class BruteForceStrategy implements IStrategy {
       }
     }
 
-    var verschiebungen = new HashMap<String, HashSet<Punkt>>();
-    landkarte
-        .getSortedStaaten()
-        .forEach(staat -> verschiebungen.put(staat.getIdentifier(), new HashSet<>()));
+    var verschiebungen =
+        landkarte.getSortedStaaten().stream()
+            .collect(
+                Collectors.toMap(
+                    Staat::getIdentifier,
+                    value -> new HashSet<Punkt>(),
+                    (prev, next) -> next,
+                    HashMap::new));
 
     // Kräfte auf sortierte Liste der Staaten anwenden und neue Punkte der HashMap hinzufügen
     for (var staat : landkarte.getSortedStaaten()) {
@@ -85,6 +89,26 @@ public class BruteForceStrategy implements IStrategy {
     }
 
     landkarte.removeKraefte();
+  }
+
+  @Override
+  public void rechne(Landkarte landkarte, int maxIterationen) {
+    var i = 0;
+    var minimumIterationen = 0;
+    var beziehungenMitKleinstemAbstand = Landkarte.deepCopyBeziehungen(landkarte.getBeziehungen());
+    var abstandZwischenAllenNachbarn = landkarte.getAbstandZwischenNachbarStaaten();
+    while (i < maxIterationen) {
+      iteriere(landkarte);
+      var neuerAbstand = landkarte.getAbstandZwischenNachbarStaaten();
+      if (abstandZwischenAllenNachbarn > neuerAbstand) {
+        abstandZwischenAllenNachbarn = neuerAbstand;
+        beziehungenMitKleinstemAbstand = Landkarte.deepCopyBeziehungen(landkarte.getBeziehungen());
+        minimumIterationen = i;
+      }
+      i++;
+    }
+    landkarte.setBeziehungen(beziehungenMitKleinstemAbstand);
+    landkarte.setIterationen(minimumIterationen);
   }
 
   public String toString() {

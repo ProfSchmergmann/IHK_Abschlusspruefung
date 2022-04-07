@@ -577,7 +577,7 @@ Entwurf des Algorithmus
 Der Algorithmus orientiert sich sehr an der Angabe des Verlaufsdiagramms
  in der Aufgabenstellung.
  Bevor irgendetwas gerechnet wird, werden alle Kenngrößen nach dem Einlesen
- normalisiert, indem jede Größe durch die existierende Größe geteilt wird.
+ normalisiert, indem jeder Kennwert durch den größten Kennwert geteilt wird.
  So wird dem Problem aus dem Weg gegangen, dass schon direkt am Anfang Kreise
  überlappen.
  Der Algorithmus startet nun und berechnet bei jedem Durchlauf zuerst die
@@ -633,7 +633,7 @@ Landkarte
 
  eine Kraft hinzugefügt.
  Danach werden alle direkten Nachbarn jedes Staates betrachtet.
- Für jeden Nachbarn wird mit einer Abstandsberechnung der Kreis Klasse berechnet
+ Für jeden Nachbarn wird mit einer Abstandsberechnung der Kreis-Klasse berechnet
 , ob die Kraft negativ (abstoßend), oder positiv (anziehend) sein muss.
  Ist der Algorithmus damit fertig, wird nun eine HashMap angelegt, welche
  zu einem Schlüssel (Staaten Identifizierer) jeweils ein HashSet speichern
@@ -1307,7 +1307,25 @@ An sich sollten die fertig gebaute
  vorhanden sein, wobei der Ordnername in beim Programmstart oder in dem
  Skript angegeben werden kann.
  Der Ordner für alle Ausgabe Dateien wird dann ebenso in dieser Ebene erstellt.
+ Die Ausgabedateien werden pro Eingabedatei jeweils in eine Datei namens
  
+\begin_inset Quotes gld
+\end_inset
+
+<Name der Eingabedatei>_out.txt
+\begin_inset Quotes grd
+\end_inset
+
+ im output Ordner gespeichert, welcher entweder über die Programmzeile vorher
+ angegeben wird, oder einfach 
+\begin_inset Quotes gld
+\end_inset
+
+output
+\begin_inset Quotes grd
+\end_inset
+
+ heißt.
 \end_layout
 
 \begin_layout Subsection

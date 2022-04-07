@@ -7,7 +7,7 @@ import com.cae.de.utils.io.GnuPlotWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -77,37 +77,38 @@ public class Main {
     }
 
     var reader = new FileLandkartenReader();
-    var landkarten = new ArrayList<Landkarte>();
+    var landkarten = new HashMap<Landkarte, String>();
     try {
-      landkarten.addAll(Files.list(Path.of(inputFolder))
+      Files.list(Path.of(inputFolder))
           .parallel()
-          .map(f -> reader.readObject(f.toString()))
-          .toList());
+          .forEach(f -> landkarten.put(reader.readObject(f.toString()),
+              String.valueOf(f.getFileName())));
     } catch (IOException  e) {
       LOGGER.log(Level.SEVERE,
           "Konnte input Dateien innerhalb " + inputFolder + " nicht lesen.");
       System.exit(1);
     }
 
-    landkarten.forEach(Landkarte::normalisiereKenngroesse);
+    landkarten.forEach((l,s) -> l.normalisiereKenngroesse());
 
-    landkarten.forEach(landkarte -> landkarte.setIterationen(iterationen));
+    landkarten.forEach((l,s) -> l.setIterationen(iterationen));
 
-    landkarten.forEach(landkarte -> landkarte.rechne(iterationen));
+    landkarten.forEach((l,s) -> l.rechne(iterationen));
 
     var writer = new GnuPlotWriter();
     try {
       if (!Files.exists(Path.of(outputFolder))) {
         Files.createDirectory(Path.of(outputFolder));
       }
-      for (var i = 0; i < landkarten.size(); i++) {
-        var outputPath = outputFolder + "/" + "landkarte" + "_" + i + "_out.txt";
+      var finalOutputFolder = outputFolder;
+      landkarten.forEach((l,s) -> {
+        var outputPath = finalOutputFolder + "/" + s + "_out.txt";
         if (Files.exists(Path.of(outputPath))) {
           LOGGER.log(Level.WARNING,
               "Datei " + outputPath + " existiert. Sie wird überschrieben.");
         }
-         writer.write(landkarten.get(i), outputPath);
-      }
+        writer.write(l, outputPath);
+      });
     } catch (IOException e) {
       LOGGER.log(Level.SEVERE,
           "Konnte keine Dateien in den output Ordner: " + outputFolder + " schreiben.");

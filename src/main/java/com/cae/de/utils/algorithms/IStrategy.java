@@ -9,6 +9,7 @@ public interface IStrategy {
    * Soll die Mittelpunkte der Staaten neu berechnen.
    *
    * @param landkarte die Landkarte
+   * @param maxIterationen die maximalen Iterationen bis zum Abbruch
    */
-  void rechne(Landkarte landkarte);
+  void rechne(Landkarte landkarte, int maxIterationen);
 }

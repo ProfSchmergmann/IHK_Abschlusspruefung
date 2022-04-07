@@ -14,6 +14,13 @@ public class Staat {
     this.y = breitengrad;
   }
 
+  public Staat(Staat s) {
+    this.identifier = s.identifier;
+    this.kenngroesse = s.kenngroesse;
+    this.x = s.x;
+    this.y = s.y;
+  }
+
   public String getIdentifier() {
     return this.identifier;
   }

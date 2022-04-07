@@ -2,27 +2,25 @@ package com.cae.de.models;
 
 import com.cae.de.utils.Pair;
 import com.cae.de.utils.algorithms.IStrategy;
+import com.cae.de.utils.la.Kreis;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /** Klasse zur Representation aller gegebenen Staaten und deren Beziehungen. */
 public class Landkarte {
 
   private static final Logger LOGGER = Logger.getLogger(Landkarte.class.getName());
   private final String kenngroesse;
-  private final HashMap<Staat, HashSet<Staat>> beziehungen;
   private final HashMap<Staat, HashMap<Staat, Double>> kreafte;
   private final IStrategy strategy;
-  private final Staat staatMitMeisstenNachbarn;
+  private final Staat staatMitMeistenNachbarn;
+  private HashMap<Staat, HashSet<Staat>> beziehungen;
   private int iterationen;
-
-  public Staat getStaatMitMeistenNachbarn() {
-    return this.staatMitMeisstenNachbarn;
-  }
 
   /**
    * Konstruktor, welcher die Liste der Staaten, die Kenngröße, die Beziehungen und die Strategie
@@ -39,7 +37,7 @@ public class Landkarte {
     this.strategy = strategy;
     this.kreafte = new HashMap<>();
     this.beziehungen.forEach((key, value) -> this.kreafte.put(key, new HashMap<>()));
-    this.staatMitMeisstenNachbarn =
+    this.staatMitMeistenNachbarn =
         this.getBeziehungen().entrySet().stream()
             .sorted(Comparator.comparingInt(e -> e.getValue().size()))
             .toList()
@@ -52,6 +50,54 @@ public class Landkarte {
             + " und den Beziehungen: "
             + this.getBeziehungentoString()
             + " initialisiert.");
+  }
+
+  public static HashMap<Staat, HashSet<Staat>> deepCopyBeziehungen(
+      HashMap<Staat, HashSet<Staat>> beziehungen) {
+    var copyMap = new HashMap<Staat, HashSet<Staat>>();
+    var staaten = beziehungen.keySet().stream().map(Staat::new).toList();
+    for (var entry : beziehungen.entrySet()) {
+      var nachbarn =
+          entry.getValue().stream()
+              .map(
+                  staat ->
+                      staaten.stream()
+                          .filter(staat1 -> staat1.getIdentifier().equals(staat.getIdentifier()))
+                          .findFirst()
+                          .get())
+              .collect(Collectors.toCollection(HashSet::new));
+      var staat =
+          staaten.stream()
+              .filter(staat1 -> staat1.getIdentifier().equals(entry.getKey().getIdentifier()))
+              .findFirst()
+              .get();
+      copyMap.put(staat, nachbarn);
+    }
+    return copyMap;
+  }
+
+  public double getAbstandZwischenNachbarStaaten() {
+    return this.getBeziehungen().entrySet().stream()
+        .map(
+            (staatHashSetEntry) -> {
+              var s1 = staatHashSetEntry.getKey();
+              var k1 = new Kreis(s1.getX(), s1.getY(), s1.getKenngroesse());
+              return staatHashSetEntry.getValue().stream()
+                  .map(
+                      s2 ->
+                          Math.abs(
+                              new Kreis(s2.getX(), s2.getY(), s2.getKenngroesse())
+                                  .getAbstandZwischenKreisen(k1)))
+                  .mapToDouble(Double::doubleValue)
+                  .sum();
+            })
+        .mapToDouble(Double::doubleValue)
+        .map(d -> d / 2)
+        .sum();
+  }
+
+  public Staat getStaatMitMeistenNachbarn() {
+    return this.staatMitMeistenNachbarn;
   }
 
   public void normalisiereKenngroesse() {
@@ -102,11 +148,7 @@ public class Landkarte {
    * @param iterationen die Anzahl der Iterationen
    */
   public void rechne(int iterationen) {
-    for (var i = 0; i < iterationen; i++) {
-      this.strategy.rechne(this);
-      LOGGER.log(Level.INFO, i + "te Iteration abgeschlossen.");
-    }
-    LOGGER.log(Level.INFO, "Fertig mit " + iterationen + " Iterationen.");
+    this.strategy.rechne(this, iterationen);
   }
 
   public double getMinX() {
@@ -209,6 +251,10 @@ public class Landkarte {
 
   public HashMap<Staat, HashSet<Staat>> getBeziehungen() {
     return this.beziehungen;
+  }
+
+  public void setBeziehungen(HashMap<Staat, HashSet<Staat>> staatHashSetHashMap) {
+    this.beziehungen = staatHashSetHashMap;
   }
 
   public List<Staat> getSortedStaaten() {
