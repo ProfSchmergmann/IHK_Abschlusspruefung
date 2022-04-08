@@ -93,7 +93,8 @@ public class Landkarte {
    * Diese Methode berechnet den Abstand aller Nachbarstaaten, also aller Staaten, bei denen der
    * direkte Nachbar angegeben wurde. Eventuelle andere Beziehungen werden nicht beachtet. Für die
    * Abstandsberechnung wird die Methode {@link Kreis#getAbstandZwischenKreisen(Kreis)} genutzt,
-   * wobei der Absolutwert des Ergebnisses daraus genommen wird.
+   * wobei zu dem Ergebnis 1 addiert wird, falls die Kreise sich schneiden, sodass eine
+   * Überschneidung als größtmöglicher Wert gewertet wird.
    *
    * @return den Abstand der zwischen allen benachbarten Staaten
    */
@@ -105,10 +106,12 @@ public class Landkarte {
               var k1 = new Kreis(s1.getX(), s1.getY(), s1.getKenngroesse());
               return staatHashSetEntry.getValue().stream()
                   .map(
-                      s2 ->
-                          Math.abs(
-                              new Kreis(s2.getX(), s2.getY(), s2.getKenngroesse())
-                                  .getAbstandZwischenKreisen(k1)))
+                      s2 -> {
+                        var abstand =
+                            new Kreis(s2.getX(), s2.getY(), s2.getKenngroesse())
+                                .getAbstandZwischenKreisen(k1);
+                        return abstand > 0 ? abstand : 1;
+                      })
                   .mapToDouble(Double::doubleValue)
                   .sum();
             })

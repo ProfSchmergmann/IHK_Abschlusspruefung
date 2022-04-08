@@ -1316,6 +1316,20 @@ aten berechnet und falls dieser geringer ist, als der vorher gespeicherte
 Benutzeranleitung
 \end_layout
 
+\begin_layout Standard
+Generell befindet sich die Gesamtdokumentation der Klassen und Methoden
+ als javadoc im 
+\begin_inset Quotes gld
+\end_inset
+
+docs
+\begin_inset Quotes grd
+\end_inset
+
+ Ordner.
+ 
+\end_layout
+
 \begin_layout Subsection
 Ordnerstruktur
 \end_layout
@@ -1851,8 +1865,47 @@ input
 Beispiel 4: 2 Staaten zum Testen
 \end_layout
 
-\begin_layout Subsubsection
-Äquivalenzklassen
+\begin_layout Standard
+In diesem Beispiel habe ich zwei Staaten 
+\begin_inset Quotes gld
+\end_inset
+
+1
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+2
+\begin_inset Quotes grd
+\end_inset
+
+ zum Testen angelegt.
+ Normalerweise sollten sich die Kreise direkt nach der ersten Iteration
+ richtig ausgerichtet haben.
+ 
+\end_layout
+
+\begin_layout Standard
+Das Beispiel ist in der Datei 
+\begin_inset Quotes gld
+\end_inset
+
+beispiel4.txt
+\begin_inset Quotes grd
+\end_inset
+
+ im Ordner 
+\begin_inset Quotes gld
+\end_inset
+
+input
+\begin_inset Quotes grd
+\end_inset
+
+ zu finden.
 \end_layout
 
 \begin_layout Subsection
@@ -1864,7 +1917,7 @@ Kontrollflussgraphen
 \end_layout
 
 \begin_layout Section
-Zusammenfassung und Ausblicks
+Zusammenfassung und Ausblick
 \end_layout
 
 \begin_layout Standard
@@ -2257,7 +2310,17 @@ Aktivitätsdiagramme
 \end_layout
 
 \begin_layout Section
-Eigenständigkeitserklärung
+Selbstständigkeitserklärung
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Selbstständigkeitserklärung.pdf
+	width 100text%
+
+\end_inset
+
+
 \end_layout
 
 \end_body

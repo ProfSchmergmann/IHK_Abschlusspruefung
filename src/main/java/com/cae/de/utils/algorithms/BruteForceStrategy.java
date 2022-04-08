@@ -6,6 +6,8 @@ import com.cae.de.utils.la.Kreis;
 import com.cae.de.utils.la.Punkt;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -28,7 +30,6 @@ public class BruteForceStrategy implements IStrategy {
    * @param landkarte die gegebene Landkarte
    */
   private static void iteriere(Landkarte landkarte) {
-    var epsilon = 1e-10;
 
     // Abstoßungskräfte der Staaten bestimmen, bei denen die Kreise überlappen
     landkarte
@@ -80,44 +81,66 @@ public class BruteForceStrategy implements IStrategy {
         .getStaatenNachKenngroesseSortiert()
         .forEach(
             staat ->
-                landkarte.getKreafte().get(staat).entrySet().stream()
-                    .filter(n -> n.getValue() > epsilon || n.getValue() < -epsilon)
+                landkarte
+                    .getKreafte()
+                    .get(staat)
                     .forEach(
-                        n -> {
+                        (nachbarstaat, kraft) -> {
                           var m1 = new Punkt(staat.getX(), staat.getY());
-                          var nachbarstaat = n.getKey();
                           var m2 = new Punkt(nachbarstaat.getX(), nachbarstaat.getY());
                           var m1new =
-                              (n.getValue() > 0)
-                                  ? m1.verschiebeInRichtung(m2, n.getValue() / 2)
-                                  : m1.verschiebeInGegenrichtung(m2, -n.getValue() / 2);
+                              kraft > 0
+                                  ? m1.verschiebeInRichtung(m2, kraft / 2)
+                                  : m1.verschiebeInRichtung(m2, -kraft / 2);
                           verschiebungen.get(staat.getIdentifier()).add(m1new);
                         }));
 
     // Setze für jeden Staat einen neuen Mittelpunkt, basieren auf den vorher ausgerechneten
-    // Punkten, wobei der Staat mit den meisten Nachbarn nicht beachtet wird
+    // Punkten, wobei der Staat mit den meisten Nachbarn nicht beachtet wird und der Staat nicht
+    // verschoben wird, wenn der neue Mittelpunkt in irgendeinem anderen Kreis liegt.
     landkarte.getStaatenNachKenngroesseSortiert().stream()
-        .filter(
-            staat ->
-                !staat
-                    .getIdentifier()
-                    .equals(landkarte.getStaatMitMeistenNachbarn().getIdentifier()))
+        .filter(staat -> !staat.equals(landkarte.getStaatMitMeistenNachbarn()))
         .forEach(
             staat -> {
-              var p = Punkt.getMittelpunkt(verschiebungen.get(staat.getIdentifier()));
               LOGGER.log(
                   Level.INFO,
-                  "Verschiebe: "
-                      + staat.getIdentifier()
-                      + " von "
-                      + new Punkt(staat.getX(), staat.getY())
-                      + " nach "
-                      + p);
+                  getKreiseAllerAnderenStaaten(staat, landkarte.getStaatenNachKenngroesseSortiert())
+                      .toString());
+              var p = Punkt.getMittelpunkt(verschiebungen.get(staat.getIdentifier()));
+              if (getKreiseAllerAnderenStaaten(staat, landkarte.getStaatenNachKenngroesseSortiert())
+                  .stream()
+                  .noneMatch(
+                      kreis ->
+                          kreis.getAbstandZwischenKreisen(
+                                  new Kreis(p.x(), p.y(), staat.getKenngroesse()))
+                              < 0))
+                LOGGER.log(
+                    Level.INFO,
+                    "Verschiebe: "
+                        + staat.getIdentifier()
+                        + " von "
+                        + new Punkt(staat.getX(), staat.getY())
+                        + " nach "
+                        + p);
               staat.setX(p.x());
               staat.setY(p.y());
             });
 
     landkarte.removeKraefte();
+  }
+
+  /**
+   * Berechnet die Kreise aller anderen Staaten außer dem des gegebenen Staats.
+   *
+   * @param staat der Staat, von dem der Kreis nicht berechnet werden soll
+   * @param staaten alle Staaten
+   * @return ein Set der Kreise aller anderen Staaten
+   */
+  private static Set<Kreis> getKreiseAllerAnderenStaaten(Staat staat, List<Staat> staaten) {
+    return staaten.stream()
+        .filter(staat1 -> !staat1.equals(staat))
+        .map(staat1 -> new Kreis(staat1.getX(), staat1.getY(), staat1.getKenngroesse()))
+        .collect(Collectors.toSet());
   }
 
   /**
@@ -134,11 +157,11 @@ public class BruteForceStrategy implements IStrategy {
    */
   @Override
   public void rechne(Landkarte landkarte, int maxIterationen) {
-    var i = 0;
-    var minimumIterationen = 0;
+    var i = 1;
+    var minimumIterationen = i;
     var beziehungenMitKleinstemAbstand = Landkarte.deepCopyBeziehungen(landkarte.getBeziehungen());
     var abstandZwischenAllenNachbarn = landkarte.getAbstandZwischenNachbarStaaten();
-    while (i < maxIterationen) {
+    while (i <= maxIterationen) {
       iteriere(landkarte);
       var neuerAbstand = landkarte.getAbstandZwischenNachbarStaaten();
       if (abstandZwischenAllenNachbarn > neuerAbstand) {

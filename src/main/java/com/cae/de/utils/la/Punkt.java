@@ -39,20 +39,6 @@ public record Punkt(double x, double y) {
   }
 
   /**
-   * Verschiebt den Punkt in die Gegenrichtung des gegebenen Punktes um den Wert.
-   * @param p der Punkt gegen welche Richtung der andere Punkt verschoben werden soll
-   * @param wert der Wert, um den der Punkt verschoben werden soll
-   * @return den aus der Verschiebung resultierenden Punkt
-   */
-  public Punkt verschiebeInGegenrichtung(Punkt p, double wert) {
-    return this.subtrahiere(
-        new Punkt(p.x - this.x, p.y - this.y)
-            .normalisiere()
-            .multipliziereMitSkalar(wert)
-    );
-  }
-
-  /**
    * Berechnet den euklidischen Abstand beider Punkte.
    * @param p der andere Punkt
    * @return den euklidischen Abstand
