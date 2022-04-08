@@ -39,9 +39,8 @@ public class Landkarte {
     this.beziehungen.forEach((key, value) -> this.kreafte.put(key, new HashMap<>()));
     this.staatMitMeistenNachbarn =
         this.getBeziehungen().entrySet().stream()
-            .sorted(Comparator.comparingInt(e -> e.getValue().size()))
-            .toList()
-            .get(0)
+            .max(Comparator.comparingInt(e -> e.getValue().size()))
+            .get()
             .getKey();
     LOGGER.log(
         Level.INFO,
@@ -49,7 +48,9 @@ public class Landkarte {
             + this.kenngroesse
             + " und den Beziehungen: "
             + this.getBeziehungentoString()
-            + " initialisiert.");
+            + " initialisiert."
+            + "\nStaat mit meisten Nachbarn:"
+            + this.staatMitMeistenNachbarn);
   }
 
   /**
@@ -63,23 +64,25 @@ public class Landkarte {
       HashMap<Staat, HashSet<Staat>> beziehungen) {
     var copyMap = new HashMap<Staat, HashSet<Staat>>();
     var staaten = beziehungen.keySet().stream().map(Staat::new).toList();
-    for (var entry : beziehungen.entrySet()) {
-      var nachbarn =
-          entry.getValue().stream()
-              .map(
-                  staat ->
-                      staaten.stream()
-                          .filter(staat1 -> staat1.getIdentifier().equals(staat.getIdentifier()))
-                          .findFirst()
-                          .get())
-              .collect(Collectors.toCollection(HashSet::new));
-      var staat =
-          staaten.stream()
-              .filter(staat1 -> staat1.getIdentifier().equals(entry.getKey().getIdentifier()))
-              .findFirst()
-              .get();
-      copyMap.put(staat, nachbarn);
-    }
+    beziehungen.forEach(
+        (key, value) -> {
+          var nachbarn =
+              value.stream()
+                  .map(
+                      nachbar ->
+                          staaten.stream()
+                              .filter(
+                                  staat1 -> staat1.getIdentifier().equals(nachbar.getIdentifier()))
+                              .findFirst()
+                              .get())
+                  .collect(Collectors.toCollection(HashSet::new));
+          var staat =
+              staaten.stream()
+                  .filter(staat1 -> staat1.getIdentifier().equals(key.getIdentifier()))
+                  .findFirst()
+                  .get();
+          copyMap.put(staat, nachbarn);
+        });
     return copyMap;
   }
 
