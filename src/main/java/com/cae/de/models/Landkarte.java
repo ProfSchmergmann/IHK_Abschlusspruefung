@@ -35,8 +35,11 @@ public class Landkarte {
     this.kenngroesse = kenngroesse;
     this.beziehungen = beziehungen;
     this.strategy = strategy;
-    this.kreafte = new HashMap<>();
-    this.beziehungen.forEach((key, value) -> this.kreafte.put(key, new HashMap<>()));
+    this.kreafte =
+        this.getStaatenNachKenngroesseSortiert().stream()
+            .collect(
+                Collectors.toMap(
+                    staat -> staat, value -> new HashMap<>(), (prev, next) -> next, HashMap::new));
     this.staatMitMeistenNachbarn =
         this.getBeziehungen().entrySet().stream()
             .max(Comparator.comparingInt(e -> e.getValue().size()))

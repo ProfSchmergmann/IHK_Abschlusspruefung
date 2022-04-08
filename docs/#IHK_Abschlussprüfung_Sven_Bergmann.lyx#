@@ -1,0 +1,2264 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass scrartcl
+\begin_preamble
+\usepackage{csquotes}
+\end_preamble
+\options numbers=noendperiod
+\use_default_options true
+\maintain_unincluded_children false
+\language ngerman
+\language_package babel
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command biber
+\index_command default
+\float_placement H
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_title "Abschlussprüfung Sommer 2022 - Entwicklung eines Softwaresystems"
+\pdf_author "Sven Bergmann"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine biblatex
+\cite_engine_type authoryear
+\biblatex_bibstyle authoryear
+\biblatex_citestyle authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style german
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\listings_params "basicstyle={\small\ttfamily},columns=flexible,breaklines=true"
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{titlepage} % Suppresses headers and footers on the title page 	
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+centering % Centre everything on the title page  	
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+scshape % Use small caps for all text on the title page  	
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+vspace*{
+\backslash
+baselineskip} % White space at the top of the page 
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+rule{
+\backslash
+textwidth}{1.6pt}
+\backslash
+vspace*{-
+\backslash
+baselineskip}
+\backslash
+vspace*{2pt} % Thick horizontal rule
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+vspace{2
+\backslash
+baselineskip} % Whitespace above the title 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\backslash
+LARGE Abschlussprüfung Sommer 2022
+\backslash
+
+\backslash
+ Entwicklung eines Softwaresystems
+\backslash
+
+\backslash
+} % Title 
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+vspace{2
+\backslash
+baselineskip} % Whitespace below the title
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+rule{
+\backslash
+textwidth}{1.6pt}
+\backslash
+vspace*{-
+\backslash
+baselineskip}
+\backslash
+vspace*{2pt} % Thick horizontal rule
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+vspace*{25
+\backslash
+baselineskip} % Whitespace after the title block  	
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+begin{flushleft} 	
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+begin{tabular}{ll} 		
+\end_layout
+
+\begin_layout Plain Layout
+
+			Vorgelegt von: & Sven Bergmann 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			Vorgelegt am: & 
+\backslash
+today 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			Prüfungsnummer: & 123456789 
+\backslash
+
+\backslash
+ 		
+\end_layout
+
+\begin_layout Plain Layout
+
+			Ausbildungsbetrieb: & CAE GmbH 	
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+end{tabular} 	
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+end{flushleft} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{titlepage}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Aufgabenbeschreibung
+\end_layout
+
+\begin_layout Subsection
+Analyse Problemstellung
+\end_layout
+
+\begin_layout Standard
+Es soll ein Programm entwickelt werden, welches Länder mit staatenspezifischen
+ Kennwerten in Form von Kreisen, proportional zur jeweiligen Größe des Kennwerte
+s wiedergibt.
+ Dabei muss darauf geachtet werden, dass die Abstoßungskräfte (zwei Kreise
+ überschneiden sich) und die Anziehungskräfte (zwei Kreise berühren sich
+ nicht, sind aber Nachbarn laut Vorgabe) präzise und in mehreren Iterationen
+ so berechnet werden, dass sich am Ende keine Überschneidung mehr ergibt
+ und die Nachbarschaften bestmöglich eingehalten werden.
+ 
+\end_layout
+
+\begin_layout Subsection
+Geeignete Programm- und Datenstruktur
+\end_layout
+
+\begin_layout Standard
+Zuerst wird jeder Staat in einem Objekt der Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Staat
+\begin_inset Quotes grd
+\end_inset
+
+ repräsentiert, welches einige Attribute bereitstellt, wie 
+\begin_inset Quotes gld
+\end_inset
+
+identifier
+\begin_inset Quotes grd
+\end_inset
+
+, 
+\begin_inset Quotes gld
+\end_inset
+
+kenngroesse
+\begin_inset Quotes grd
+\end_inset
+
+, 
+\begin_inset Quotes gld
+\end_inset
+
+x
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+y
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Der Längengrad wird dabei bei der Initialisierung direkt auf den x-Wert
+ gemappt, während der Breitengrad auf den y-Wert gesetzt wird.
+ Diese Staaten werden dann in eine Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Landkarte
+\begin_inset Quotes grd
+\end_inset
+
+ gekapselt, die zudem noch die Kenngröße, Beziehungen unter den Staaten,
+ Kräfte unter den Staaten, Anzahl der Iterationen und die Strategie enthält.
+ Mit dem Objekt dieser Klasse wird dann auch gerechnet.
+ Für die Eingabedaten existiert eine Klasse namens 
+\begin_inset Quotes gld
+\end_inset
+
+FileLandkartenReader
+\begin_inset Quotes grd
+\end_inset
+
+, welche die vorgegebene Datei direkt in ein Landkartenobjekt lesen kann.
+ Die Ausgabe erfolgt dann über die Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+GnuPlotWriter
+\begin_inset Quotes grd
+\end_inset
+
+, bei der wie der Name schon sagt, die Ausgabe in ein lesbares Format für
+ das GnuPlot Programm
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://www.gnuplot.info/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ gebracht wird.
+ Weiterhin existieren Helper Klassen, wie z.
+ B.
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Kreis
+\begin_inset Quotes grd
+\end_inset
+
+, 
+\begin_inset Quotes gld
+\end_inset
+
+Punkt
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+Pair
+\begin_inset Quotes grd
+\end_inset
+
+, die nützliche, wiederverwendbare Methoden bereitstellen.
+ Der Algorithmus wird über die Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+IStrategy
+\begin_inset Quotes grd
+\end_inset
+
+ implementiert um das Ganze austauschbar zu machen.
+ Bisher existiert allerdings nur die Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+BruteForceStrategie
+\begin_inset Quotes grd
+\end_inset
+
+, welche eine Strategie implementiert.
+ 
+\end_layout
+
+\begin_layout Subsection
+Einlesen und Initialisieren der Daten
+\end_layout
+
+\begin_layout Standard
+Da davon auszugehen ist, dass die Eingabedaten keine Fehler enthalten, wird
+ die Eingabe vorher auch nicht geprüft.
+ Die Datei fängt also mit einer Zeile an, worin die zu berücksichtigende
+ Kenngröße steht.
+ Diese Zeile wird als String eingelesen und als Attribut der Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Landkarte
+\begin_inset Quotes grd
+\end_inset
+
+ gespeichert.
+ Die zweite Zeile enthält einen Kommentar, welcher mit 
+\begin_inset Quotes gld
+\end_inset
+
+#
+\begin_inset Quotes grd
+\end_inset
+
+ beginnt.
+ Soweit es sich nicht besser aus den Beispielen erschließen lässt, ist nicht
+ noch eine weitere Kommentarteile vorhanden.
+ Danach folgt eine Liste aller zu berücksichtigenden Staaten, wobei in jeder
+ Zeile ein Staat mit Kennzeichen, Kenngröße, Längen- und Breitengrad angegeben
+ wird.
+ Diese Staaten können dadurch direkt initialisiert und als Schlüssel in
+ die Map 
+\begin_inset Quotes gld
+\end_inset
+
+Beziehungen
+\begin_inset Quotes grd
+\end_inset
+
+ der Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Landkarte
+\begin_inset Quotes grd
+\end_inset
+
+ eingefügt werden.
+ Sind alle Staaten eingelesen, folgt eine Kommentarzeile 
+\begin_inset Quotes gld
+\end_inset
+
+Nachbarschaften
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Danach folgen alle Nachbarschaftsbeziehungen in der Form: 
+\begin_inset Quotes gld
+\end_inset
+
+<Staat>: <Liste aller Nachbarn getrennt mit 
+\backslash
+s>
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Diese werden in das Attribut 
+\begin_inset Quotes gld
+\end_inset
+
+Beziehungen
+\begin_inset Quotes grd
+\end_inset
+
+ eingelesen, wobei pro Zeile zuerst nach dem Schlüssel gesucht wird, und
+ danach jeweils der Staat dem Set hinzugefügt wird.
+ Eine Darstellung als Nassi-Shneiderman Diagram ist in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Einlesen-der-Landkarte"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Einlesen-der-Landkarte"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ vorhanden.
+\end_layout
+
+\begin_layout Subsection
+Entwurf des Algorithmus
+\end_layout
+
+\begin_layout Standard
+Der Algorithmus orientiert sich sehr an der Angabe des Verlaufsdiagramms
+ in der Aufgabenstellung.
+ Bevor irgendetwas gerechnet wird, werden alle Kenngrößen nach dem Einlesen
+ normalisiert, indem jeder Kennwert durch den größten Kennwert geteilt wird.
+ So wird dem Problem aus dem Weg gegangen, dass schon direkt am Anfang Kreise
+ überlappen.
+ Der Algorithmus startet nun und berechnet bei jedem Durchlauf zuerst die
+ Kräfte der sich überlappenden Kreise
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Berechnung-der-Kräfte"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Berechnung-der-Kräfte"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ Sind also die Staaten keine direkten Nachbarn voneinander, überlappen sich
+ aber die von den Kenngrößen und Mittelpunktskoordinaten aufgespannten Kreise,
+ wird dem Attribut 
+\begin_inset Quotes gld
+\end_inset
+
+kraefte
+\begin_inset Quotes grd
+\end_inset
+
+ des Objektes 
+\begin_inset Quotes gld
+\end_inset
+
+Landkarte
+\begin_inset Quotes grd
+\end_inset
+
+ eine Kraft hinzugefügt.
+ Danach werden alle direkten Nachbarn jedes Staates betrachtet.
+ Für jeden Nachbarn wird mit einer Abstandsberechnung der Kreis-Klasse berechnet
+, ob die Kraft negativ (abstoßend), oder positiv (anziehend) sein muss.
+ Ist der Algorithmus damit fertig, wird nun eine HashMap angelegt, welche
+ zu einem Schlüssel (Staaten Identifizierer) jeweils ein HashSet speichern
+ soll, zu dem alle Punkte hinzugefügt werden, wohin sich der Kreis verschieben
+ soll.
+ Mit dem letzten Schritt iteriert der Algorithmus durch diese HashMap, berechnet
+ den Mittelwert der Punkte für jeden Staat und verschiebt die Staaten dementspre
+chend.
+\end_layout
+
+\begin_layout Subsection
+Ausgabe gemäß Aufgabenstellung
+\end_layout
+
+\begin_layout Standard
+Die Ausgabe soll in einer Form dargestellt werden, welche von GnuPlot lesbar
+ ist.
+ Hierfür muss zuerst der x-Bereich, sowie der y-Bereich berechnet werden.
+ Dafür wird durch die Staaten durchiteriert und zusammen mit dem Radius
+ der Kreise der kleinste, bzw.
+ größte x, bzw.
+ y Wert berechnet.
+ Ist nun 
+\begin_inset Formula $\mid x_{max}-x_{min}\mid\neq\mid y_{max}-y_{min}\mid$
+\end_inset
+
+, so wird der kleinere Bereich um jeweils die Hälfte des Überschusses links
+ und rechts erweitert, sodass GnuPlot die Kreise ordentlich ausgibt und
+ diese nicht verzerrt.
+ Der Name der Kenngröße, sowie die Anzahl der Iterationen wird dann aus
+ dem Attribut des Objektes 
+\begin_inset Quotes gld
+\end_inset
+
+Landkarte
+\begin_inset Quotes grd
+\end_inset
+
+ ausgelesen.
+ Die Liste kann danach zusammen mit allen anderen Attributen geschrieben
+ werden.
+ Der Workflow hierfür ist ebenfalls in einem Nassi-Shneiderman Diagram in
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Ausgabe-der-Landkarte"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Ausgabe-der-Landkarte"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ dargestellt.
+\end_layout
+
+\begin_layout Section
+Objektorientierter Entwurf
+\end_layout
+
+\begin_layout Subsection
+Klassendiagramme
+\end_layout
+
+\begin_layout Standard
+Die UML-Klassendiagramme befinden sich im Anhang.
+ Auf der obersten Ebene befindet sich die 
+\begin_inset Quotes gld
+\end_inset
+
+Main
+\begin_inset Quotes grd
+\end_inset
+
+ Klasse zusammen mit zwei anderen Paketen
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Main-UML-Diagramm"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Main-UML-Diagramm"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ Im darunterliegenden Paket 
+\begin_inset Quotes gld
+\end_inset
+
+models
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Paket-models"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Paket-models"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ befinden sich die Klassen 
+\begin_inset Quotes gld
+\end_inset
+
+Landkarte
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+Staat
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Das Paket 
+\begin_inset Quotes gld
+\end_inset
+
+utils
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Paket-utils"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Paket-utils"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ beinhaltet neben der Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Pair
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+LogOption
+\begin_inset Quotes grd
+\end_inset
+
+ auch noch das Paket 
+\begin_inset Quotes gld
+\end_inset
+
+algorithm
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Paket-algorithms"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Paket-algorithms"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, das Paket 
+\begin_inset Quotes gld
+\end_inset
+
+io
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Paket-io"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Paket-io"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ und das Paket 
+\begin_inset Quotes gld
+\end_inset
+
+la
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Paket-la"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Paket-la"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Pakete
+\end_layout
+
+\begin_layout Subsubsection
+Utils
+\end_layout
+
+\begin_layout Standard
+Das Paket 
+\begin_inset Quotes gld
+\end_inset
+
+com.cae.de.utils
+\begin_inset Quotes grd
+\end_inset
+
+ beinhaltet weitere Pakete, welche Klassen beinhalten, die in irgendeiner
+ Art zum Oberbegriff 
+\begin_inset Quotes gld
+\end_inset
+
+Utilities
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+Werkzeuge
+\begin_inset Quotes grd
+\end_inset
+
+ gehören.
+ Unter anderem existiert hier die Record Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Pair
+\begin_inset Quotes grd
+\end_inset
+
+ welche zum erstellen eines 
+\begin_inset Quotes gld
+\end_inset
+
+immutable Pairs
+\begin_inset Quotes grd
+\end_inset
+
+ nützlich sein kann, da keine Pair-Klasse mehr in Java 17 existiert.
+ Des Weiteren wird die Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+LogOption
+\begin_inset Quotes grd
+\end_inset
+
+ in der Main Methode genutzt um die Option für das Logging festlegen zu
+ können.
+ Der Nutzer hat dabei die Möglichkeit die Logging Ausgabe zu modifizieren.
+\end_layout
+
+\begin_layout Paragraph
+IO
+\end_layout
+
+\begin_layout Standard
+Wie der Name schon sagt, ist dies das Paket für die Ein- und Ausgabe von
+ Daten.
+ Es existieren vor allem die Interfaces 
+\begin_inset Quotes gld
+\end_inset
+
+IReader
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+IWriter
+\begin_inset Quotes grd
+\end_inset
+
+, welche beide generisch geschrieben sind, sodass in den implementierenden
+ Klassen angegeben werden kann, welche Objekte eingelesen oder geschrieben
+ werden.
+ Zudem existieren hier noch implementierende Writer und Reader, wie 
+\begin_inset Quotes gld
+\end_inset
+
+GnuPlotWriter
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+FileLandkartenLeser
+\begin_inset Quotes grd
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Paragraph
+Algorithms
+\end_layout
+
+\begin_layout Standard
+Das Paket Algorithms ist auch selbst sprechend und beinhaltet Klassen, welche
+ Strategien implementieren.
+ Vor allem wird hier darauf geachtet, dass durch die Implementierung des
+ Interfaces 
+\begin_inset Quotes gld
+\end_inset
+
+IStrategy
+\begin_inset Quotes grd
+\end_inset
+
+ die Algorithmen austauschbar gemacht werden.
+ 
+\end_layout
+
+\begin_layout Paragraph
+LA
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset Quotes gld
+\end_inset
+
+la
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+lineare Algebra
+\begin_inset Quotes grd
+\end_inset
+
+ befinden sich die Record Klassen 
+\begin_inset Quotes gld
+\end_inset
+
+Punkt
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+Kreis
+\begin_inset Quotes grd
+\end_inset
+
+, welche beide Methoden der linearen Algebra bereitstellen um beispielsweise
+ Abstandsberechnungen durchführen zu können.
+\end_layout
+
+\begin_layout Subsubsection
+Models
+\end_layout
+
+\begin_layout Standard
+Im Paket 
+\begin_inset Quotes gld
+\end_inset
+
+models
+\begin_inset Quotes grd
+\end_inset
+
+ befinden sich nur die zwei Klassen 
+\begin_inset Quotes gld
+\end_inset
+
+Landkarte
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+Staat
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Da diese Klassen fast nur eine Datenhaltung bereitstellen, befinden sie
+ sich hier.
+\end_layout
+
+\begin_layout Section
+Änderungen zur schriftlichen Ausarbeitung
+\end_layout
+
+\begin_layout Subsection
+Umbenennungen
+\end_layout
+
+\begin_layout Standard
+Es sind fast alle der Bennenungen so wie in der schriftlichen Ausarbeitung
+ geblieben, es wurden nur alle Bennenungen an das Deutsche angepasst.
+ Die Java-spezifischen Benennungen wie 
+\begin_inset Quotes gld
+\end_inset
+
+z.
+ B.
+ getAttribut oder setAttribut
+\begin_inset Quotes grd
+\end_inset
+
+ sind geblieben.
+ Zudem wurden natürlich noch die Umlaute umschrieben.
+\end_layout
+
+\begin_layout Subsection
+Modifikation der Klassenstruktur
+\end_layout
+
+\begin_layout Standard
+In der schriftlichen Ausarbeitung war ni die Rede von einem Interface namens
+ 
+\begin_inset Quotes gld
+\end_inset
+
+IStrategy
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Dies ist hinzugenommen, um den zu implementierenden Algorithmus austauschbar
+ zu machen.
+ Die Utils Klassen 
+\begin_inset Quotes gld
+\end_inset
+
+Pair
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+Punkt
+\begin_inset Quotes grd
+\end_inset
+
+ existierten ebenfalls noch nicht und stellten sich zusammen mit der Implementie
+rung der Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Kreis
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+Main
+\begin_inset Quotes grd
+\end_inset
+
+ als nützliche Klassen dar.
+ Ansonsten sollte sich nichts geändert haben.
+ 
+\end_layout
+
+\begin_layout Subsection
+Modifikation der Logik
+\end_layout
+
+\begin_layout Standard
+Während des Einlesens wurden zwei oder mehr Listen angelegt, obwohl die
+ Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Landkarte
+\begin_inset Quotes grd
+\end_inset
+
+ nur genau eine HashMap mit allen Beziehungen braucht, um die Staaten zu
+ speichern.
+ Direkt nach dem Einlesen wird die Kenngröß jedes Staates normalisiert,
+ das heißt 
+\begin_inset Formula $\nabla Staaten:\frac{staat.kenngroesse}{staaten.maximaleKenngroesse}$
+\end_inset
+
+.Weiterhin wurde der Algorithmus in der Art angepasst, dass nun eine Art
+ Qualitätskontrolle stattfindet, welche den derzeitigen Abstand aller Nachbarsta
+aten berechnet und falls dieser geringer ist, als der vorher gespeicherte
+ Abstand, diesen ersetzt und zudem die HashMap aller Beziehungen speichert.
+ Diese HashMap wird dann am Ende genommen, um die Eigentliche zu überschreiben
+ und dadurch wird durch das Kommandozeilenargument, welches die Iterationen
+ angibt nur eine maximale Anzahl an Iterationen festgelegt.
+ Es kann somit beispielsweise passieren, dass bei einer Angabe von 
+\begin_inset Quotes gld
+\end_inset
+
+-i 500
+\begin_inset Quotes grd
+\end_inset
+
+ die Anzahl 460 an Iterationen herauskommt, da dort der minimalste Abstand
+ der Nachbarstaaten ist.
+ Es fand zudem eine Veränderung der Abstandsberechnung statt, da in irgendeiner
+ Art dargestellt werden musste, dass ein Kreis innerhalb eines anderen liegt.
+ Des Weiteren wird der Staat mit den meisten Nachbarn von Verschiebungen
+ ausgenommen, da es so einen Fixpunkt gibt, um den sich die anderen Staaten
+ herum bewegen können.
+ 
+\end_layout
+
+\begin_layout Section
+Benutzeranleitung
+\end_layout
+
+\begin_layout Subsection
+Ordnerstruktur
+\end_layout
+
+\begin_layout Standard
+An sich sollten die fertig gebaute 
+\begin_inset Quotes gld
+\end_inset
+
+.jar
+\begin_inset Quotes grd
+\end_inset
+
+ Datei zusammen mit dem ausführbaren Python Skript in einem Ordner liegen.
+ Die Testbeispiele sollten ebenfalls auf der gleichen Ebene in einem Ordner
+ vorhanden sein, wobei der Ordnername in beim Programmstart oder in dem
+ Skript angegeben werden kann.
+ Der Ordner für alle Ausgabe Dateien wird dann ebenso in dieser Ebene erstellt.
+ Die Ausgabedateien werden pro Eingabedatei jeweils in eine Datei namens
+ 
+\begin_inset Quotes gld
+\end_inset
+
+<Name der Eingabedatei>_out.txt
+\begin_inset Quotes grd
+\end_inset
+
+ im output Ordner gespeichert, welcher entweder über die Programmzeile vorher
+ angegeben wird, oder einfach 
+\begin_inset Quotes gld
+\end_inset
+
+output
+\begin_inset Quotes grd
+\end_inset
+
+ heißt.
+\end_layout
+
+\begin_layout Subsection
+Benötigte Programme
+\end_layout
+
+\begin_layout Standard
+Für die Ausführung der 
+\begin_inset Quotes gld
+\end_inset
+
+.jar
+\begin_inset Quotes grd
+\end_inset
+
+ Datei benötigt der Zielrechner zwingend eine Installation des Open JDK
+ 17
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://www.oracle.com/java/technologies/downloads/#java17
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, da das Java-Sprachlevel auf 17 gesetzt wurde.
+ Um das Python Skript auszuführen wird eine Python Installation gebraucht,
+ wobei ich die Version 3.10
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://www.python.org/downloads/release/python-3100/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ benutzt habe.
+ Um das Projekt zu bauen, wird 
+\begin_inset Quotes gld
+\end_inset
+
+gradle
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://gradle.org/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ genutzt.
+\end_layout
+
+\begin_layout Subsection
+Ausführen als Kommandozeilenprogramm
+\end_layout
+
+\begin_layout Standard
+Es gibt zwei Wege das Programm auszuführen, einmal direkt über Java und
+ einmal über das Python Skript, welches intern die 
+\begin_inset Quotes gld
+\end_inset
+
+.jar
+\begin_inset Quotes grd
+\end_inset
+
+ Datei aufruft.
+\end_layout
+
+\begin_layout Standard
+Das Programm nimmt Argumente entgegen, welche sind:
+\end_layout
+
+\begin_layout Itemize
+-inputfolder {
+\begin_inset Quotes gld
+\end_inset
+
+Name des Ordners mit den Eingabedateien
+\begin_inset Quotes grd
+\end_inset
+
+}
+\end_layout
+
+\begin_layout Itemize
+-outputfolder {
+\begin_inset Quotes gld
+\end_inset
+
+Name des Ordners, wohin die Ausgabedateien geschrieben werden
+\begin_inset Quotes grd
+\end_inset
+
+}
+\end_layout
+
+\begin_layout Itemize
+-log {
+\begin_inset Quotes gld
+\end_inset
+
+true
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+false
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+file
+\begin_inset Quotes grd
+\end_inset
+
+}
+\end_layout
+
+\begin_layout Itemize
+-loglvl {
+\begin_inset Quotes gld
+\end_inset
+
+warning
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+info
+\begin_inset Quotes grd
+\end_inset
+
+}
+\end_layout
+
+\begin_layout Standard
+Die Namen der Ordner werden immer relativ zum derzeitigen Ordnerpfad ausgewertet.
+ Ohne den Parameter 
+\begin_inset Quotes gld
+\end_inset
+
+-inputfolder
+\begin_inset Quotes grd
+\end_inset
+
+ wird das Programm den Ordner 
+\begin_inset Quotes gld
+\end_inset
+
+input
+\begin_inset Quotes grd
+\end_inset
+
+ auf der gleichen Ebene suchen und wenn dieser vorhanden ist, das Programm
+ ausführen, ansonsten das Programm direkt beenden.
+ Der Parameter 
+\begin_inset Quotes gld
+\end_inset
+
+-outputfolder
+\begin_inset Quotes grd
+\end_inset
+
+ muss nicht zwingend angegeben werden, da ohne diese Angabe alle Ausgabedaten
+ in den Ordner 
+\begin_inset Quotes gld
+\end_inset
+
+output
+\begin_inset Quotes grd
+\end_inset
+
+ geschrieben werden.
+ Die Option 
+\begin_inset Quotes gld
+\end_inset
+
+-log
+\begin_inset Quotes grd
+\end_inset
+
+ gibt an, ob der Benutzer Loggingausgaben in der Kommandozeile haben möchte
+ oder nicht, der default Wert hierfür ist 
+\begin_inset Quotes gld
+\end_inset
+
+true
+\begin_inset Quotes grd
+\end_inset
+
+, also Loggingausgaben in der Konsole.
+ Falls die Option 
+\begin_inset Quotes gld
+\end_inset
+
+file
+\begin_inset Quotes grd
+\end_inset
+
+ angeben wurde, werden alle Logs in eine Datei 
+\begin_inset Quotes gld
+\end_inset
+
+log.txt
+\begin_inset Quotes grd
+\end_inset
+
+ auf der gleichen Ebene geschrieben.
+ Weiterhin wird mit der Option 
+\begin_inset Quotes gld
+\end_inset
+
+-loglvl
+\begin_inset Quotes grd
+\end_inset
+
+ angegeben, ab welchem Level geloggt werden soll.
+ Die Voreinstellung ist hier 
+\begin_inset Quotes gld
+\end_inset
+
+Level.all
+\begin_inset Quotes grd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Ausführen der JAR
+\end_layout
+
+\begin_layout Standard
+Um die 
+\begin_inset Quotes gld
+\end_inset
+
+.jar
+\begin_inset Quotes grd
+\end_inset
+
+ ausführen zu können, muss zumindest unter Windows der Pfad zum JDK 17 in
+ den Umgebungsvariablen gesetzt sein.
+ Mit einem Doppelklick auf die Datei wird der Code mit Standardargumenten
+ ausgeführt.
+ Ansonsten könnte der Benutzer auch über die Kommandozeile gehen und die
+ Programmargumente selbst setzen.
+ Das würde dann beispielsweise so aussehen: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lstlisting}
+\end_layout
+
+\begin_layout Plain Layout
+
+	java -jar IHK_Abschlusspruefung.jar -inputfolder input -outputfolder output
+ -log false
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lstlisting}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Ausführen des Python-Skripts
+\end_layout
+
+\begin_layout Standard
+Der Benutzer kann zusätzlich auch noch das Python-Skript 
+\begin_inset Quotes gld
+\end_inset
+
+execute_gro_pro.py
+\begin_inset Quotes grd
+\end_inset
+
+ ausführen, um das Programm mit den Standardargumenten zu starten.
+ Hierfür ist eine Installation von Python notwendig, sowie die Verlinkung
+ zur Umgebungsvariablen.
+ Der Kommandozeilencode sieht dann beispielsweise so aus:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lstlisting}
+\end_layout
+
+\begin_layout Plain Layout
+
+	python execute_gro_pro.py
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lstlisting}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Beschreibung, Begründung und Diskussion ausgewählter Beispiele
+\end_layout
+
+\begin_layout Subsection
+Black-Box-Test
+\end_layout
+
+\begin_layout Standard
+Da die folgenden Beispiele, welche auch in der Aufgabenstellung genutzt
+ werden, nicht darauf abziehlen, den Programmcode im Einzelnen zu verstehen
+ und zu testen, fallen diese unter den Bereich der Black-Box-Tests.
+ Des Weiteren werden keine Zwischenschritte geprüft, sondern einzig die
+ Eingabe, sowie die ungefähre Ausgabe vorgegeben.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Beispiel 1: Fläche von 10 Staaten
+\end_layout
+
+\begin_layout Standard
+Das erste Beispiel der Aufgabenstellung beschreibt die Fläche von 10 Staaten
+ in Europa und deren Beziehungen.
+ Hierbei habe ich, wie am Anfang erklärt, auch die Kenngröße normalisiert,
+ da die Kreise der Staaten ansonsten direkt überlappen würden.
+ Das Beispiel war dahingehend gut gewählt, da man die ungefähre Position
+ der Staaten im Hinterkopf hat und dadurch besser evaluieren kann, wie gut
+ oder schlecht, der selbst geschriebene Algorithmus ist.
+ Bisher konnte ich weder mit 100 Iterationen, noch mit einer anderen Zahl
+ an Iterationen das Beispiel reproduzieren.
+\end_layout
+
+\begin_layout Standard
+Das Beispiel ist in der Datei 
+\begin_inset Quotes gld
+\end_inset
+
+beispiel1.txt
+\begin_inset Quotes grd
+\end_inset
+
+ im Ordner 
+\begin_inset Quotes gld
+\end_inset
+
+input
+\begin_inset Quotes grd
+\end_inset
+
+ zu finden.
+\end_layout
+
+\begin_layout Subsubsection
+Beispiel 2: Bierkonsum von 10 Staaten
+\end_layout
+
+\begin_layout Standard
+Der Bierkonsum der Staaten wird in Beispiel 2 beschrieben, was daher interessant
+ ist, dass alle Nachbarschaftsbeziehungen wie in Beispiel 1 dargestellt
+ werden müssen, aber die Größe der Kreise vollkommen unterschiedlich sind.
+ Es kann also nun passieren, dass der Algorithmus mit Beispiel 1 besser
+ oder schlechter funktioniert als mit Beispiel 2.
+ Allerdings konnte hier wiederum weder mit 100 noch mit einer anderen Zahl
+ an Iterationen das Beispiel reproduziert werden.
+\end_layout
+
+\begin_layout Standard
+Das Beispiel ist in der Datei 
+\begin_inset Quotes gld
+\end_inset
+
+beispiel2.txt
+\begin_inset Quotes grd
+\end_inset
+
+ im Ordner 
+\begin_inset Quotes gld
+\end_inset
+
+input
+\begin_inset Quotes grd
+\end_inset
+
+ zu finden.
+\end_layout
+
+\begin_layout Subsubsection
+Beispiel 3: Fläche von 24 Staaten
+\end_layout
+
+\begin_layout Standard
+Die Fläche von 24 Staaten ist wiederum ähnlich zum Beispiel 1 nur mit mehr
+ Nachbarn.
+ Das heißt alle Kenngrößen bleiben gleich und theoretisch sollte auch die
+ Anordnung der 10 gleichen Staaten gleich bleiben, allerdings kann es durch
+ die Abstoßungs- und Anziehungskräfte passieren, dass sich die Konstellation
+ auch ändert.
+\end_layout
+
+\begin_layout Standard
+Das Beispiel ist in der Datei 
+\begin_inset Quotes gld
+\end_inset
+
+beispiel3.txt
+\begin_inset Quotes grd
+\end_inset
+
+ im Ordner 
+\begin_inset Quotes gld
+\end_inset
+
+input
+\begin_inset Quotes grd
+\end_inset
+
+ zu finden.
+\end_layout
+
+\begin_layout Subsubsection
+Beispiel 4: 2 Staaten zum Testen
+\end_layout
+
+\begin_layout Subsubsection
+Äquivalenzklassen
+\end_layout
+
+\begin_layout Subsection
+White-Box-Test
+\end_layout
+
+\begin_layout Subsubsection
+Kontrollflussgraphen
+\end_layout
+
+\begin_layout Section
+Zusammenfassung und Ausblicks
+\end_layout
+
+\begin_layout Standard
+In dieser Aufgabe mussten Kenngrößen für Länder mit geografischen Kennwerten
+ dargestellt werden.
+ Das Ziel dabei war, die geografische Anordnung und Nachbarschaftsbeziehungen
+ bei verschieden großen Werten möglichst genau beizubehalten.
+ Hierfür mussten Funktionen definiert werden, welche die Anziehungs- und
+ Abstoßungskräfte der Kreise berechnen und diese dementsprechend verschieben.
+ Mit einer festen Anzahl an Iterationen funktioniert der Algorithmus leider
+ nicht, da dieser durch die Kräfte divergiert, das heißt die Kreise stoßen
+ sich immer wieder ab und ziehen sich zusammen.
+ Durch ein wie auch immer geartetes Qualitätskriterium kann man dieses Problem
+ mehr oder weniger lösen, allerdings ist es nicht ganz eindeutig, wie dieses
+ Kriterium aussehen soll.
+ In meiner Lösung habe ich den Gesamtabstand der Nachbarstaaten voneinander
+ genommen und beim minimalen Abstand die Beziehungen ausgegeben.
+ 
+\end_layout
+
+\begin_layout Standard
+In einer Verbesserung des Programms könnte noch eingebaut werden, dass eine
+ grafische Anzeige vorhanden ist, welche nicht die letzte Iteration anzeigt,
+ sondern durch alle Iterationen durchläuft und jede einzeln anzeigt.
+ Hiermit könnte dann eventuell auch der Algorithmus, oder die Abbruchbedingung
+ verbessert werden, da grafisch genau dargestellt wird, was eigentlich passiert.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\start_of_appendix
+UML-Diagramme
+\end_layout
+
+\begin_layout Subsection
+Klassendiagramme
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Main UML Diagramm
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Main-UML-Diagramm"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename umls/main.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Paket models
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Paket-models"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename umls/Package models.png
+	width 70text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Paket utils
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Paket-utils"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename umls/Package utils.png
+	width 50text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Paket algorithms
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Paket-algorithms"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename umls/Package algorithms.png
+	width 50text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Paket io
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Paket-io"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename umls/Package io.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Paket la
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Paket-la"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename umls/Package la.png
+	width 70text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Nassi-Shneidermann Diagramme
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Einlesen der Landkarte
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Einlesen-der-Landkarte"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename umls/Einlesen_der_Landkarte_nassi.pdf
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Ausgabe der Landkarte
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Ausgabe-der-Landkarte"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename umls/Ausgabe_der_Landkarte_nassi.pdf
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Berechnung der Kräfte
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Berechnung-der-Kräfte"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename umls/Berechnung_der_Kräfte_nassi.pdf
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Sequenzdiagramme
+\end_layout
+
+\begin_layout Subsection
+Aktivitätsdiagramme
+\end_layout
+
+\begin_layout Section
+Eigenständigkeitserklärung
+\end_layout
+
+\end_body
+\end_document
