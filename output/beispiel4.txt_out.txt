@@ -1,13 +1,13 @@
 reset
-set xrange [3.5092880150001404:6.666666666666667]
-set yrange [1.6759546816668074:7.24535599249993]
+set xrange [1.0:6.666666666666667]
+set yrange [-0.8333333333333335:8.5]
 set size ratio 1.0
 set title "Test, Iterationen: 1"
 unset xtics
 unset ytics
 $data << EOD
 6.0 5.0 0.6666666666666666 1 0
-4.50928801500014 4.254644007500071 1.0 2 1
+2.0 3.0 1.0 2 1
 EOD
 plot \
 '$data' using 1:2:3:5 with circles lc var notitle, \

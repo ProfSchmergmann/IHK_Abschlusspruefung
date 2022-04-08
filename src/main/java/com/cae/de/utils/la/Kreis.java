@@ -1,12 +1,16 @@
 package com.cae.de.utils.la;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Record Kreis für eine primitive Abstandsberechnung.
- * @param x der x Wert des Mittelpunktes
- * @param y der y Wert des Mittelpunktes
+ * @param p der Mittelpunkt
  * @param r der Radius
  */
-public record Kreis(double x, double y, double r) {
+public record Kreis(Punkt p, double r) {
+
+  private static final Logger LOGGER = Logger.getLogger(Kreis.class.getName());
 
   /**
    * Berechnet den Abstand beider Kreise
@@ -15,7 +19,7 @@ public record Kreis(double x, double y, double r) {
    * andernfalls ist der Abstand negativ und repräsentiert die Strecke der größten Überschneidung.
    */
   public double getAbstandZwischenKreisen(Kreis k) {
-    return new Punkt(k.x, k.y).getAbstand(new Punkt(this.x, this.y)) - (this.r + k.r);
+    return new Punkt(k.p().x(), k.p().y()).getAbstand(this.p) - (this.r + k.r);
   }
 
   /**
@@ -24,7 +28,7 @@ public record Kreis(double x, double y, double r) {
    * @return true wenn er innerhalb liegt, andernfalls false
    */
   public boolean isInnerhalb(Punkt p) {
-    return p.getAbstand(new Punkt(this.x, this.y)) < this.r;
+    return p.getAbstand(this.p) < this.r;
   }
 
 }

@@ -31,18 +31,26 @@ public class BruteForceStrategy implements IStrategy {
    */
   private static void iteriere(Landkarte landkarte) {
 
+    var epsilon = 1e-6;
+
     // Abstoßungskräfte der Staaten bestimmen, bei denen die Kreise überlappen
     landkarte
         .getBeziehungen()
         .forEach(
             (staat, nachbarn) -> {
-              var k1 = new Kreis(staat.getX(), staat.getY(), staat.getKenngroesse());
+              var k1 = new Kreis(new Punkt(staat.getX(), staat.getY()), staat.getKenngroesse());
               landkarte.getBeziehungen().keySet().stream()
                   .filter(
-                      staat2 ->
-                          staat != staat2
-                              && !landkarte.getBeziehungen().get(staat).contains(staat2))
-                  .filter(staat2 -> k1.isInnerhalb(new Punkt(staat2.getX(), staat2.getY())))
+                      nachbar ->
+                          staat != nachbar
+                              && !landkarte.getBeziehungen().get(staat).contains(nachbar))
+                  .filter(
+                      nachbar ->
+                          k1.getAbstandZwischenKreisen(
+                                  new Kreis(
+                                      new Punkt(nachbar.getX(), nachbar.getY()),
+                                      nachbar.getKenngroesse()))
+                              < 0)
                   .forEach(
                       nachbar ->
                           landkarte.addKraft(
@@ -56,7 +64,7 @@ public class BruteForceStrategy implements IStrategy {
         .getBeziehungen()
         .forEach(
             (staat, nachbarn) -> {
-              var k1 = new Kreis(staat.getX(), staat.getY(), staat.getKenngroesse());
+              var k1 = new Kreis(new Punkt(staat.getX(), staat.getY()), staat.getKenngroesse());
               nachbarn.forEach(
                   nachbar ->
                       landkarte.addKraft(
@@ -64,14 +72,15 @@ public class BruteForceStrategy implements IStrategy {
                           nachbar,
                           k1.getAbstandZwischenKreisen(
                               new Kreis(
-                                  nachbar.getX(), nachbar.getY(), nachbar.getKenngroesse()))));
+                                  new Punkt(nachbar.getX(), nachbar.getY()),
+                                  nachbar.getKenngroesse()))));
             });
 
     var verschiebungen =
         landkarte.getStaatenNachKenngroesseSortiert().stream()
             .collect(
                 Collectors.toMap(
-                    Staat::getIdentifier,
+                    staat -> staat,
                     value -> new HashSet<Punkt>(),
                     (prev, next) -> next,
                     HashMap::new));
@@ -89,31 +98,26 @@ public class BruteForceStrategy implements IStrategy {
                           var m1 = new Punkt(staat.getX(), staat.getY());
                           var m2 = new Punkt(nachbarstaat.getX(), nachbarstaat.getY());
                           var m1new =
-                              kraft > 0
-                                  ? m1.verschiebeInRichtung(m2, kraft / 2)
-                                  : m1.verschiebeInRichtung(m2, -kraft / 2);
-                          verschiebungen.get(staat.getIdentifier()).add(m1new);
+                              (nachbarstaat.equals(landkarte.getStaatMitMeistenNachbarn()))
+                                  ? m1.verschiebeInRichtung(m2, kraft)
+                                  : m1.verschiebeInRichtung(m2, kraft / 2);
+                          verschiebungen.get(staat).add(m1new);
                         }));
 
     // Setze für jeden Staat einen neuen Mittelpunkt, basieren auf den vorher ausgerechneten
     // Punkten, wobei der Staat mit den meisten Nachbarn nicht beachtet wird und der Staat nicht
     // verschoben wird, wenn der neue Mittelpunkt in irgendeinem anderen Kreis liegt.
-    landkarte.getStaatenNachKenngroesseSortiert().stream()
+    verschiebungen.keySet().stream()
         .filter(staat -> !staat.equals(landkarte.getStaatMitMeistenNachbarn()))
         .forEach(
             staat -> {
-              LOGGER.log(
-                  Level.INFO,
+              var mNeu = Punkt.getMittelpunkt(verschiebungen.get(staat));
+              var kNeu = new Kreis(mNeu, staat.getKenngroesse());
+              var neuerKreisAusserhalb =
                   getKreiseAllerAnderenStaaten(staat, landkarte.getStaatenNachKenngroesseSortiert())
-                      .toString());
-              var p = Punkt.getMittelpunkt(verschiebungen.get(staat.getIdentifier()));
-              if (getKreiseAllerAnderenStaaten(staat, landkarte.getStaatenNachKenngroesseSortiert())
-                  .stream()
-                  .noneMatch(
-                      kreis ->
-                          kreis.getAbstandZwischenKreisen(
-                                  new Kreis(p.x(), p.y(), staat.getKenngroesse()))
-                              < 0))
+                      .stream()
+                      .noneMatch(kreis -> kreis.getAbstandZwischenKreisen(kNeu) < epsilon);
+              if (neuerKreisAusserhalb) {
                 LOGGER.log(
                     Level.INFO,
                     "Verschiebe: "
@@ -121,9 +125,10 @@ public class BruteForceStrategy implements IStrategy {
                         + " von "
                         + new Punkt(staat.getX(), staat.getY())
                         + " nach "
-                        + p);
-              staat.setX(p.x());
-              staat.setY(p.y());
+                        + mNeu);
+                staat.setX(mNeu.x());
+                staat.setY(mNeu.y());
+              }
             });
 
     landkarte.removeKraefte();
@@ -139,7 +144,7 @@ public class BruteForceStrategy implements IStrategy {
   private static Set<Kreis> getKreiseAllerAnderenStaaten(Staat staat, List<Staat> staaten) {
     return staaten.stream()
         .filter(staat1 -> !staat1.equals(staat))
-        .map(staat1 -> new Kreis(staat1.getX(), staat1.getY(), staat1.getKenngroesse()))
+        .map(staat1 -> new Kreis(new Punkt(staat1.getX(), staat1.getY()), staat1.getKenngroesse()))
         .collect(Collectors.toSet());
   }
 

@@ -3,6 +3,7 @@ package com.cae.de.models;
 import com.cae.de.utils.Pair;
 import com.cae.de.utils.algorithms.IStrategy;
 import com.cae.de.utils.la.Kreis;
+import com.cae.de.utils.la.Punkt;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -103,12 +104,12 @@ public class Landkarte {
         .map(
             staatHashSetEntry -> {
               var s1 = staatHashSetEntry.getKey();
-              var k1 = new Kreis(s1.getX(), s1.getY(), s1.getKenngroesse());
+              var k1 = new Kreis(new Punkt(s1.getX(), s1.getY()), s1.getKenngroesse());
               return staatHashSetEntry.getValue().stream()
                   .map(
                       s2 -> {
                         var abstand =
-                            new Kreis(s2.getX(), s2.getY(), s2.getKenngroesse())
+                            new Kreis(new Punkt(s2.getX(), s2.getY()), s2.getKenngroesse())
                                 .getAbstandZwischenKreisen(k1);
                         return abstand > 0 ? abstand : 1;
                       })

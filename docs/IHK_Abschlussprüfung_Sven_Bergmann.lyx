@@ -1291,10 +1291,10 @@ Landkarte
  Qualitätskontrolle stattfindet, welche den derzeitigen Abstand aller Nachbarsta
 aten berechnet und falls dieser geringer ist, als der vorher gespeicherte
  Abstand, diesen ersetzt und zudem die HashMap aller Beziehungen speichert.
- Diese HashMap wird dann am Ende genommen, um die eigentliche zu überschreiben
+ Diese HashMap wird dann am Ende genommen, um die Eigentliche zu überschreiben
  und dadurch wird durch das Kommandozeilenargument, welches die Iterationen
  angibt nur eine maximale Anzahl an Iterationen festgelegt.
- Es kann dadurch beispielsweise passieren, dass bei einer Angabe von 
+ Es kann somit beispielsweise passieren, dass bei einer Angabe von 
 \begin_inset Quotes gld
 \end_inset
 
@@ -1302,15 +1302,32 @@ aten berechnet und falls dieser geringer ist, als der vorher gespeicherte
 \begin_inset Quotes grd
 \end_inset
 
- die Anzahl 460 an Iterationen rauskommt, da dort der minimalste Abstand
+ die Anzahl 460 an Iterationen herauskommt, da dort der minimalste Abstand
  der Nachbarstaaten ist.
  Es fand zudem eine Veränderung der Abstandsberechnung statt, da in irgendeiner
  Art dargestellt werden musste, dass ein Kreis innerhalb eines anderen liegt.
+ Des Weiteren wird der Staat mit den meisten Nachbarn von Verschiebungen
+ ausgenommen, da es so einen Fixpunkt gibt, um den sich die anderen Staaten
+ herum bewegen können.
  
 \end_layout
 
 \begin_layout Section
 Benutzeranleitung
+\end_layout
+
+\begin_layout Standard
+Generell befindet sich die Gesamtdokumentation der Klassen und Methoden
+ als javadoc im 
+\begin_inset Quotes gld
+\end_inset
+
+docs
+\begin_inset Quotes grd
+\end_inset
+
+ Ordner.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -1781,20 +1798,118 @@ input
 Beispiel 2: Bierkonsum von 10 Staaten
 \end_layout
 
-\begin_layout Subsubsection
-Äquivalenzklassen
+\begin_layout Standard
+Der Bierkonsum der Staaten wird in Beispiel 2 beschrieben, was daher interessant
+ ist, dass alle Nachbarschaftsbeziehungen wie in Beispiel 1 dargestellt
+ werden müssen, aber die Größe der Kreise vollkommen unterschiedlich sind.
+ Es kann also nun passieren, dass der Algorithmus mit Beispiel 1 besser
+ oder schlechter funktioniert als mit Beispiel 2.
+ Allerdings konnte hier wiederum weder mit 100 noch mit einer anderen Zahl
+ an Iterationen das Beispiel reproduziert werden.
 \end_layout
 
-\begin_layout Subsection
-White-Box-Test
+\begin_layout Standard
+Das Beispiel ist in der Datei 
+\begin_inset Quotes gld
+\end_inset
+
+beispiel2.txt
+\begin_inset Quotes grd
+\end_inset
+
+ im Ordner 
+\begin_inset Quotes gld
+\end_inset
+
+input
+\begin_inset Quotes grd
+\end_inset
+
+ zu finden.
 \end_layout
 
 \begin_layout Subsubsection
-Kontrollflussgraphen
+Beispiel 3: Fläche von 24 Staaten
+\end_layout
+
+\begin_layout Standard
+Die Fläche von 24 Staaten ist wiederum ähnlich zum Beispiel 1 nur mit mehr
+ Nachbarn.
+ Das heißt alle Kenngrößen bleiben gleich und theoretisch sollte auch die
+ Anordnung der 10 gleichen Staaten gleich bleiben, allerdings kann es durch
+ die Abstoßungs- und Anziehungskräfte passieren, dass sich die Konstellation
+ auch ändert.
+\end_layout
+
+\begin_layout Standard
+Das Beispiel ist in der Datei 
+\begin_inset Quotes gld
+\end_inset
+
+beispiel3.txt
+\begin_inset Quotes grd
+\end_inset
+
+ im Ordner 
+\begin_inset Quotes gld
+\end_inset
+
+input
+\begin_inset Quotes grd
+\end_inset
+
+ zu finden.
+\end_layout
+
+\begin_layout Subsubsection
+Beispiel 4: 2 Staaten zum Testen
+\end_layout
+
+\begin_layout Standard
+In diesem Beispiel habe ich zwei Staaten 
+\begin_inset Quotes gld
+\end_inset
+
+1
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+2
+\begin_inset Quotes grd
+\end_inset
+
+ zum Testen angelegt.
+ Normalerweise sollten sich die Kreise direkt nach der ersten Iteration
+ richtig ausgerichtet haben.
+ 
+\end_layout
+
+\begin_layout Standard
+Das Beispiel ist in der Datei 
+\begin_inset Quotes gld
+\end_inset
+
+beispiel4.txt
+\begin_inset Quotes grd
+\end_inset
+
+ im Ordner 
+\begin_inset Quotes gld
+\end_inset
+
+input
+\begin_inset Quotes grd
+\end_inset
+
+ zu finden.
 \end_layout
 
 \begin_layout Section
-Zusammenfassung und Ausblicks
+Zusammenfassung und Ausblick
 \end_layout
 
 \begin_layout Standard
@@ -2178,16 +2293,18 @@ name "fig:Berechnung-der-Kräfte"
 
 \end_layout
 
-\begin_layout Subsection
-Sequenzdiagramme
-\end_layout
-
-\begin_layout Subsection
-Aktivitätsdiagramme
-\end_layout
-
 \begin_layout Section
-Eigenständigkeitserklärung
+Selbstständigkeitserklärung
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename Selbstständigkeitserklärung.pdf
+	width 100text%
+
+\end_inset
+
+
 \end_layout
 
 \end_body
