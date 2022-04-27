@@ -7,24 +7,30 @@ import com.cae.de.utils.io.ExternalStringFileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Main class which is to be started and executed. It evaluates the given arguments and starts the
- * program if everything went right.
+ * Main Klasse welche über den Programmaufruf gestartet wird.
  */
 public class Main {
 
   private static final String INPUT_FOLDER_STRING = "-inputfolder";
   private static final String OUTPUT_FOLDER_STRING = "-outputfolder";
   private static final String LOG_STRING = "-log";
+  private static final String LOG_LEVEL_STRING = "-loglvl";
   private static final Logger ROOT_LOGGER = Logger.getLogger("");
   private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
-  public static FileHandler FILE_HANDLER;
+  private static final String ITERATIONEN = "-i";
+  private static int iterationen = 100;
 
+  /**
+   * Main Methode, welche unter anderen alle Programmzeilenargumente prüft und - falls nötig - auch die resultierenden Werte setzt.
+   *
+   * @param args die Programmzeilenargumente
+   */
   public static void main(String[] args) {
     var inputFolder = "input";
     var outputFolder = "output";
@@ -38,9 +44,18 @@ public class Main {
             try {
               logOption = LogOption.getOption(args[++i]);
             } catch (IllegalArgumentException e) {
-              LOGGER.log(Level.WARNING, "Could not cast \"" + args[i] + "\" to any LOG_OPTION."
-                  + "LOG_OPTIONS are \"true\", \"false\", \"file\". Default value is \"false\".");
+              LOGGER.log(Level.WARNING, "Konnte \"" + args[i] + "\" keiner LOG_OPTION zuordnen."
+                  + "LOG_OPTIONen sind \"true\", \"false\", \"file\". Der default Wert ist \"false\".");
             }
+          }
+          case ITERATIONEN -> iterationen = Integer.parseInt(args[++i]);
+          case LOG_LEVEL_STRING -> {
+            Level logLevel = switch (args[++i]) {
+              case "info" -> Level.INFO;
+              case "warning" -> Level.WARNING;
+              default -> Level.ALL;
+            };
+            ROOT_LOGGER.setLevel(logLevel);
           }
         }
       }
@@ -50,11 +65,11 @@ public class Main {
     switch (logOption) {
       case FILE -> {
         try {
-          FILE_HANDLER = new FileHandler("IHK_Abschlusspruefung.log", true);
+          FileHandler FILE_HANDLER = new FileHandler("IHK_Abschlusspruefung.log", true);
           ROOT_LOGGER.addHandler(FILE_HANDLER);
         } catch (IOException e) {
-          ROOT_LOGGER.log(Level.WARNING, "Could not attach FileHandler to Logger. "
-              + "Logs are written to the console now.");
+          ROOT_LOGGER.log(Level.WARNING, "Konnte keinen FileHandler zum Logger hinzufügen. "
+              + "Logs werden in die Konsole geschrieben.");
         }
       }
       case FALSE -> {
@@ -65,12 +80,15 @@ public class Main {
     }
 
     var reader = new ExternalStringFileReader();
-    var fileContents = new ArrayList<String>();
+    var landkarten = new HashMap<String, String>();
     try {
-      fileContents.addAll(Files.list(Path.of(inputFolder))
-          .map(f -> reader.read(f.toString())).toList());
-    } catch (IOException e) {
-      LOGGER.log(Level.SEVERE, "Could not read input files inside " + inputFolder);
+      Files.list(Path.of(inputFolder))
+           .parallel()
+           .forEach(f -> landkarten.put(reader.readObject(f.toString()),
+               String.valueOf(f.getFileName())));
+    } catch (IOException  e) {
+      LOGGER.log(Level.SEVERE,
+          "Konnte input Dateien innerhalb " + inputFolder + " nicht lesen.");
       System.exit(1);
     }
 
@@ -79,15 +97,18 @@ public class Main {
       if (!Files.exists(Path.of(outputFolder))) {
         Files.createDirectory(Path.of(outputFolder));
       }
-      for (var i = 0; i < fileContents.size(); i++) {
-        var outputPath = outputFolder + "/" + "test" + "_" + i + "_out.txt";
+      var finalOutputFolder = outputFolder;
+      landkarten.forEach((l,s) -> {
+        var outputPath = finalOutputFolder + "/" + s + "_out.txt";
         if (Files.exists(Path.of(outputPath))) {
-          LOGGER.log(Level.WARNING, "File " + outputPath + " exists. Going to override it.");
+          LOGGER.log(Level.WARNING,
+              "Datei " + outputPath + " existiert. Sie wird überschrieben.");
         }
-        writer.write(fileContents.get(i), outputPath);
-      }
+        writer.write(l, outputPath);
+      });
     } catch (IOException e) {
-      LOGGER.log(Level.SEVERE, "Could not write files to output folder: " + outputFolder);
+      LOGGER.log(Level.SEVERE,
+          "Konnte keine Dateien in den output Ordner: " + outputFolder + " schreiben.");
       System.exit(1);
     }
   }

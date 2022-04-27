@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * Class external File reader for reading files outside the project like for example in the same
  * folder.
  */
-public class ExternalStringFileReader implements Reader<String> {
+public class ExternalStringFileReader implements IReader<String> {
 
   private static final Logger LOGGER = Logger.getLogger(ExternalStringFileReader.class.getName());
 

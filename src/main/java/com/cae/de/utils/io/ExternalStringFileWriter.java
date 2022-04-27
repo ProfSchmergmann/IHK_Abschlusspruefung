@@ -10,7 +10,7 @@ import java.util.logging.Logger;
  * Class ExternalStringFileWriter for writing strings to files outside the project like for example
  * in the same folder.
  */
-public class ExternalStringFileWriter implements Writer<String> {
+public class ExternalStringFileWriter implements IWriter<String> {
 
   private static final Logger LOGGER = Logger.getLogger(ExternalStringFileWriter.class.getName());
 
