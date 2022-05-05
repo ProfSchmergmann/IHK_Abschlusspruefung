@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * Main Klasse welche über den Programmaufruf gestartet wird.
@@ -80,12 +81,12 @@ public class Main {
     }
 
     var reader = new ExternalStringFileReader();
-    var landkarten = new HashMap<String, String>();
+    var map = new HashMap<String, String>();
     try {
-      Files.list(Path.of(inputFolder))
-           .parallel()
-           .forEach(f -> landkarten.put(reader.readObject(f.toString()),
-               String.valueOf(f.getFileName())));
+      map = Files.list(Path.of(inputFolder))
+                 .parallel()
+                 .collect(Collectors.toMap(f -> reader.readObject(f.toString()),
+                     f -> String.valueOf(f.getFileName()), (a, b) -> b, HashMap::new));
     } catch (IOException  e) {
       LOGGER.log(Level.SEVERE,
           "Konnte input Dateien innerhalb " + inputFolder + " nicht lesen.");
@@ -98,7 +99,7 @@ public class Main {
         Files.createDirectory(Path.of(outputFolder));
       }
       var finalOutputFolder = outputFolder;
-      landkarten.forEach((l,s) -> {
+      map.forEach((l,s) -> {
         var outputPath = finalOutputFolder + "/" + s + "_out.txt";
         if (Files.exists(Path.of(outputPath))) {
           LOGGER.log(Level.WARNING,

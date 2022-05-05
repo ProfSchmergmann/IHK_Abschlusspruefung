@@ -303,6 +303,26 @@ LatexCommand tableofcontents
 Aufgabenbeschreibung
 \end_layout
 
+\begin_layout Subsection
+Analyse Problemstellung
+\end_layout
+
+\begin_layout Subsection
+Geeignete Programm- und Datenstruktur
+\end_layout
+
+\begin_layout Subsection
+Einlesen und Initialisieren der Daten
+\end_layout
+
+\begin_layout Subsection
+Entwurf des Algorithmus
+\end_layout
+
+\begin_layout Subsection
+Ausgabe gemäß Aufgabenstellung
+\end_layout
+
 \begin_layout Section
 Objektorientierter Entwurf
 \end_layout
@@ -316,65 +336,50 @@ Pakete
 \end_layout
 
 \begin_layout Subsubsection
+Klassendiagramme 
+\end_layout
+
+\begin_layout Standard
+Die UML-Klassendiagramme befinden sich im Anhang.
+ Auf der obersten Ebene befindet sich die „Main“ Klasse zusammen mit zwei
+ anderen Paketen .
+ Im darunterliegenden Paket „models“4 befinden sich die Klassen „Landkarte“
+ und „Staat“.
+ Das Paket „utils“ beinhaltet neben der Klasse „Pair“ und „LogOption“ auch
+ noch das Paket „algorithm“ , das Paket „io“ und das Paket „la“ .
+\end_layout
+
+\begin_layout Subsection
+Pakete 
+\end_layout
+
+\begin_layout Subsubsection
 Utils
 \end_layout
 
 \begin_layout Standard
-Das Paket 
-\begin_inset Quotes gld
-\end_inset
-
-com.cae.de.utils
-\begin_inset Quotes grd
-\end_inset
-
- beinhaltet weitere Pakete, welche Klassen beinhalten, die in irgendeiner
- Art zum Oberbegriff 
-\begin_inset Quotes gld
-\end_inset
-
-Utilities
-\begin_inset Quotes grd
-\end_inset
-
- oder 
-\begin_inset Quotes gld
-\end_inset
-
-Werkzeuge
-\begin_inset Quotes grd
-\end_inset
-
- gehören.
+Das Paket „com.cae.de.utils“ beinhaltet weitere Pakete, welche Klassen beinhalten,
+ die in irgendeiner Art zum Oberbegriff „Utilities“ oder „Werkzeuge“ gehören.
+ Unter anderem existiert hier die Record Klasse „Pair“ welche zum erstellen
+ eines „immutable Pairs“ nützlich sein kann, da keine Pair-Klasse mehr in
+ Java 17 existiert.
+ Des Weiteren wird die Klasse „LogOption“ in der Main Methode genutzt um
+ die Option für das Logging festlegen zu können.
+ Der Nutzer hat dabei die Möglichkeit die Logging Ausgabe zu modifizieren
 \end_layout
 
 \begin_layout Paragraph
-IO
+IO 
 \end_layout
 
 \begin_layout Standard
 Wie der Name schon sagt, ist dies das Paket für die Ein- und Ausgabe von
  Daten.
- Es existieren vor allem die Interfaces 
-\begin_inset Quotes gld
-\end_inset
-
-Reader
-\begin_inset Quotes grd
-\end_inset
-
- und 
-\begin_inset Quotes gld
-\end_inset
-
-Writer
-\begin_inset Quotes grd
-\end_inset
-
-, welche beide generisch geschrieben sind, sodass in den implementierenden
- Klassen angegeben werden kann, welche Objekte eingelesen oder geschrieben
- werden.
- 
+ Es existieren vor allem die Interfaces „IReader“ und „IWriter“, welche
+ beide generisch geschrieben sind, sodass in den implementierenden Klassen
+ angegeben werden kann, welche Objekte eingelesen oder geschrieben werden.
+ Zudem existieren hier noch implementierende Writer und Reader, wie „GnuPlotWrit
+er“ und „FileLandkartenLeser“.
 \end_layout
 
 \begin_layout Paragraph
@@ -382,18 +387,10 @@ Algorithms
 \end_layout
 
 \begin_layout Standard
-Das Paket Algorithms ist auch selbstsprechend und behinhaltet Klassen, welche
- bekannte Algorithmen implementieren.
-\end_layout
-
-\begin_layout Paragraph
-LogOption
-\end_layout
-
-\begin_layout Standard
-Die Klasse LogOption wird in der Main Methode genutzt um die Option für
- das Logging festlegen zu können.
- Der Nutzer hat dabei die Möglichkeit die Logging Ausgabe zu modifizieren.
+Das Paket Algorithms ist auch selbst sprechend und beinhaltet Klassen, welche
+ Strategien implementieren.
+ Vor allem wird hier darauf geachtet, dass durch die Implementierung des
+ Interfaces „IStrategy“ die Algorithmen austauschbar gemacht werden.
 \end_layout
 
 \begin_layout Subsubsection
@@ -420,24 +417,27 @@ Modifikation der Logik
 Benutzeranleitung
 \end_layout
 
+\begin_layout Standard
+Generell befindet sich die Gesamtdokumentation der Klassen und Methoden
+ als javadoc im „docs“ Ordner.
+ 
+\end_layout
+
 \begin_layout Subsection
 Ordnerstruktur
 \end_layout
 
 \begin_layout Standard
-An sich sollten die fertig gebaute 
-\begin_inset Quotes gld
-\end_inset
-
-.jar
-\begin_inset Quotes grd
-\end_inset
-
- Datei zusammen mit dem ausführbaren Python Skript in einem Ordner liegen.
+An sich sollten die fertig gebaute „.jar“ Datei zusammen mit dem ausführbaren
+ Python Skript in einem Ordner liegen.
  Die Testbeispiele sollten ebenfalls auf der gleichen Ebene in einem Ordner
  vorhanden sein, wobei der Ordnername in beim Programmstart oder in dem
  Skript angegeben werden kann.
  Der Ordner für alle Ausgabe Dateien wird dann ebenso in dieser Ebene erstellt.
+ Die Ausgabedateien werden pro Eingabedatei jeweils in eine Datei namens
+ „<Name der Eingabedatei>_out.txt“ im output Ordner gespeichert, welcher
+ entweder über die Programmzeile vorher angegeben wird, oder einfach „output“
+ heißt.
  
 \end_layout
 
