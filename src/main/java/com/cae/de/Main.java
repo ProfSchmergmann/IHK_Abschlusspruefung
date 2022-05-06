@@ -62,7 +62,6 @@ public class Main {
       }
     }
 
-    // Default case for java logger is true so there is no case for it.
     switch (logOption) {
       case FILE -> {
         try {
