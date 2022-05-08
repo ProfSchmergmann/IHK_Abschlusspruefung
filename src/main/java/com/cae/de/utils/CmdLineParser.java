@@ -75,12 +75,12 @@ public class CmdLineParser {
 		}
 	}
 
-	public int getIterationen() {
-		return this.iterationen;
-	}
-
 	public String getInputFolder() {
 		return this.inputFolder;
+	}
+
+	public int getIterationen() {
+		return this.iterationen;
 	}
 
 	public String getOutputFolder() {
