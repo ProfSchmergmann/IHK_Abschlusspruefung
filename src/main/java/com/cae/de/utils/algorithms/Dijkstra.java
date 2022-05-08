@@ -1,6 +1,5 @@
 package com.cae.de.utils.algorithms;
 
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -19,9 +18,9 @@ public class Dijkstra<T> {
   /**
    * Calculates the shortest path for each node from the source.
    *
-   * @param graph  the graph
+   * @param graph the graph
    * @param source the source node
-   * @param <T>    the node value
+   * @param <T> the node value
    * @return the evaluated graph
    */
   public static <T> Graph<T> calculateShortestPathFromSource(Graph<T> graph, Node<T> source) {
@@ -50,12 +49,12 @@ public class Dijkstra<T> {
    * Calculates the minimum distance.
    *
    * @param evaluationNode the node to be evaluated
-   * @param edgeWeigh      the weight of the edge
-   * @param sourceNode     the source node
-   * @param <T>            the node value
+   * @param edgeWeigh the weight of the edge
+   * @param sourceNode the source node
+   * @param <T> the node value
    */
-  private static <T> void CalculateMinimumDistance(Node<T> evaluationNode, Integer edgeWeigh,
-      Node<T> sourceNode) {
+  private static <T> void CalculateMinimumDistance(
+      Node<T> evaluationNode, Integer edgeWeigh, Node<T> sourceNode) {
     var sourceDistance = sourceNode.getDistance();
     if (sourceDistance + edgeWeigh < evaluationNode.getDistance()) {
       evaluationNode.setDistance(sourceDistance + edgeWeigh);
@@ -69,7 +68,7 @@ public class Dijkstra<T> {
    * Method for computing the node with the lowest distance.
    *
    * @param unsettledNodes the unsettled nodes
-   * @param <T>            the node value
+   * @param <T> the node value
    * @return the node with the lowest distance
    */
   private static <T> Node<T> getLowestDistanceNode(Set<Node<T>> unsettledNodes) {
@@ -97,21 +96,21 @@ public class Dijkstra<T> {
     private Node<T> endNode;
 
     /**
-     * Getter for the start node.
+     * Adds a node to the graph.
      *
-     * @return the start node
+     * @param node the node to be added
      */
-    public Node<T> getStartNode() {
-      return this.startNode;
+    public void addNode(Node<T> node) {
+      this.nodes.add(node);
     }
 
     /**
-     * Setter for the start node.
+     * Adds multiple nodes.
      *
-     * @param startNode the start node
+     * @param nodes the nodes to be added
      */
-    public void setStartNode(Node<T> startNode) {
-      this.startNode = startNode;
+    public void addNodes(Collection<Node<T>> nodes) {
+      this.nodes.addAll(nodes);
     }
 
     /**
@@ -133,15 +132,6 @@ public class Dijkstra<T> {
     }
 
     /**
-     * Adds a node to the graph.
-     *
-     * @param node the node to be added
-     */
-    public void addNode(Node<T> node) {
-      this.nodes.add(node);
-    }
-
-    /**
      * Getter for the nodes.
      *
      * @return the nodes
@@ -160,12 +150,21 @@ public class Dijkstra<T> {
     }
 
     /**
-     * Adds multiple nodes.
+     * Getter for the start node.
      *
-     * @param nodes the nodes to be added
+     * @return the start node
      */
-    public void addNodes(Collection<Node<T>> nodes) {
-      this.nodes.addAll(nodes);
+    public Node<T> getStartNode() {
+      return this.startNode;
+    }
+
+    /**
+     * Setter for the start node.
+     *
+     * @param startNode the start node
+     */
+    public void setStartNode(Node<T> startNode) {
+      this.startNode = startNode;
     }
 
     @Override
@@ -202,28 +201,10 @@ public class Dijkstra<T> {
      * Adds a destination to the node.
      *
      * @param destination the node destination
-     * @param distance    the distance
+     * @param distance the distance
      */
     public void addDestination(Node<T> destination, int distance) {
       this.adjacentNodes.put(destination, distance);
-    }
-
-    /**
-     * Getter for the node value.
-     *
-     * @return the node value
-     */
-    public T getValue() {
-      return this.value;
-    }
-
-    /**
-     * Setter for the node value.
-     *
-     * @param value the node value
-     */
-    public void setValue(T value) {
-      this.value = value;
     }
 
     /**
@@ -278,6 +259,24 @@ public class Dijkstra<T> {
      */
     public void setShortestPath(LinkedList<Node<T>> shortestPath) {
       this.shortestPath = shortestPath;
+    }
+
+    /**
+     * Getter for the node value.
+     *
+     * @return the node value
+     */
+    public T getValue() {
+      return this.value;
+    }
+
+    /**
+     * Setter for the node value.
+     *
+     * @param value the node value
+     */
+    public void setValue(T value) {
+      this.value = value;
     }
 
     @Override

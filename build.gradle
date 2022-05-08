@@ -41,3 +41,9 @@ java {
     withSourcesJar()
     withJavadocJar()
 }
+
+javadoc {
+    options.encoding = 'UTF-8'
+    options.docEncoding = 'UTF-8'
+    options.charSet = 'UTF-8'
+}
