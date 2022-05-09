@@ -17,7 +17,10 @@ public class ThreadC extends Observable<AutoKorrelationsFunktion>
   }
 
   @Override
-  public void run() {}
+  public void run() {
+    if (this.running) return;
+    this.running = true;
+  }
 
   @Override
   public void update(AutoKorrelationsFunktion autoKorrelationsFunktion) {
