@@ -40,22 +40,6 @@ public class ThreadC extends Observable<AutoKorrelationsFunktion>
   @Override
   public boolean write(AutoKorrelationsFunktion autoKorrelationsFunktion) {
     this.writing = true;
-    var sb = new StringBuilder();
-    sb.append("# FWHM = ")
-        .append(autoKorrelationsFunktion.getFwhm())
-        .append(", ")
-        .append(autoKorrelationsFunktion.getIndexL())
-        .append(", ")
-        .append(autoKorrelationsFunktion.getIndexR())
-        .append("\n# pos int\tenv");
-    for (var i = 0; i < autoKorrelationsFunktion.getxTransformiert().length; i++) {
-      sb.append("\n")
-          .append(autoKorrelationsFunktion.getxTransformiert()[i])
-          .append(" ")
-          .append(autoKorrelationsFunktion.getyNormiert()[i])
-          .append(" ")
-          .append(autoKorrelationsFunktion.getObereEinhuellende()[i]);
-    }
 
     var pathToFile = this.pathToOutputFolder + "/" + "out" + autoKorrelationsFunktion.getFileName();
     try {
@@ -65,7 +49,7 @@ public class ThreadC extends Observable<AutoKorrelationsFunktion>
       if (!Files.exists(Path.of(pathToFile))) {
         var br = new BufferedWriter(new FileWriter(pathToFile));
         LOGGER.log(Level.INFO, "Schreibe in die Datei: " + pathToFile);
-        br.write(sb.toString());
+        br.write(autoKorrelationsFunktion.toString());
         br.close();
         this.notifyObserver(autoKorrelationsFunktion);
         this.writing = false;

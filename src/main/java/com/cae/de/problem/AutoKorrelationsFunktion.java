@@ -38,4 +38,24 @@ public class AutoKorrelationsFunktion {
   public double[] getyNormiert() {
     return this.yNormiert;
   }
+
+  public String toString() {
+    var sb = new StringBuilder();
+    sb.append("# FWHM = ")
+        .append(this.fwhm)
+        .append(", ")
+        .append(this.indexL)
+        .append(", ")
+        .append(this.indexR)
+        .append("\n# pos int\tenv");
+    for (var i = 0; i < this.xTransformiert.length; i++) {
+      sb.append("\n")
+          .append(this.xTransformiert[i])
+          .append(" ")
+          .append(this.yNormiert[i])
+          .append(" ")
+          .append(this.obereEinhuellende[i]);
+    }
+    return sb.toString();
+  }
 }
