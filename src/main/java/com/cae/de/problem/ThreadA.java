@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class ThreadA extends Observable<ThreadA.Data>
-    implements Observer<ThreadA.Data>, ReadRunnable<ThreadA.Data> {
+    implements Observer<AutoKorrelationsFunktion>, ReadRunnable<ThreadA.Data> {
 
   private static final Logger LOGGER = Logger.getLogger(ThreadA.class.getName());
   private final Path pathToInputFolder;
@@ -75,8 +75,8 @@ public class ThreadA extends Observable<ThreadA.Data>
   }
 
   @Override
-  public void update(Data data) {
-    this.processedFiles.add(data.fileName);
+  public void update(AutoKorrelationsFunktion autoKorrelationsFunktion) {
+    this.processedFiles.add(autoKorrelationsFunktion.getFileName());
   }
 
   public record Data(String fileName, List<Pair<Integer, Integer>> start) {}

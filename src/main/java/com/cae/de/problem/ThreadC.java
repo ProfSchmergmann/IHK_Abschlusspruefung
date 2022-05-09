@@ -6,7 +6,8 @@ import com.cae.de.framework.WriteRunnable;
 
 import java.nio.file.Path;
 
-public class ThreadC<T> extends Observable<T> implements Observer<T>, WriteRunnable<T> {
+public class ThreadC extends Observable<AutoKorrelationsFunktion>
+    implements Observer<AutoKorrelationsFunktion>, WriteRunnable<AutoKorrelationsFunktion> {
 
   private final Path pathToOutputFolder;
   private boolean running;
@@ -19,10 +20,12 @@ public class ThreadC<T> extends Observable<T> implements Observer<T>, WriteRunna
   public void run() {}
 
   @Override
-  public void update(T t) {}
+  public void update(AutoKorrelationsFunktion autoKorrelationsFunktion) {
+
+  }
 
   @Override
-  public boolean write(T t) {
+  public boolean write(AutoKorrelationsFunktion autoKorrelationsFunktion) {
     return false;
   }
 }

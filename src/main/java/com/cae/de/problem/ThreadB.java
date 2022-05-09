@@ -4,12 +4,13 @@ import com.cae.de.framework.Observable;
 import com.cae.de.framework.Observer;
 import com.cae.de.framework.ProcessRunnable;
 
-public class ThreadB<T> extends Observable<T> implements Observer<T>, ProcessRunnable<T> {
+public class ThreadB extends Observable<AutoKorrelationsFunktion>
+    implements Observer<ThreadA.Data>, ProcessRunnable<ThreadA.Data, AutoKorrelationsFunktion> {
 
   private boolean running;
 
   @Override
-  public T process(T t) {
+  public AutoKorrelationsFunktion process(ThreadA.Data data) {
     return null;
   }
 
@@ -17,5 +18,5 @@ public class ThreadB<T> extends Observable<T> implements Observer<T>, ProcessRun
   public void run() {}
 
   @Override
-  public void update(T t) {}
+  public void update(ThreadA.Data data) {}
 }

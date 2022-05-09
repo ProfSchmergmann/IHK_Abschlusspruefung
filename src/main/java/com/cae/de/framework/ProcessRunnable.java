@@ -1,6 +1,6 @@
 package com.cae.de.framework;
 
-public interface ProcessRunnable<T> extends Runnable {
+public interface ProcessRunnable<P, R> extends Runnable {
 
-  T process(T t);
+  R process(P p);
 }

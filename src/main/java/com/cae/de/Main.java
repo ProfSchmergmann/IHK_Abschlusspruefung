@@ -21,20 +21,17 @@ public class Main {
   public static void main(String[] args) {
     var cmdLineParser = new CmdLineParser(args);
 
-    var executorService = Executors.newFixedThreadPool(3);
-    executorService.submit(new ThreadA(Path.of(cmdLineParser.getInputFolder())));
-    executorService.submit(new ThreadB<ThreadA.Data>());
-    executorService.submit(new ThreadC<ThreadA.Data>(Path.of(cmdLineParser.getOutputFolder())));
+    var threadA = new ThreadA(Path.of(cmdLineParser.getInputFolder()));
+    var threadB = new ThreadB();
+    var threadC = new ThreadC(Path.of(cmdLineParser.getOutputFolder()));
 
-    //    try {
-    //      new FileStringSolver()
-    //          .input(new FileStringProducer(cmdLineParser.getInputFolder()))
-    //          .process()
-    //          .output(new FileStringConsumer(cmdLineParser.getOutputFolder()))
-    //          .done();
-    //    } catch (EVAException e) {
-    //      LOGGER.log(Level.SEVERE, e.getMessage());
-    //      System.exit(1);
-    //    }
+    threadA.registerObserver(threadB);
+    threadB.registerObserver(threadC);
+    threadC.registerObserver(threadA);
+
+    var executorService = Executors.newFixedThreadPool(3);
+    executorService.execute(threadA);
+    executorService.execute(threadB);
+    executorService.execute(threadC);
   }
 }
