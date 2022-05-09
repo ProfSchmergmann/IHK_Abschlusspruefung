@@ -5,7 +5,7 @@ package com.cae.de.framework;
  *
  * @param <D> das zu schreibende Objekt
  */
-public abstract class Consumer<D> {
+public interface IConsumer<D> {
 
   /**
    * Methode zur Ausgabe des übergebenen Objektes. Intern kann je nach gewünschter Implementierung
@@ -17,5 +17,5 @@ public abstract class Consumer<D> {
    *     java.io.IOException} passiert, um alles in der {@link com.cae.de.Main} Klasse behandeln zu
    *     können.
    */
-  public abstract boolean write(D data) throws EVAException;
+ boolean write(D data) throws EVAException;
 }

@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @param <P> das zu lesende Objekt
  */
-public abstract class Producer<P> {
+public interface IProducer<P> {
 
   /**
    * Methode zum Einlesen der Objekte. Falls aus einem Ordner gelesen werden soll, sollte noch ein
@@ -19,5 +19,5 @@ public abstract class Producer<P> {
    *     java.io.IOException} passiert, um alles in der {@link com.cae.de.Main} Klasse behandeln zu
    *     können.
    */
-  public abstract List<P> readToList() throws EVAException;
+  List<P> readToList() throws EVAException;
 }

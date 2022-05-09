@@ -14,22 +14,22 @@ public interface ISolver<P, R> {
   /**
    * Methode, um mit einem gegebenen Producer eine Eingabe zu lesen.
    *
-   * @param producer der Producer
+   * @param IProducer der Producer
    * @return das this Objekt, für Chaining
    * @throws EVAException falls intern eine {@link java.io.IOException} geworfen wird, um alles in
    *     der aufrufenden Methode behandeln zu können
    */
-  ISolver<P, R> input(Producer<P> producer) throws EVAException;
+  ISolver<P, R> input(IProducer<P> IProducer) throws EVAException;
 
   /**
    * Methode, um mit einem gegebenen Consumer eine Ausgabe zu produzieren.
    *
-   * @param consumer der Consumer
+   * @param IConsumer der Consumer
    * @return das this Objekt, für Chaining
    * @throws EVAException falls intern eine {@link java.io.IOException} geworfen wird, um alles in
    *     der aufrufenden Methode behandeln zu können
    */
-  ISolver<P, R> output(Consumer<Data<P, R>> consumer) throws EVAException;
+  ISolver<P, R> output(IConsumer<Data<P, R>> IConsumer) throws EVAException;
 
   /**
    * Methode, um das Problem mit den vorher eingelesenen Daten zu lösen.

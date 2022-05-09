@@ -1,9 +1,9 @@
 package com.cae.de.stringproblem;
 
-import com.cae.de.framework.Consumer;
+import com.cae.de.framework.IConsumer;
 import com.cae.de.framework.EVAException;
 import com.cae.de.framework.ISolver;
-import com.cae.de.framework.Producer;
+import com.cae.de.framework.IProducer;
 import com.cae.de.utils.Pair;
 
 import java.util.ArrayList;
@@ -19,18 +19,18 @@ public class FileStringSolver implements ISolver<Pair<String, String>, String> {
   }
 
   @Override
-  public ISolver<Pair<String, String>, String> input(Producer<Pair<String, String>> producer)
+  public ISolver<Pair<String, String>, String> input(IProducer<Pair<String, String>> IProducer)
       throws EVAException {
     this.dataList = new ArrayList<>();
-    producer.readToList().forEach(pair -> this.dataList.add(new Data<>(pair, "")));
+    IProducer.readToList().forEach(pair -> this.dataList.add(new Data<>(pair, "")));
     return this;
   }
 
   @Override
   public ISolver<Pair<String, String>, String> output(
-      Consumer<Data<Pair<String, String>, String>> consumer) throws EVAException {
+      IConsumer<Data<Pair<String, String>, String>> IConsumer) throws EVAException {
     for (Data<Pair<String, String>, String> pairStringData : this.dataList) {
-      consumer.write(pairStringData);
+      IConsumer.write(pairStringData);
     }
     return this;
   }

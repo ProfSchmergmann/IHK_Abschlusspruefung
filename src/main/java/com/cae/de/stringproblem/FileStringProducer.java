@@ -1,7 +1,7 @@
 package com.cae.de.stringproblem;
 
 import com.cae.de.framework.EVAException;
-import com.cae.de.framework.Producer;
+import com.cae.de.framework.IProducer;
 import com.cae.de.utils.Pair;
 
 import java.io.BufferedReader;
@@ -15,14 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-public class FileStringProducer extends Producer<Pair<String, String>> {
+public record FileStringProducer(String pathToFile) implements IProducer<Pair<String, String>> {
 
   private static final Logger LOGGER = Logger.getLogger(FileStringProducer.class.getName());
-  private final String pathToFile;
-
-  public FileStringProducer(String pathToFile) {
-    this.pathToFile = pathToFile;
-  }
 
   @Override
   public List<Pair<String, String>> readToList() throws EVAException {

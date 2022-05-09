@@ -1,6 +1,6 @@
 package com.cae.de.stringproblem;
 
-import com.cae.de.framework.Consumer;
+import com.cae.de.framework.IConsumer;
 import com.cae.de.framework.EVAException;
 import com.cae.de.framework.ISolver;
 import com.cae.de.utils.Pair;
@@ -13,15 +13,9 @@ import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class FileStringConsumer extends Consumer<ISolver.Data<Pair<String, String>, String>> {
+public record FileStringConsumer(String outputFolderString) implements IConsumer<ISolver.Data<Pair<String, String>, String>> {
 
   private static final Logger LOGGER = Logger.getLogger(FileStringConsumer.class.getName());
-
-  private final String outputFolderString;
-
-  public FileStringConsumer(String outputFolderString) {
-    this.outputFolderString = outputFolderString;
-  }
 
   @Override
   public boolean write(ISolver.Data<Pair<String, String>, String> data) throws EVAException {
