@@ -23,7 +23,6 @@ public class ThreadB extends Observable<AutoKorrelationsFunktion>
 
   private static final Logger LOGGER = Logger.getLogger(ThreadB.class.getName());
   private final Set<String> processedFiles = new HashSet<>();
-  private final HashSet<CompletableFuture<Void>> worker = new HashSet<>();
   private boolean running = false;
 
   /**
@@ -52,7 +51,6 @@ public class ThreadB extends Observable<AutoKorrelationsFunktion>
                   return Algorithms.solve(data);
                 })
             .thenAccept(this::notifyObserver);
-    this.worker.add(cf);
     return null;
   }
 
@@ -76,9 +74,11 @@ public class ThreadB extends Observable<AutoKorrelationsFunktion>
   @Override
   public void update(Pair<Data, Integer> dataIntegerPair) {
     if (this.processedFiles.size() == dataIntegerPair.value()) {
-      this.worker.forEach(CompletableFuture::join);
-      LOGGER.log(Level.INFO, "Alle Dateien des Eingabeordners verarbeitet. Beende Programm.");
-      System.exit(0);
+      this.notifyObserver(null);
+      LOGGER.log(
+          Level.INFO,
+          "Alle Dateien des Eingabeordners verarbeitet. " +
+              "Programm wird beendet, sobald alle Daten geschrieben sind.");
     }
     if (!this.processedFiles.contains(dataIntegerPair.key().fileName())) {
       this.process(dataIntegerPair.key());

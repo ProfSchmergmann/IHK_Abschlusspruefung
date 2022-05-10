@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
@@ -23,6 +24,7 @@ public class ThreadC
   private static final Logger LOGGER = Logger.getLogger(ThreadC.class.getName());
   private final Path pathToOutputFolder;
   private final AtomicBoolean running = new AtomicBoolean(false);
+  private final HashSet<CompletableFuture<Boolean>> workers = new HashSet<>();
 
   /**
    * Konstruktor, welcher den relativen Pfad zum Ausgabeordner setzt.
@@ -42,13 +44,20 @@ public class ThreadC
 
   /**
    * Update-Methode, welche die gegebene {@link AutoKorrelationsFunktion} an einen Worker-Thread zur
-   * Weiterbearbeitung schickt.
+   * Weiterbearbeitung schickt. Wird null übergeben, so wird auf alle Worker Threads gewartet und
+   * dann wird das Programm beendet.
    *
    * @param autoKorrelationsFunktion das Objekt was geschrieben werden soll
    */
   @Override
   public void update(AutoKorrelationsFunktion autoKorrelationsFunktion) {
-    CompletableFuture.supplyAsync(() -> this.write(autoKorrelationsFunktion));
+    if (autoKorrelationsFunktion == null) {
+      this.workers.forEach(CompletableFuture::join);
+      LOGGER.log(Level.INFO, "Alle Daten wurden geschrieben. Programm wird beendet.");
+      System.exit(0);
+    } else {
+      this.workers.add(CompletableFuture.supplyAsync(() -> this.write(autoKorrelationsFunktion)));
+    }
   }
 
   /**

@@ -25,6 +25,7 @@ public class ThreadA extends Observable<Pair<Data, Integer>> implements ReadRunn
   private static final Logger LOGGER = Logger.getLogger(ThreadA.class.getName());
   private final Path pathToInputFolder;
   private final AtomicBoolean running = new AtomicBoolean(false);
+  private final long sleepTime;
 
   /**
    * Konstruktor, welcher den Pfad zum Eingabeordner setzt, welcher dann benutzt wird um die Daten
@@ -32,8 +33,9 @@ public class ThreadA extends Observable<Pair<Data, Integer>> implements ReadRunn
    *
    * @param pathToInputFolder der relative Pfad zum Eingabeordner
    */
-  public ThreadA(Path pathToInputFolder) {
+  public ThreadA(Path pathToInputFolder, int sleepTime) {
     this.pathToInputFolder = pathToInputFolder;
+    this.sleepTime = sleepTime;
   }
 
   /**
@@ -97,9 +99,8 @@ public class ThreadA extends Observable<Pair<Data, Integer>> implements ReadRunn
                 "Schicke neue Daten aus der Datei: \"" + pathToFile + "\" an alle Observer!");
           }
           try {
-            long timeSleep = 50;
-            LOGGER.log(Level.INFO, "Thread A wartet " + timeSleep + " Millisekunden!");
-            Thread.sleep(timeSleep);
+            LOGGER.log(Level.INFO, "Thread A wartet " + this.sleepTime + " Millisekunden!");
+            Thread.sleep(this.sleepTime);
           } catch (InterruptedException e) {
             LOGGER.log(Level.SEVERE, "Thread A konnte nicht warten! Stoppe den Thread A!");
             break;

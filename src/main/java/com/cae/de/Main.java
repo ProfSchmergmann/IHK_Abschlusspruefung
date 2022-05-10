@@ -19,9 +19,10 @@ public class Main {
   public static void main(String[] args) {
     var cmdLineParser = new CmdLineParser(args);
 
-    var threadA = new ThreadA(Path.of(cmdLineParser.getInputFolder()));
+    var threadA = new ThreadA(Path.of(cmdLineParser.getInputFolder()), cmdLineParser.getSleepTime());
     var threadB = new ThreadB();
-    var threadC = new ThreadC(Path.of(cmdLineParser.getOutputFolder()));
+    var threadC =
+        new ThreadC(Path.of(cmdLineParser.getOutputFolder()));
 
     threadA.registerObserver(threadB);
     threadB.registerObserver(threadC);

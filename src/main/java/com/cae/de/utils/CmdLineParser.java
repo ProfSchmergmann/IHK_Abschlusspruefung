@@ -15,11 +15,16 @@ public class CmdLineParser {
 	private static final String OUTPUT_FOLDER_STRING = "-outputfolder";
 	private static final String LOG_STRING = "-log";
 	private static final String LOG_LEVEL_STRING = "-loglvl";
+
+	private static final String THREAD_POOL_SIZE_STRING = "-poolsize";
+
+	private static final String SLEEP_TIME_STRING = "-sleep";
 	private static final Logger ROOT_LOGGER = Logger.getLogger("");
 	private static final Logger LOGGER = Logger.getLogger(CmdLineParser.class.getName());
+	private int sleepTime;
+	private int threadPoolSize;
 	private String inputFolder;
 	private String outputFolder;
-
 	/**
 	 * Konstruktor, welcher als Parameter das args-Array der main Methode übergeben bekommen soll.
 	 * Hier findet dann auch schon die Analyse statt und auch das Setzen des Loggers.
@@ -29,6 +34,8 @@ public class CmdLineParser {
 	public CmdLineParser(String[] args) {
 		this.inputFolder = "input";
 		this.outputFolder = "output";
+		this.threadPoolSize = 1;
+		this.sleepTime = 1;
 		var logOption = LogOption.TRUE;
 		for (var i = 0; i < args.length; i++) {
 			if (i + 1 < args.length) {
@@ -51,6 +58,8 @@ public class CmdLineParser {
 						};
 						ROOT_LOGGER.setLevel(logLevel);
 					}
+					case THREAD_POOL_SIZE_STRING -> this.threadPoolSize = Integer.parseInt(args[++i]);
+					case SLEEP_TIME_STRING -> this.sleepTime = Integer.parseInt(args[++i]);
 				}
 			}
 		}
@@ -82,6 +91,14 @@ public class CmdLineParser {
 
 	public String getOutputFolder() {
 		return this.outputFolder;
+	}
+
+	public int getSleepTime() {
+		return this.sleepTime;
+	}
+
+	public int getThreadPoolSize() {
+		return this.threadPoolSize;
 	}
 
 	/**
