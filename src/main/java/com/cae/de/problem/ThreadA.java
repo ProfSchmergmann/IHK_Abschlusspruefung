@@ -3,6 +3,7 @@ package com.cae.de.problem;
 import com.cae.de.framework.Observable;
 import com.cae.de.framework.Observer;
 import com.cae.de.framework.ReadRunnable;
+import com.cae.de.utils.Pair;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,9 +13,11 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ThreadA extends Observable<Data>
     implements Observer<AutoKorrelationsFunktion>, ReadRunnable<Data> {
@@ -22,7 +25,7 @@ public class ThreadA extends Observable<Data>
   private static final Logger LOGGER = Logger.getLogger(ThreadA.class.getName());
   private final Path pathToInputFolder;
   private final HashSet<String> processedFiles;
-  private boolean running;
+  private final AtomicBoolean running = new AtomicBoolean(false);
 
   public ThreadA(Path pathToInputFolder) {
     this.pathToInputFolder = pathToInputFolder;
@@ -40,9 +43,9 @@ public class ThreadA extends Observable<Data>
 
   @Override
   public Data read(Path pathToFile) {
+    List<Pair<Integer, Integer>> list;
     try (var br = new BufferedReader(new FileReader(String.valueOf(pathToFile)))) {
-      return new Data(
-          pathToFile.getFileName().toString(),
+      list =
           br.lines()
               .filter(line -> !line.startsWith("#"))
               .map(
@@ -50,18 +53,28 @@ public class ThreadA extends Observable<Data>
                       new Pair<>(
                           Integer.parseInt(line.split("\t")[0]),
                           Integer.parseInt(line.split("\t")[1])))
-              .collect(Collectors.toList()));
+              .collect(Collectors.toList());
     } catch (IOException e) {
       LOGGER.log(
           Level.WARNING, "Konnte Dateien aus dem Pfad: \"" + pathToFile + "\" nicht einlesen!");
       return null;
     }
+    var xStart = new int[list.size()];
+    var yStart = new int[list.size()];
+    IntStream.range(0, list.size())
+        .forEachOrdered(
+            i -> {
+              var tmp = list.get(i);
+              xStart[i] = tmp.value();
+              yStart[i] = tmp.key();
+            });
+    return new Data(pathToFile.getFileName().toString(), xStart, yStart);
   }
 
   @Override
   public void run() {
-    if (this.running) return;
-    this.running = true;
+    if (this.running.get()) return;
+    this.running.set(true);
     String[] paths = new File(String.valueOf(this.pathToInputFolder)).list();
     while (!this.finishedProcessing(Arrays.stream(paths).map(Path::of).toList())) {
       for (var pathToFile : paths) {
@@ -81,10 +94,11 @@ public class ThreadA extends Observable<Data>
         }
       }
     }
+    Thread.currentThread().interrupt();
   }
 
   @Override
   public void update(AutoKorrelationsFunktion autoKorrelationsFunktion) {
-    this.processedFiles.add(autoKorrelationsFunktion.getFileName());
+    this.processedFiles.add(autoKorrelationsFunktion.fileName());
   }
 }
