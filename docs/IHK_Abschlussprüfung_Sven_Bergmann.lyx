@@ -305,11 +305,152 @@ Aufgabenbeschreibung
 \end_layout
 
 \begin_layout Subsection
-Analyse Problemstellung
+Aufgabenanalyse
+\end_layout
+
+\begin_layout Standard
+Eine Firma möchte einen optischen Autokorrelator
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Link: 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://de.wikipedia.org/wiki/Autokorrelator
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ bauen, welcher mit einem Laser, halbdurchlässigen und vollreflektierenden
+ Spiegeln, einem Kristall, einem Filter und einem Detektor funktioniert.
+ Der Detektor misst hierbei die Autokorrelationsfunktion des Eingangssignals,
+ die Aufschluss über die Breite des Laserpulses oder die Ursprungsfrequenz
+ gibt.
+ Die Messdaten werden allerdings vom Detektor permanent und nebenläufig
+ geliefert, was mit einem Thread modelliert werden soll, welcher mit 20
+ Hz, also alle 0,05 Sekunden eine neue Messdatei zur Verfügung stellt und
+ die alte überschreibt.
+ Der Lese-Thread ist hierbei Thread A und läuft ständig weiter, indem die
+ Daten "0.txt" bis "9.txt" immer wieder eingelesen werden und den aktuellen
+ Datensatz überschreiben.
+ Der Thread B soll dann diese Messdaten weiterverarbeiten und mit den später
+ erklärten mathematischen Methoden die Funktion modellieren, bzw.
+ die Messwerte umrechnen und glätten.
+ Schließlich wird die fertige Berechnung dann an Thread C weitergegeben,
+ um die Daten in seinem auch später erklärten Format in eine Datei auszugeben,
+ welche als Präfix "out" besitzt und ansonsten gleich heißt.
+ Das Programm wird dann beendet, wenn alle Messdaten verarbeitet wurden.
+ Es kann durchaus vorkommen, dass eine Messdatei häufiger eingelesen wird.
+ Diese muss dann allerdings nicht erneut verarbeitet werden, es wird dann
+ einfach auf eine noch nicht verarbeitete Datei gewartet.
 \end_layout
 
 \begin_layout Subsection
-Geeignete Programm- und Datenstruktur
+Beschreibung der mathematischen Methoden
+\end_layout
+
+\begin_layout Standard
+Als erstes werden alle 
+\begin_inset Formula $\hat{x}$
+\end_inset
+
+-Werte in Pikosekunden umgerechnet, was mit der Formel 
+\begin_inset Formula $\hat{x_{k}}=\frac{\tilde{x_{k}}}{2^{18}-1}\cdot266,3-132,3$
+\end_inset
+
+ passieren soll.
+ Zur Zeitersparnis und Verbesserung der Genauigkeit wurde hierbei eine Umstellun
+g sinnvoll sein, sodass der Bruch 
+\begin_inset Formula $\frac{266,3}{2^{18}-1}$
+\end_inset
+
+ nicht immer wieder erneut berechnet werden muss.
+ Also wird es eine Variable 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ geben, welche diesen Bruch beschreibt und die Formel wird zu 
+\begin_inset Formula $\hat{x_{k}}=\alpha\cdot\tilde{x_{k}}-132,3$
+\end_inset
+
+.
+ Des Weiteren werden noch alle y-Werte normiert, sprich jeder Wert wird
+ durch das Maximum aller y-Werte geteilt.
+ 
+\end_layout
+
+\begin_layout Standard
+Danach sollen die Daten geglättet werden, indem der sog.
+ gleitende Mittelwert berechnet werden soll.
+ Die Formel hierfür ist 
+\begin_inset Formula $x_{k}=\frac{1}{n}\sum_{i=0}^{n}\tilde{x_{k-\tau+i}}$
+\end_inset
+
+ mit 
+\begin_inset Formula $\tau=\frac{n-1}{2}$
+\end_inset
+
+ und 
+\begin_inset Formula $n=\begin{cases}
+\lfloor0,002\cdot N\rfloor-1,\:für\:\lfloor0,002\cdot N\rfloor\:gerade & \lfloor0,002\cdot N\rfloor,\:für\:\lfloor0,002\cdot N\rfloor\:ungerade\end{cases}$
+\end_inset
+
+, wobei n die Größe des Mittelungsfensters beschreibt, ungerade ist und
+ 0,2% von N entspricht.
+ Es soll zudem noch geeignete Werte für 
+\begin_inset Formula $k<\tau$
+\end_inset
+
+ und 
+\begin_inset Formula $k>N-1-\tau$
+\end_inset
+
+ bestimmt werden, sprich den linken und rechten Rand der Messungen.
+ Das Symbol 
+\begin_inset Formula $\ensuremath{\lfloor x\rfloor}$
+\end_inset
+
+ heißt untere Gaußklammer und beschreibt, wie auf ganze Zahlen gerundet
+ werden soll.
+ 
+\end_layout
+
+\begin_layout Standard
+Als nächstes wird die obere Einhüllende bestimmt, welche die Autokorrelationsfun
+ktion oben komplett einschnürt.
+ Da dies aber numerisch sehr aufwändig ist, reicht es aus, diese Einhüllende
+ einfacher zu approximieren und zwar indem zuerst von links beginnend jedem
+ Positionswert der zuletzt höchste Intensitätswert zugeordnet wird, solange
+ bis man am Maximum ist, dann wird das gleiche Verfahren von rechts wiederholt.
+ 
+\end_layout
+
+\begin_layout Standard
+Zuletzt wird noch die Pulsbreite b berechnet, welche sich über den Abstand
+ der beiden Punkte L und R berechnet.
+ Diese sind Punkte auf der oberen Einhüllende, wobei die Gerade die durch
+ L und R geht, genau auf der Hälfte der Grundlinie und des Maximums liegt.
+ Die Grundlinie stellt dabei die mittlere Höhe des äußersten linken Prozents
+ der Intensitätswerte dar.
+ Es müssen also zuerst die gemittelten Werte der ersten Berechnung aufsteigend
+ sortiert werden, wobei dann geschaut wird, welche Werte alle im Intervall
+ 
+\begin_inset Formula $\left[0;0,01\right]$
+\end_inset
+
+ liegen.
+ Diese werden dann ebenfalls gemittelt und der daraus resultierende Wert
+ beschreibt die Grundlinie.
+ 
 \end_layout
 
 \begin_layout Subsection
