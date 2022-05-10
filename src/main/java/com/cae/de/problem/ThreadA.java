@@ -8,10 +8,7 @@ import com.cae.de.utils.Pair;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
@@ -19,28 +16,34 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class ThreadA extends Observable<Data>
-    implements Observer<AutoKorrelationsFunktion>, ReadRunnable<Data> {
+/**
+ * Implementierung eines {@link ReadRunnable}s und {@link Observable}s. Dieser Thread kümmert sich
+ * um das Einlesen der Daten und das Informieren der {@link Observer} über neue Daten.
+ */
+public class ThreadA extends Observable<Pair<Data, Integer>> implements ReadRunnable<Data> {
 
   private static final Logger LOGGER = Logger.getLogger(ThreadA.class.getName());
   private final Path pathToInputFolder;
-  private final HashSet<String> processedFiles;
   private final AtomicBoolean running = new AtomicBoolean(false);
 
+  /**
+   * Konstruktor, welcher den Pfad zum Eingabeordner setzt, welcher dann benutzt wird um die Daten
+   * darin zu lesen.
+   *
+   * @param pathToInputFolder der relative Pfad zum Eingabeordner
+   */
   public ThreadA(Path pathToInputFolder) {
     this.pathToInputFolder = pathToInputFolder;
-    this.processedFiles = new HashSet<>();
   }
 
-  private boolean finishedProcessing(List<Path> paths) {
-    if (this.processedFiles.size() != paths.size()) return false;
-    paths.stream()
-        .map(path -> path.getFileName().toString())
-        .toList()
-        .forEach(this.processedFiles::remove);
-    return this.processedFiles.size() == 0;
-  }
-
+  /**
+   * Methode für das Einlesen einer Datei in ein {@link Data} Objekt. Falls ein Fehler beim Einlesen
+   * passiert, sei es ein semantischer oder syntaktischer, wird das ignoriert, eine Warning in den
+   * Log geschrieben und null zurückgegeben.
+   *
+   * @param pathToFile der relative Pfad zur Datei
+   * @return ein {@link Data} Objekt
+   */
   @Override
   public Data read(Path pathToFile) {
     List<Pair<Integer, Integer>> list;
@@ -54,7 +57,7 @@ public class ThreadA extends Observable<Data>
                           Integer.parseInt(line.split("\t")[0]),
                           Integer.parseInt(line.split("\t")[1])))
               .collect(Collectors.toList());
-    } catch (IOException e) {
+    } catch (Exception e) {
       LOGGER.log(
           Level.WARNING, "Konnte Dateien aus dem Pfad: \"" + pathToFile + "\" nicht einlesen!");
       return null;
@@ -71,34 +74,38 @@ public class ThreadA extends Observable<Data>
     return new Data(pathToFile.getFileName().toString(), xStart, yStart);
   }
 
+  /**
+   * Methode run, welche beim Aufruf dieser Klasse gestartet wird. Diese Methode soll eine
+   * Signaldatenquelle simulieren, welche alle 0,05 Sekunden neue Daten schickt. Intern wird das mit
+   * {@link Thread#sleep(long)} realisiert. Wenn neue Daten vorhanden sind, werden alle {@link
+   * Observer} über die Daten informiert. Der Thread läuft unendlich lange weiter und schickt auch
+   * unendlich lange weiter Daten.
+   */
   @Override
   public void run() {
     if (this.running.get()) return;
     this.running.set(true);
     String[] paths = new File(String.valueOf(this.pathToInputFolder)).list();
-    while (!this.finishedProcessing(Arrays.stream(paths).map(Path::of).toList())) {
-      for (var pathToFile : paths) {
-        var data = this.read(Path.of(this.pathToInputFolder + "/" + pathToFile));
-        if (data != null) {
-          this.notifyObserver(data);
-          LOGGER.log(
-              Level.INFO,
-              "Schicke neue Daten aus der Datei: \"" + pathToFile + "\" an alle Observer!");
-        }
-        try {
-          Thread.sleep(50);
-          LOGGER.log(Level.INFO, "Thread A wartet 0.05 Sekunden!");
-        } catch (InterruptedException e) {
-          LOGGER.log(Level.SEVERE, "Thread A konnte nicht warten! Stoppe den Thread A!");
-          break;
+    while (true) {
+      if (paths != null) {
+        for (var pathToFile : paths) {
+          var data = this.read(Path.of(this.pathToInputFolder + "/" + pathToFile));
+          if (data != null) {
+            this.notifyObserver(new Pair<>(data, paths.length));
+            LOGGER.log(
+                Level.INFO,
+                "Schicke neue Daten aus der Datei: \"" + pathToFile + "\" an alle Observer!");
+          }
+          try {
+            long timeSleep = 50;
+            LOGGER.log(Level.INFO, "Thread A wartet " + timeSleep + " Millisekunden!");
+            Thread.sleep(timeSleep);
+          } catch (InterruptedException e) {
+            LOGGER.log(Level.SEVERE, "Thread A konnte nicht warten! Stoppe den Thread A!");
+            break;
+          }
         }
       }
     }
-    Thread.currentThread().interrupt();
-  }
-
-  @Override
-  public void update(AutoKorrelationsFunktion autoKorrelationsFunktion) {
-    this.processedFiles.add(autoKorrelationsFunktion.fileName());
   }
 }

@@ -7,11 +7,9 @@ import com.cae.de.utils.CmdLineParser;
 
 import java.nio.file.Path;
 import java.util.concurrent.Executors;
-import java.util.logging.Logger;
 
 /** Main Klasse welche über den Programmaufruf gestartet wird. */
 public class Main {
-  private static final Logger LOGGER = Logger.getLogger(Main.class.getName());
 
   /**
    * Main Methode.
@@ -27,12 +25,10 @@ public class Main {
 
     threadA.registerObserver(threadB);
     threadB.registerObserver(threadC);
-    threadC.registerObserver(threadA);
 
     var executorService = Executors.newFixedThreadPool(3);
     executorService.execute(threadA);
     executorService.execute(threadB);
     executorService.execute(threadC);
-
   }
 }

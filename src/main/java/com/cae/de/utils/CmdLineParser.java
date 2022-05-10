@@ -2,6 +2,7 @@ package com.cae.de.utils;
 
 import java.io.IOException;
 import java.util.logging.FileHandler;
+import java.util.logging.Handler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,8 +17,6 @@ public class CmdLineParser {
 	private static final String LOG_LEVEL_STRING = "-loglvl";
 	private static final Logger ROOT_LOGGER = Logger.getLogger("");
 	private static final Logger LOGGER = Logger.getLogger(CmdLineParser.class.getName());
-	private static final String ITERATIONEN_STRING = "-i";
-	private int iterationen = 100;
 	private String inputFolder;
 	private String outputFolder;
 
@@ -44,7 +43,6 @@ public class CmdLineParser {
 									+ "LOG_OPTIONen sind true, false, file. Der default Wert ist false.");
 						}
 					}
-					case ITERATIONEN_STRING -> this.iterationen = Integer.parseInt(args[++i]);
 					case LOG_LEVEL_STRING -> {
 						Level logLevel = switch (args[++i]) {
 							case "info" -> Level.INFO;
@@ -60,6 +58,9 @@ public class CmdLineParser {
 		switch (logOption) {
 			case FILE -> {
 				try {
+					for (Handler handler : ROOT_LOGGER.getHandlers()) {
+						ROOT_LOGGER.removeHandler(handler);
+					}
 					FileHandler FILE_HANDLER = new FileHandler("IHK_Abschlusspruefung.log", true);
 					ROOT_LOGGER.addHandler(FILE_HANDLER);
 				} catch (IOException e) {
@@ -77,10 +78,6 @@ public class CmdLineParser {
 
 	public String getInputFolder() {
 		return this.inputFolder;
-	}
-
-	public int getIterationen() {
-		return this.iterationen;
 	}
 
 	public String getOutputFolder() {
