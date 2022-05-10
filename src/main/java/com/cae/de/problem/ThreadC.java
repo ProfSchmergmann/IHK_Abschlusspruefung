@@ -35,7 +35,7 @@ public class ThreadC
     this.pathToOutputFolder = pathToOutputFolder;
   }
 
-  /** Methode, die dafür da ist, den Zustand dieses Threads zu setzten. */
+  /** Methode, die dafür da ist, den Zustand dieses Threads zu setzen. */
   @Override
   public void run() {
     if (this.running.get()) return;

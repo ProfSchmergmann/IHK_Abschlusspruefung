@@ -9,6 +9,10 @@ import com.cae.de.utils.Pair;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,7 +27,21 @@ public class ThreadB extends Observable<AutoKorrelationsFunktion>
 
   private static final Logger LOGGER = Logger.getLogger(ThreadB.class.getName());
   private final Set<String> processedFiles = new HashSet<>();
+  private final ExecutorService es;
+  private final LinkedBlockingQueue<Runnable> taskQueue;
   private boolean running = false;
+
+  /**
+   * Konstruktor, welcher die maximale Anzahl Threads im Threadpool und die maximale Anzahl an
+   * Elementen in der Queue setzt.
+   *
+   * @param maxPoolSize die maximale Anzahl an Threads im Threadpool
+   * @param maxQueueSize die maximale Anzahl an Tasks in der Queue des Threadpools
+   */
+  public ThreadB(int maxPoolSize, int maxQueueSize) {
+    this.taskQueue = new LinkedBlockingQueue<>(maxQueueSize);
+    this.es = new ThreadPoolExecutor(1, maxPoolSize, 0L, TimeUnit.MILLISECONDS, this.taskQueue);
+  }
 
   /**
    * Methode für die Bearbeitung eines {@link Data} Objektes. Hier werden {@link CompletableFuture}s
@@ -36,25 +54,18 @@ public class ThreadB extends Observable<AutoKorrelationsFunktion>
    */
   @Override
   public AutoKorrelationsFunktion process(Data data) {
-    if (this.processedFiles.contains(data.fileName())) return null;
-    this.processedFiles.add(data.fileName());
-    var cf =
-        CompletableFuture.supplyAsync(
-                () -> {
-                  LOGGER.log(
-                      Level.INFO,
-                      "ThreadB schickt \""
-                          + data.fileName()
-                          + "\" zur Verarbeitung an "
-                          + Thread.currentThread().getName()
-                          + "!");
-                  return Algorithms.solve(data);
-                })
-            .thenAccept(this::notifyObserver);
+    LOGGER.log(
+        Level.INFO,
+        "ThreadB schickt \""
+            + data.fileName()
+            + "\" zur Verarbeitung an "
+            + Thread.currentThread().getName()
+            + "!");
+    this.notifyObserver(Algorithms.solve(data));
     return null;
   }
 
-  /** Methode, die dafür da ist, den Zustand dieses Threads zu setzten. */
+  /** Methode, die dafür da ist, den Zustand dieses Threads zu setzen. */
   @Override
   public void run() {
     if (this.running) return;
@@ -77,12 +88,20 @@ public class ThreadB extends Observable<AutoKorrelationsFunktion>
       this.notifyObserver(null);
       LOGGER.log(
           Level.INFO,
-          "Alle Dateien des Eingabeordners verarbeitet. " +
-              "Programm wird beendet, sobald alle Daten geschrieben sind.");
+          "Alle Dateien des Eingabeordners verarbeitet. "
+              + "Programm wird beendet, sobald alle Daten geschrieben sind.");
     }
     if (!this.processedFiles.contains(dataIntegerPair.key().fileName())) {
-      this.process(dataIntegerPair.key());
-      this.processedFiles.add(dataIntegerPair.key().fileName());
+      if (this.taskQueue.isEmpty()) {
+        this.es.execute(() -> this.process(dataIntegerPair.key()));
+        this.processedFiles.add(dataIntegerPair.key().fileName());
+      } else {
+        LOGGER.log(
+            Level.INFO,
+            "Keine Prozesse mehr verfügbar. Überspringe \""
+                + dataIntegerPair.key().fileName()
+                + "\"!");
+      }
     }
   }
 }
