@@ -364,7 +364,11 @@ Als erstes werden alle
 \end_inset
 
 -Werte in Pikosekunden umgerechnet, was mit der Formel 
-\begin_inset Formula $\hat{x_{k}}=\frac{\tilde{x_{k}}}{2^{18}-1}\cdot266,3-132,3$
+\begin_inset Formula 
+\[
+\hat{x_{k}}=\frac{\tilde{x_{k}}}{2^{18}-1}\cdot266,3-132,3
+\]
+
 \end_inset
 
  passieren soll.
@@ -379,7 +383,11 @@ g sinnvoll sein, sodass der Bruch
 \end_inset
 
  geben, welche diesen Bruch beschreibt und die Formel wird zu 
-\begin_inset Formula $\hat{x_{k}}=\alpha\cdot\tilde{x_{k}}-132,3$
+\begin_inset Formula 
+\[
+\hat{x_{k}}=\alpha\cdot\tilde{x_{k}}-132,3
+\]
+
 \end_inset
 
 .
@@ -392,7 +400,11 @@ g sinnvoll sein, sodass der Bruch
 Danach sollen die Daten geglättet werden, indem der sog.
  gleitende Mittelwert berechnet werden soll.
  Die Formel hierfür ist 
-\begin_inset Formula $x_{k}=\frac{1}{n}\sum_{i=0}^{n}\tilde{x_{k-\tau+i}}$
+\begin_inset Formula 
+\[
+x_{k}=\frac{1}{n}\sum_{i=0}^{n}\tilde{x_{k-\tau+i}}
+\]
+
 \end_inset
 
  mit 
@@ -400,12 +412,28 @@ Danach sollen die Daten geglättet werden, indem der sog.
 \end_inset
 
  und 
-\begin_inset Formula $n=\begin{cases}
-\lfloor0,002\cdot N\rfloor-1,\:für\:\lfloor0,002\cdot N\rfloor\:gerade & \lfloor0,002\cdot N\rfloor,\:für\:\lfloor0,002\cdot N\rfloor\:ungerade\end{cases}$
+\begin_inset Formula 
+\[
+n=\begin{cases}
+\lfloor0,002\cdot N\rfloor-1,\:für\:\lfloor0,002\cdot N\rfloor\:gerade & \lfloor0,002\cdot N\rfloor,\:für\:\lfloor0,002\cdot N\rfloor\:ungerade\end{cases}
+\]
+
 \end_inset
 
-, wobei n die Größe des Mittelungsfensters beschreibt, ungerade ist und
- 0,2% von N entspricht.
+, wobei 
+\begin_inset Formula $n$
+\end_inset
+
+ die Größe des Mittelungsfensters beschreibt, ungerade ist und 
+\begin_inset Formula $0,2%\%
+$
+\end_inset
+
+ von 
+\begin_inset Formula $N$
+\end_inset
+
+ entspricht.
  Es soll zudem noch geeignete Werte für 
 \begin_inset Formula $k<\tau$
 \end_inset
@@ -435,10 +463,29 @@ ktion oben komplett einschnürt.
 \end_layout
 
 \begin_layout Standard
-Zuletzt wird noch die Pulsbreite b berechnet, welche sich über den Abstand
- der beiden Punkte L und R berechnet.
+Zuletzt wird noch die Pulsbreite 
+\begin_inset Formula $b$
+\end_inset
+
+ berechnet, welche sich über den Abstand der beiden Punkte 
+\begin_inset Formula $L$
+\end_inset
+
+ und 
+\begin_inset Formula $R$
+\end_inset
+
+ berechnet.
  Diese sind Punkte auf der oberen Einhüllende, wobei die Gerade die durch
- L und R geht, genau auf der Hälfte der Grundlinie und des Maximums liegt.
+ 
+\begin_inset Formula $L$
+\end_inset
+
+ und 
+\begin_inset Formula $R$
+\end_inset
+
+ geht, genau auf der Hälfte der Grundlinie und des Maximums liegt.
  Die Grundlinie stellt dabei die mittlere Höhe des äußersten linken Prozents
  der Intensitätswerte dar.
  Es müssen also zuerst die gemittelten Werte der ersten Berechnung aufsteigend
@@ -454,19 +501,366 @@ Zuletzt wird noch die Pulsbreite b berechnet, welche sich über den Abstand
 \end_layout
 
 \begin_layout Subsection
-Einlesen und Initialisieren der Daten
+Konzepterstellung zur Nebenläufigkeit von Einlesen, Verarbeiten und Ausgeben
+\end_layout
+
+\begin_layout Standard
+Bei dem gegebenen Problem könnte ganz strikt nach dem IPO (Input-Process-Output)
+ oder EVA (Eingabe-Verarbeitung-Ausgabe) Prinzip gearbeitet werden, wobei
+ jedoch nur genau ein Thread für das Liefern der Daten, also den Input zuständig
+ ist.
+ Hierfür könnte ein Interface bereitgestellt werden, welches einen Thread
+ oder Prozess implementiert.
+ Dieses Interface stellt dann eine default Methode bereit, die in einem
+ Intervall von 20 Hz immer wieder aus der zu implementierenden read Methode
+ der Daten holt und weitergibt.
+ Der Thread B wird dann, wie auch der Thread C, so lange laufen, wie noch
+ Daten nicht verarbeitet wurden.
+ Wenn Thread A also eine Datei bereitstellt, startet Thread B und berechnet
+ das Ergebnis, welches dann vom Thread C geschrieben werden kann.
+ Thread A, B und C können somit gleichzeitig ausgeführt werden, da die Verarbeit
+ung unabhängig voneinander passiert.
+ Für Thread B würde also ebenfalls ein Interface bereitgestellt werden,
+ welches einen Thread implementiert und die Methode process mit den Parametern
+ aus Thread A bereitstellen muss.
+ Der Thread C sieht dann ebenfalls ein Interface vor, welches einen Thread
+ implementiert und die Methode write bereitstellt.
+ Falls Thread C alle Messdaten geschrieben hat, wird Thread A gestoppt und
+ damit auch Thread B.
+ Nachdem alle Threads gestoppt wurden, wird auch das Programm beendet.
+\end_layout
+
+\begin_layout Standard
+Die Klasse AKF beinhaltet einige Arrays, welche immer die Größe 
+\begin_inset Formula $N$
+\end_inset
+
+ haben werden und von denen eventuell nicht alle immer gebraucht werden.
+ Laut Aufgabenstellung stellt der Lesethread (Thread A) alle 0,05 Sekunden
+ einen neuen Datensatz bereit, was wahrscheinlich sinnvoller ist als "push"
+ Methode zu implementieren.
+ Des Weiteren habe ich das so verstanden, dass von allen Threads nur jeweils
+ eine Instanz gleichzeitig laufen kann, was die Überschreibung und Wiederholung
+ der Datensätze erklären würde, jedoch in einem Produktivsystem nicht allzu
+ sinnvoll wäre, da ansonsten Datensätze verloren gehen.
+ Der Thread B läuft also nur einmal und verarbeitet auch nur einen Datensatz
+ gleichzeitig, bevor der nächste geholt oder gepusht wird.
+ Eventuell wäre daher auch das Observer-Observable Pattern sinnvoll, da
+ der Thread B informiert werden muss, falls Thread A Daten bereitstellt.
+ Genau das Gleiche wäre dann natürlich auch für Thread B und C sinnvoll.
+\end_layout
+
+\begin_layout Standard
+Das Pattern könnte dann so abgewandelt werden, dass Thread A ein Observable
+ implementiert.
+ worin der Observer Thread B registriert ist und über die notify Methode
+ den neuen Datensatz bekommt.
+ Falls der Thread B allerdings noch arbeitet, wird das einfach ignoriert.
+ Thread C wird denn selbst auch als Observer im Observable Thread B registriert
+ und bekommt so die fertig verarbeiteten Daten.
+ Als Abbruchbedingung könnte eventuell noch der Thread C als Obervable implement
+iert werden und Thread A als Observer registrieren, um alle bereits geschriebene
+n Dateinamen mitzuteilen.
+ Weiterhin habe ich in dem UML Diagramm alles generisch mit dem Type T gelassen,
+ da am besten ein Paar aus Dateinamen und AKF übergeben werden sollte, allerding
+s braucht Thread B zum Beispiel nicht die komplette Klassenstruktur, weshalb
+ der generische Typ hier noch sinnvoll ist.
+ Theoretisch braucht Thread C dann eben auch nur zwei Strings als Übergabe.
 \end_layout
 
 \begin_layout Subsection
-Entwurf des Algorithmus
+Einlesen und Initialisieren der Daten
+\end_layout
+
+\begin_layout Standard
+Das Einlesen der Daten passiert über die read Methode in Thread A.
+ Besonders große Schwierigkeiten gibt es hierbei nicht, da alle Zeilen mit
+ einem 
+\begin_inset Quotes gld
+\end_inset
+
+#
+\begin_inset Quotes grd
+\end_inset
+
+ startend ignoriert werden können.
+ Die weiteren Zeilen bezeichnen die Messwerte, welche mit 
+\begin_inset Quotes gld
+\end_inset
+
+
+\backslash
+t
+\begin_inset Quotes grd
+\end_inset
+
+ getrennt sind.
+ Hierbei ist die erste Zahl der y-Wert, also die Intensität des Signals
+ und die zweite Zahl der x-Wert, also die Position des Spiegels.
+ Falls während des Einlesevorgangs eine Exception geschmissen wird, wird
+ der Vorgang einfach abgebrochen und null zurückgegeben.
+ Das habe ich so realisiert, da der ThreadA die Daten schnell lesen muss
+ und keine lange Fehlerbehandlung machen kann, falls diese korrupt sind.
+ Die Werte von x und y werden zuerst in Paare eingelesen, welche in einer
+ Liste gespeichert werden.
+ Laut Aufgabenstellung sind dies immer positive, ganzzahlige Werte.
+ Diese Liste von paaren wird dann in zwei Arrays, xStart und yStart, umgewandelt
+ und mit dem Dateinamen in ein Data Objekt gegeben und von der Methode zurückgeg
+eben.
+ 
 \end_layout
 
 \begin_layout Subsection
 Ausgabe gemäß Aufgabenstellung
 \end_layout
 
+\begin_layout Standard
+Die Ausgabe der fertigen Autokorrelationsfunktion erledigt dann ThreadC.
+ Hierfür habe ich eine Methode in der Klasse AKF geschrieben, welche einen
+ formatierten String für die Ausgabe zusammenbaut und zurückgibt.
+ Da in der Klasse der Wert für die Pulsbreite, den IndexL und den indexR
+ gesetzt ist, ist die erste Zeile kein Problem.
+ Die weiteren Zeilen werden dann mit den Arrays 
+\begin_inset Quotes gld
+\end_inset
+
+xTransformiert
+\begin_inset Quotes grd
+\end_inset
+
+, 
+\begin_inset Quotes gld
+\end_inset
+
+yNormiert
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+obereEinhuellende
+\begin_inset Quotes grd
+\end_inset
+
+ zusammengebaut.
+ 
+\end_layout
+
+\begin_layout Standard
+Wenn der String fertig ist, wird das Ganze in eine Datei mit dem Namen 
+\begin_inset Quotes gld
+\end_inset
+
+out
+\begin_inset Quotes grd
+\end_inset
+
+ + 
+\begin_inset Quotes gld
+\end_inset
+
+fileName
+\begin_inset Quotes grd
+\end_inset
+
+ aus der Klasse AKF geschrieben.
+\end_layout
+
 \begin_layout Section
 Objektorientierter Entwurf
+\end_layout
+
+\begin_layout Subsection
+Framework
+\end_layout
+
+\begin_layout Standard
+Das Paket Framework beinhaltet alle wichtigen Interfaces und eine abstrakte
+ Klasse zur Lösung des gegebenen Problems.
+ Somit wird die geforderte Austauschbarkeit des Threads A erreicht, man
+ kann aber auch alle anderen Threads austauschen.
+ 
+\end_layout
+
+\begin_layout Standard
+Das vorher genannte Observer-Observable-Pattern habe ich mit einem Interface
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Observer
+\begin_inset Quotes grd
+\end_inset
+
+ und einer abstrakten Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Observable
+\begin_inset Quotes grd
+\end_inset
+
+ vorgegeben.
+ Der 
+\begin_inset Quotes gld
+\end_inset
+
+Observer
+\begin_inset Quotes grd
+\end_inset
+
+ ist generisch und muss die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+void update(T t)
+\begin_inset Quotes grd
+\end_inset
+
+ bereitstellen, welche vom 
+\begin_inset Quotes gld
+\end_inset
+
+Observable
+\begin_inset Quotes grd
+\end_inset
+
+ aufgerufen werden kann.
+ Ebenfalls generisch gestaltet sich die 
+\begin_inset Quotes gld
+\end_inset
+
+Observable
+\begin_inset Quotes grd
+\end_inset
+
+ Klasse, die eine Liste von 
+\begin_inset Quotes gld
+\end_inset
+
+Observern
+\begin_inset Quotes grd
+\end_inset
+
+ hält.
+ In diese Liste kann man über die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+public void registerObserver(Observer observer)
+\begin_inset Quotes grd
+\end_inset
+
+ einen 
+\begin_inset Quotes gld
+\end_inset
+
+Observer
+\begin_inset Quotes grd
+\end_inset
+
+ hinzufügen.
+ Diese werden dann über die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+public void notifyObservers(T t)
+\begin_inset Quotes grd
+\end_inset
+
+ über ein verändertes Objekt informiert.
+ 
+\end_layout
+
+\begin_layout Standard
+Das Threading ist durch die drei Interfaces 
+\begin_inset Quotes gld
+\end_inset
+
+ReadRunnable
+\begin_inset Quotes grd
+\end_inset
+
+, 
+\begin_inset Quotes gld
+\end_inset
+
+WriteRunnable
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+ProcessRunnable
+\begin_inset Quotes grd
+\end_inset
+
+ implementiert, welche selbst das Interface 
+\begin_inset Quotes gld
+\end_inset
+
+Runnable
+\begin_inset Quotes grd
+\end_inset
+
+ erweitern.
+ Der Lesethread soll durch das Interface 
+\begin_inset Quotes gld
+\end_inset
+
+ReadRunnable
+\begin_inset Quotes grd
+\end_inset
+
+ implementiert werden, welches die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+T read(Path pathToFile)
+\begin_inset Quotes grd
+\end_inset
+
+ bereitstellt und generisch ist.
+ 
+\begin_inset Quotes gld
+\end_inset
+
+ProcessRunnable
+\begin_inset Quotes grd
+\end_inset
+
+ stellt das Interface für den Verarbeitungsthread dar und gibt die Methode
+ 
+\begin_inset Quotes gld
+\end_inset
+
+R process(P p)
+\begin_inset Quotes grd
+\end_inset
+
+ vor, wobei R der Typ des Ergebnisparameters ist und P der Type des Eingabeparam
+eters.
+ Schlussendlich wird der Schreibthread durch das Interface 
+\begin_inset Quotes gld
+\end_inset
+
+WriteRunnable
+\begin_inset Quotes grd
+\end_inset
+
+ dargestellt, wobei man die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+boolean write(T t)
+\begin_inset Quotes grd
+\end_inset
+
+ implementieren muss, die einen generischen Parameter schreiben soll.
 \end_layout
 
 \begin_layout Subsection

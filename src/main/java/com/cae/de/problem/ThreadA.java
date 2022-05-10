@@ -93,7 +93,7 @@ public class ThreadA extends Observable<Pair<Data, Integer>> implements ReadRunn
         for (var pathToFile : paths) {
           var data = this.read(Path.of(this.pathToInputFolder + "/" + pathToFile));
           if (data != null) {
-            this.notifyObserver(new Pair<>(data, paths.length));
+            this.notifyObservers(new Pair<>(data, paths.length));
             LOGGER.log(
                 Level.INFO,
                 "Schicke neue Daten aus der Datei: \"" + pathToFile + "\" an alle Observer!");

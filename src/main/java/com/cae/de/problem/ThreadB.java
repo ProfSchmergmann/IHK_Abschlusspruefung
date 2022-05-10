@@ -61,7 +61,7 @@ public class ThreadB extends Observable<AutoKorrelationsFunktion>
             + "\" zur Verarbeitung an "
             + Thread.currentThread().getName()
             + "!");
-    this.notifyObserver(Algorithms.solve(data));
+    this.notifyObservers(Algorithms.solve(data));
     return null;
   }
 
@@ -85,7 +85,7 @@ public class ThreadB extends Observable<AutoKorrelationsFunktion>
   @Override
   public void update(Pair<Data, Integer> dataIntegerPair) {
     if (this.processedFiles.size() == dataIntegerPair.value()) {
-      this.notifyObserver(null);
+      this.notifyObservers(null);
       LOGGER.log(
           Level.INFO,
           "Alle Dateien des Eingabeordners verarbeitet. "

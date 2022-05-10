@@ -23,7 +23,7 @@ public abstract class Observable<T> {
    *
    * @param t das Objekt, was sich geändert hat und worüber informiert werden soll
    */
-  public void notifyObserver(T t) {
+  public void notifyObservers(T t) {
     this.observers.forEach(observer -> observer.update(t));
   }
 
