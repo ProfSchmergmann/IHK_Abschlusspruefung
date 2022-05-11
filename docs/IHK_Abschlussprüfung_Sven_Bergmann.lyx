@@ -882,8 +882,8 @@ Problem
 \end_layout
 
 \begin_layout Standard
-Problem beinhaltet alle Klassen zur Lösung des gegebenen Problems, welche
- unter anderem von der Klasse und den Interfaces aus 
+Problem beinhaltet alle Klassen zur (optimierten) Lösung des gegebenen Problems,
+ welche unter anderem von der Klasse und den Interfaces aus 
 \begin_inset Quotes gld
 \end_inset
 
@@ -950,7 +950,9 @@ https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.ht
 \begin_inset Quotes gld
 \end_inset
 
-Autokorrelationsfunktion
+Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion
 \begin_inset Quotes grd
 \end_inset
 
@@ -982,7 +984,7 @@ Runnable<Data>
 \begin_inset Quotes gld
 \end_inset
 
-Observable<Pair<Data, Integer>>
+Observable< Pair<Data, Integer> >
 \begin_inset Quotes grd
 \end_inset
 
@@ -1035,7 +1037,14 @@ ThreadB
 \begin_inset Quotes gld
 \end_inset
 
-Observable<AutoKorrelationsfunktion>
+Ob\SpecialChar softhyphen
+ser\SpecialChar softhyphen
+va\SpecialChar softhyphen
+ble\SpecialChar softhyphen
+<Auto\SpecialChar softhyphen
+Kor\SpecialChar softhyphen
+relations\SpecialChar allowbreak
+Funktion>
 \begin_inset Quotes grd
 \end_inset
 
@@ -1051,7 +1060,10 @@ Observer<Pair<Data, Integer>>
 \begin_inset Quotes gld
 \end_inset
 
-ProcessRunnable<Data, Autokorrelationsfunktion>
+Process\SpecialChar softhyphen
+Runnable<Data, Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion>
 \begin_inset Quotes grd
 \end_inset
 
@@ -1112,7 +1124,9 @@ ThreadA
 \begin_inset Quotes gld
 \end_inset
 
-AutoKorrelationsfunktion
+Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+funktion
 \begin_inset Quotes grd
 \end_inset
 
@@ -1131,7 +1145,9 @@ ThreadC
 \begin_inset Quotes gld
 \end_inset
 
-Observer<AutoKorrelationsFunktion>
+Observer<Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion>
 \begin_inset Quotes grd
 \end_inset
 
@@ -1139,7 +1155,9 @@ Observer<AutoKorrelationsFunktion>
 \begin_inset Quotes gld
 \end_inset
 
-WriteRunnable<AutoKorrelationsFunktion
+WriteRunnable<Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion>
 \begin_inset Quotes grd
 \end_inset
 
@@ -1149,7 +1167,9 @@ WriteRunnable<AutoKorrelationsFunktion
 \begin_inset Quotes gld
 \end_inset
 
-public void update(AutoKorrelationsFunktion akf)
+public void update(Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion akf)
 \begin_inset Quotes grd
 \end_inset
 
@@ -1178,7 +1198,9 @@ join
 \begin_inset Quotes gld
 \end_inset
 
-public boolean write(AutoKorrelationsFunktion akf)
+public boolean write(Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion akf)
 \begin_inset Quotes grd
 \end_inset
 
@@ -1193,7 +1215,9 @@ public String getOuputString()
 \begin_inset Quotes grd
 \end_inset
 
- in AutoKorrelationsFunktion überschrieben, welche in 
+ in Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion überschrieben, welche in 
 \begin_inset CommandInset ref
 LatexCommand nameref
 reference "subsec:Ausgabe-gemäß-Aufgabenstellung"
@@ -1204,6 +1228,127 @@ noprefix "false"
 \end_inset
 
  beschrieben wurde.
+\end_layout
+
+\begin_layout Subsection
+ProblemSimple
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset Quotes gld
+\end_inset
+
+problemsimple
+\begin_inset Quotes grd
+\end_inset
+
+ findet sich eine alternative Implementierung des gegebenen Problems wieder,
+ es wurden allerdings nur die Klassen 
+\begin_inset Quotes gld
+\end_inset
+
+ThreadB
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+ThreadC
+\begin_inset Quotes grd
+\end_inset
+
+ neu geschrieben, alle anderen Klassen werden weiter benutzt.
+ Wie der Name schon sagt, wird hier naiv und mit einer einfachen Fehlerbehandlun
+g an das Problem herangegangen.
+ Während dieser Ausführung existieren nur genau diese drei Threads A,B und
+ C, wobei das Master-Worker Pattern nicht implementiert ist.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes gld
+\end_inset
+
+ThreadB
+\begin_inset Quotes grd
+\end_inset
+
+ erweitert nun die abstrakte Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Observable<Pair<Auto\SpecialChar softhyphen
+korrelations\SpecialChar softhyphen
+funktion, Integer>>
+\begin_inset Quotes grd
+\end_inset
+
+ und implementiert die Interfaces 
+\begin_inset Quotes gld
+\end_inset
+
+Observer <Pair<Data, Integer> >
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+ProcessRunnable<Pair<Data, Integer>, Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion>
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Dies ist nötig, da nun die Anzahl der zu bearbeitenden Elemente an ThreadC
+ weitergeschickt werden kann.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes gld
+\end_inset
+
+ThreadC
+\begin_inset Quotes grd
+\end_inset
+
+ implementiert nun die zwei Interfaces 
+\begin_inset Quotes gld
+\end_inset
+
+Observer<Pair<Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion, Integer>>
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+WriteRunnable<Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion>
+\begin_inset Quotes grd
+\end_inset
+
+, um die Anzahl der Daten geschickt bekommen zu können.
+ Die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+public boolean write(Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion akf)
+\begin_inset Quotes grd
+\end_inset
+
+ ist gleichgeblieben.
 \end_layout
 
 \begin_layout Subsection
@@ -1405,8 +1550,46 @@ run()
  B als Observer registriert hat und der Thread B den Thread C als Observer.
  Das heißt, dass die Threads nun in einer Reihe verkettet sind und nichtmehr
  wie bei der schriftlichen Ausarbeitung in einem Ring.
- Weiterhin wird das ganze Programm erst von Thread C beendet, falls dieser
- in der 
+ 
+\end_layout
+
+\begin_layout Standard
+Es wurden des Weiteren zwei mögliche Implementierungen dargestellt, einmal
+ mit dem Master-Worker Pattern und einmal ohne.
+ Die Implementierung des Master-Worker Patterns befindet sich im Paket 
+\begin_inset Quotes gld
+\end_inset
+
+problem
+\begin_inset Quotes grd
+\end_inset
+
+, während die einfache Implementierung im Paket 
+\begin_inset Quotes gld
+\end_inset
+
+problemsimple
+\begin_inset Quotes grd
+\end_inset
+
+ zu finden ist.
+ Beide Implementierungen nutzen die gleiche Klasse ThreadA, unterscheiden
+ sich aber in den Klassen ThreadB und ThreadC und vorallem auch in der Abbruchbe
+dingung des Programms.
+ 
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset Quotes gld
+\end_inset
+
+problem
+\begin_inset Quotes grd
+\end_inset
+
+ wird das ganze Programm erst von Thread C beendet, falls dieser in der
+ 
 \begin_inset Quotes gld
 \end_inset
 
@@ -1414,19 +1597,282 @@ update(T t)
 \begin_inset Quotes grd
 \end_inset
 
- Methode null zurück bekommt, da nur der Thread B weiß, wann keine Daten
+ Methode null zurück bekommt, da nur der ThreadB weiß, wann keine Daten
  mehr eingelesen, bzw.
  verarbeitet werden.
- Sowohl Thread B, als auch Thread C implementieren das Master-Worker Pattern
+ Sowohl ThreadB, als auch ThreadC implementieren das Master-Worker Pattern
  und bei Thread B kann zusätzlich angegeben werden, wie groß der Threadpool
- sein soll und wieviele Objekte in die Warteschlange gepackt werden dürfen.
- Thread C schreibt einfach alle gepushten Daten asynchron, da ich davon
- ausgehe, dass die Verarbeitung länger dauert, als das Schreiben.
+ sein soll und wie viele Objekte in die Warteschlange gepackt werden dürfen.
+ ThreadC schreibt einfach alle gepushten Daten asynchron, da davon ausgegangen
+ wird, dass die Verarbeitung länger dauert, als das Schreiben.
  
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Standard
+In 
+\begin_inset Quotes gld
+\end_inset
+
+problemsimple
+\begin_inset Quotes grd
+\end_inset
+
+ wird nur mit genau diesen drei Threads gearbeitet und keinen Weiteren.
+ Um dies zu realisieren, gibt es in beiden Klassen nun eine Variable 
+\begin_inset Quotes gld
+\end_inset
+
+processing
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+writing
+\begin_inset Quotes grd
+\end_inset
+
+, welche beide vom Typen AtomicBoolean
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/a
+tomic/AtomicBoolean.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ sind, da diese Variablen threadsafe sind.
+ Falls nun der ThreadA zu schnell Daten pusht, sodass ThreadB in einem bearbeite
+nden Zustand ist, so überspringt ThreadB einfach diese Datei und bearbeitet
+ die nächste, sobald er fertig ist.
+ ThreadC macht das ähnlich, woraus auch resultiert, dass ThreadC die Abbruchbedi
+ngung in diesem Fall verwalten muss.
+ Die Anzahl der Input Dateien wird also von ThreadA über ThreadB nach ThreadC
+ geschleußt und in ThreadC wird dann immer geprüft, ob die aktuelle Datei
+ schon geschrieben wurde und ob schon alle Daten geschrieben wurden.
+ Ist dies der Fall, wird das Programm beendet.
+\end_layout
+
+\begin_layout Section
 Allgemeines zu Multithreading in Java
+\end_layout
+
+\begin_layout Standard
+In Java kann Multithreading auf verschiedene Arten realisiert werden.
+ Das etwas ältere, aber duraus noch genutzte Konzept besteht darin, die
+ Thread Klasse zu erweitern und die Methoden, vorallem die 
+\begin_inset Quotes gld
+\end_inset
+
+run()
+\begin_inset Quotes grd
+\end_inset
+
+ Methode, zu überschreiben.
+ Der Vorteil hierbei ist, dass von Haus aus Basisfunktionalitäten, wie 
+\begin_inset Quotes gld
+\end_inset
+
+yield()
+\begin_inset Quotes grd
+\end_inset
+
+, oder 
+\begin_inset Quotes gld
+\end_inset
+
+sleep()
+\begin_inset Quotes grd
+\end_inset
+
+ bereitgestellt werden.
+ Eine weitere Methode ist es, das Interface 
+\begin_inset Quotes gld
+\end_inset
+
+Runnable
+\begin_inset Quotes grd
+\end_inset
+
+ zu implementieren, was den Vorteil mit sich bringt, dass man mehrere Interfaces
+ implementieren kann, aber nur eine Klasse erweitern kann.
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Runnable
+\begin_inset Quotes grd
+\end_inset
+
+ wird auch von der Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Thread
+\begin_inset Quotes grd
+\end_inset
+
+ implementiert, stellt aber nur Basisfunktionalitäten bereit, wie die 
+\begin_inset Quotes gld
+\end_inset
+
+run()
+\begin_inset Quotes grd
+\end_inset
+
+ Methode.
+ Ein Objekt vom Typen 
+\begin_inset Quotes gld
+\end_inset
+
+Runnable
+\begin_inset Quotes grd
+\end_inset
+
+ kann aber dafür genutzt werden dieses von mehreren Threads ausführen zu
+ lassen.
+ Das Ausführen der beiden Objekte verhält sich auch unterschiedlich.
+ Ein Objekt des Types 
+\begin_inset Quotes gld
+\end_inset
+
+Thread
+\begin_inset Quotes grd
+\end_inset
+
+ kann einfach mit 
+\begin_inset Quotes gld
+\end_inset
+
+new Thread
+\begin_inset Quotes grd
+\end_inset
+
+ erstellt werden und dann mit 
+\begin_inset Quotes gld
+\end_inset
+
+Thread.start()
+\begin_inset Quotes grd
+\end_inset
+
+ gestartet werden, wodurch jedes Mal eine neue Instanz eines Thread Objektes
+ erstellt wird.
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Runnables
+\begin_inset Quotes grd
+\end_inset
+
+ hingegen werden entweder einem vorher erstellten 
+\begin_inset Quotes gld
+\end_inset
+
+new Thread()
+\begin_inset Quotes grd
+\end_inset
+
+ Objekt als Parameter mitgegeben und dann gestartet, oder aber einem Executor
+ Service übergeben, welcher entweder selbst erstellt und verwaltet werden
+ kann, oder einem bereits vorgegebenen Service zugeordnet werden kann.
+ Vorgegebene Services sind zum Beispiel der 
+\begin_inset Quotes gld
+\end_inset
+
+newCachedThreadPool()
+\begin_inset Quotes grd
+\end_inset
+
+, welcher neue Threads erstellt, solange diese gebraucht werden und alte
+ wieder nutzt, oder der 
+\begin_inset Quotes gld
+\end_inset
+
+newFixedThreadPool(int nThreads)
+\begin_inset Quotes grd
+\end_inset
+
+, welcher eine fixe Anzahl an Threads nutzt, um die Aufgaben auszuführen
+ und ansonsten eine Queue benutzt, in welcher die Aufgaben gespeichert und
+ dann nach und nach abgearbeitet werden.
+ Je nach Programm oder Problemstellung kann man also diese Services nutzen.
+ In meinem Programm nutze ich in der 
+\begin_inset Quotes gld
+\end_inset
+
+Main
+\begin_inset Quotes grd
+\end_inset
+
+ zur Ausführung der selbstgeschriebenen Thread Klassen, welche das Interface
+ Runnable implementieren, einen newFixedThreadPool mit 3 Threads.
+ Diese Runnables werden dann von diesem Threadpool verwaltet.
+ Falls man nun nicht nur wie in dieser Aufgabenstellung laufende Threads
+ haben möchte, sondern auch ein Ergebnis aus diesen Threads erwartet, mit
+ dem dann weitergemacht werden soll, kann man die sogenannten 
+\begin_inset Quotes gld
+\end_inset
+
+CompletableFutures
+\begin_inset Quotes grd
+\end_inset
+
+ nutzen, welche über den Funktionsaufruf 
+\begin_inset Quotes gld
+\end_inset
+
+CompletableFuture.supplyAsync(<Runnable>)
+\begin_inset Quotes grd
+\end_inset
+
+ erstellt und asynchron ausgeführt werden.
+ Mit dem 
+\begin_inset Quotes gld
+\end_inset
+
+CompletableFuture
+\begin_inset Quotes grd
+\end_inset
+
+ Objekt kann dann mit Methoden wie z.
+ B.
+ 
+\begin_inset Quotes gld
+\end_inset
+
+thenApply()
+\begin_inset Quotes grd
+\end_inset
+
+ weitergearbeitet werden.
+ Diese werden in dem ThreadC der Methode mit der Implementierung des Master-Work
+er Patterns genutzt.
+ Um das Ganze allerdings etwas lebensechter zu machen habe ich in ThreadB
+ einen eigenen ThreadPoolExecutor erstellt, welcher die gewünschte Anzahl
+ an Threads und die gewünschte Größe der Warteschlange setzt.
+ Somit kann man gut simulieren, was passiert, wenn keine Worker mehr verfügbar
+ sind und die Queue zudem auch voll ist.
+ 
+\end_layout
+
+\begin_layout Section
+Auswertung und Interpretation
 \end_layout
 
 \begin_layout Section
@@ -1751,6 +2197,34 @@ Größe der Schlage der Tasks
 
 \end_layout
 
+\begin_layout Itemize
+-mw {
+\begin_inset Quotes gld
+\end_inset
+
+true
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+false
+\begin_inset Quotes grd
+\end_inset
+
+}, default: 
+\begin_inset Quotes gld
+\end_inset
+
+false
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 Man kann jede dieser Optionen setzen, muss das aber nicht tun.
  Falls eine Option nicht gesetzt wird, wird der default Wert angenommen.
@@ -1767,6 +2241,17 @@ en tatsächlich geloggt werden.
  Sleep gibt die Zeit in Millisekunden an, die der ThreadA wartet, nachdem
  dieser Daten gepusht hat und Queuesize beschreibt die Größe der Schlange
  des Services des ThreadsB.
+ Die Option 
+\begin_inset Quotes gld
+\end_inset
+
+-mw
+\begin_inset Quotes grd
+\end_inset
+
+ gibt an, ob das Programm die Thread Klassen mit dem intern implementierten
+ Master-Worker Pattern nutzen soll, oder die Threads ohne das Master-Worker
+ Pattern.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2814,10 +3299,6 @@ name "fig:Pair"
 Nassi-Shneidermann Diagramme
 \end_layout
 
-\begin_layout Subsection
-Sequenzdiagramme
-\end_layout
-
 \begin_layout Standard
 \begin_inset Float figure
 wide false
@@ -2825,21 +3306,13 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-\align center
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-\begin_inset Quotes gld
-\end_inset
-
-solve
-\begin_inset Quotes grd
-\end_inset
-
- Methode der Algorithms-Klasse
+Algorithmus 1
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:solve-Algorithms"
+name "fig:Algorithmus-1"
 
 \end_inset
 
@@ -2849,101 +3322,12 @@ name "fig:solve-Algorithms"
 \end_inset
 
 
-\begin_inset Graphics
-	filename Algorithms_solve.svg
-	height 70theight%
-
-\end_inset
-
-
 \end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
 
 \begin_layout Plain Layout
 \align center
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset Quotes gld
-\end_inset
-
-main
-\begin_inset Quotes grd
-\end_inset
-
- Methode der Klasse Main
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:main-Methode"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \begin_inset Graphics
-	filename Main_main.svg
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset Quotes gld
-\end_inset
-
-run
-\begin_inset Quotes grd
-\end_inset
-
- Methode der Klasse ThreadA
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:runThreadA"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename ThreadA_run.svg
-	height 70theight%
+	filename Algorithmus1.svg
 
 \end_inset
 
@@ -2966,21 +3350,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-\begin_inset Quotes gld
-\end_inset
-
-update
-\begin_inset Quotes grd
-\end_inset
-
- Methode der Klasse ThreadC
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:updateThreadC"
-
-\end_inset
-
-
+Algorithmus 2
 \end_layout
 
 \end_inset
@@ -2991,8 +3361,8 @@ name "fig:updateThreadC"
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename ThreadC_update.svg
-	width 100text%
+	filename Algorithmus2.svg
+	height 100theight%
 
 \end_inset
 
@@ -3006,55 +3376,10 @@ name "fig:updateThreadC"
 \end_inset
 
 
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset Quotes gld
-\end_inset
-
-write
-\begin_inset Quotes grd
-\end_inset
-
- Methode der Klasse ThreadC
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:writeThreadC"
-
-\end_inset
-
-
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ThreadC_write.svg
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
+\begin_layout Subsection
+Sequenzdiagramme
 \end_layout
 
 \begin_layout Standard

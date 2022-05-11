@@ -1,0 +1,771 @@
+%% LyX 2.3.6.1 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[a4paper,ngerman,numbers=noendperiod]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{babel}
+\usepackage{float}
+\usepackage{url}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[unicode=true,
+ bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,
+ breaklinks=true,pdfborder={0 0 1},backref=false,colorlinks=false]
+ {hyperref}
+\hypersetup{pdftitle={Abschlussprüfung Sommer 2022 - Entwicklung eines Softwaresystems},
+ pdfauthor={Sven Bergmann}}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\pdfpageheight\paperheight
+\pdfpagewidth\paperwidth
+
+\newcommand*\LyXZeroWidthSpace{\hspace{0pt}}
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{csquotes}
+
+\makeatother
+
+\usepackage{listings}
+\lstset{basicstyle={\small\ttfamily},
+columns=flexible,
+breaklines=true}
+\usepackage[style=authoryear]{biblatex}
+\begin{document}
+\begin{titlepage} % Suppresses headers and footers on the title page 	
+	\centering % Centre everything on the title page  	
+	\scshape % Use small caps for all text on the title page  	
+	\vspace*{\baselineskip} % White space at the top of the page 
+	\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt} % Thick horizontal rule
+
+	\vspace{2\baselineskip} % Whitespace above the title 
+
+	{\LARGE Abschlussprüfung Sommer 2022\\ Entwicklung eines Softwaresystems\\} % Title 
+	\vspace{2\baselineskip} % Whitespace below the title
+	\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt} % Thick horizontal rule
+
+	\vspace*{25\baselineskip} % Whitespace after the title block  	
+	\begin{flushleft} 	
+		\begin{tabular}{ll} 		
+			Vorgelegt von: & Sven Bergmann \\
+			Vorgelegt am: & \today \\
+			Prüflingsnummer: & 101 20541 \\ 		
+			Ausbildungsbetrieb: & CAE GmbH 	
+		\end{tabular} 	
+	\end{flushleft} 
+\end{titlepage}
+
+\tableofcontents{}\newpage{}
+
+\section{Aufgabenbeschreibung}
+
+\subsection{Aufgabenanalyse}
+
+Eine Firma möchte einen optischen Autokorrelator\footnote{Link: \url{https://de.wikipedia.org/wiki/Autokorrelator}}
+bauen, welcher mit einem Laser, halbdurchlässigen und voll reflektierenden
+Spiegeln, einem Kristall, einem Filter und einem Detektor funktioniert.
+Der Detektor misst hierbei die Autokorrelationsfunktion des Eingangssignals,
+die Aufschluss über die Breite des Laserpulses oder die Ursprungsfrequenz
+gibt. Die Messdaten werden allerdings vom Detektor permanent und nebenläufig
+geliefert, was mit einem Thread modelliert werden soll, welcher mit
+20 Hz, also alle 0,05 Sekunden eine neue Messdatei zur Verfügung stellt
+und die alte überschreibt. Der Lese-Thread ist hierbei Thread A und
+läuft ständig weiter, indem die Daten \textquotedbl 0.txt\textquotedbl{}
+bis \textquotedbl 9.txt\textquotedbl{} immer wieder eingelesen werden
+und den aktuellen Datensatz überschreiben. Der Thread B soll dann
+diese Messdaten weiterverarbeiten und mit den später erklärten mathematischen
+Methoden die Funktion modellieren, bzw. die Messwerte umrechnen und
+glätten. Schließlich wird die fertige Berechnung dann an Thread C
+weitergegeben, um die Daten in seinem auch später erklärten Format
+in eine Datei auszugeben, welche als Präfix \textquotedbl out\textquotedbl{}
+besitzt und ansonsten gleich heißt. Das Programm wird dann beendet,
+wenn alle Messdaten verarbeitet wurden. Es kann durchaus vorkommen,
+dass eine Messdatei häufiger eingelesen wird. Diese muss dann allerdings
+nicht erneut verarbeitet werden, es wird dann einfach auf eine noch
+nicht verarbeitete Datei gewartet.
+
+\subsection{Beschreibung der mathematischen Methoden}
+
+Als erstes werden alle $\hat{x}$-Werte in Pikosekunden umgerechnet,
+was mit der Formel 
+\[
+\hat{x_{k}}=\frac{\tilde{x_{k}}}{2^{18}-1}\cdot266,3-132,3
+\]
+ passieren soll. Zur Zeitersparnis und Verbesserung der Genauigkeit
+wurde hierbei eine Umstellung sinnvoll sein, sodass der Bruch $\frac{266,3}{2^{18}-1}$
+nicht immer wieder erneut berechnet werden muss. Also wird es eine
+Variable $\alpha$ geben, welche diesen Bruch beschreibt und die Formel
+wird zu 
+\[
+\hat{x_{k}}=\alpha\cdot\tilde{x_{k}}-132,3
+\]
+Des Weiteren werden noch alle y-Werte normiert, sprich jeder Wert
+wird durch das Maximum aller y-Werte geteilt. 
+
+Danach sollen die Daten geglättet werden, indem der sog. gleitende
+Mittelwert berechnet werden soll. Die Formel hierfür ist 
+\[
+x_{k}=\frac{1}{n}\sum_{i=0}^{n}\tilde{x_{k-\tau+i}}
+\]
+ mit $\tau=\frac{n-1}{2}$ und 
+\[
+n=\begin{cases}
+\lfloor0,002\cdot N\rfloor-1 & f\ddot{u}r\:\lfloor0,002\cdot N\rfloor\:gerade\\
+\lfloor0,002\cdot N\rfloor & f\ddot{u}r\:\lfloor0,002\cdot N\rfloor\:ungerade
+\end{cases}
+\]
+wobei $n$ die Größe des Mittelungsfensters beschreibt, ungerade ist
+und $0,2\%$ von $N$ entspricht. Es soll zudem noch geeignete Werte
+für $k<\tau$ und $k>N-1-\tau$ bestimmt werden, sprich den linken
+und rechten Rand der Messungen. Das Symbol $\ensuremath{\lfloor x\rfloor}$
+heißt untere Gaußklammer und beschreibt, wie auf ganze Zahlen gerundet
+werden soll. 
+
+Als nächstes wird die obere Einhüllende bestimmt, welche die Autokorrelationsfunktion
+oben komplett einschnürt. Da dies aber numerisch sehr aufwändig ist,
+reicht es aus, diese Einhüllende einfacher zu approximieren und zwar
+indem zuerst von links beginnend jedem Positionswert der zuletzt höchste
+Intensitätswert zugeordnet wird, solange bis man am Maximum ist, dann
+wird das gleiche Verfahren von rechts wiederholt. 
+
+Zuletzt wird noch die Pulsbreite $b$ berechnet, welche sich über
+den Abstand der beiden Punkte $L$ und $R$ berechnet. Diese sind
+Punkte auf der oberen Einhüllende, wobei die Gerade die durch $L$
+und $R$ geht, genau auf der Hälfte der Grundlinie und des Maximums
+liegt. Die Grundlinie stellt dabei die mittlere Höhe des äußersten
+linken Prozents der Intensitätswerte dar. Es müssen also zuerst die
+gemittelten Werte der ersten Berechnung aufsteigend sortiert werden,
+wobei dann geschaut wird, welche Werte alle im Intervall $\left[0;0,01\right]$
+liegen. Diese werden dann ebenfalls gemittelt und der daraus resultierende
+Wert beschreibt die Grundlinie. 
+
+\subsection{Konzepterstellung zur Nebenläufigkeit von Einlesen, Verarbeiten und
+Ausgeben}
+
+Bei dem gegebenen Problem könnte ganz strikt nach dem IPO (Input-Process-Output)
+oder EVA (Eingabe-Verarbeitung-Ausgabe) Prinzip gearbeitet werden,
+wobei jedoch nur genau ein Thread für das Liefern der Daten, also
+den Input zuständig ist. Hierfür könnte ein Interface bereitgestellt
+werden, welches einen Thread oder Prozess implementiert. Dieses Interface
+stellt dann eine default Methode bereit, die in einem Intervall von
+20 Hz immer wieder aus der zu implementierenden read Methode der Daten
+holt und weitergibt. Der Thread B wird dann, wie auch der Thread C,
+so lange laufen, wie noch Daten nicht verarbeitet wurden. Wenn Thread
+A also eine Datei bereitstellt, startet Thread B und berechnet das
+Ergebnis, welches dann vom Thread C geschrieben werden kann. Thread
+A, B und C können somit gleichzeitig ausgeführt werden, da die Verarbeitung
+unabhängig voneinander passiert. Für Thread B würde also ebenfalls
+ein Interface bereitgestellt werden, welches einen Thread implementiert
+und die Methode process mit den Parametern aus Thread A bereitstellen
+muss. Der Thread C sieht dann ebenfalls ein Interface vor, welches
+einen Thread implementiert und die Methode write bereitstellt. Falls
+Thread C alle Messdaten geschrieben hat, wird Thread A gestoppt und
+damit auch Thread B. Nachdem alle Threads gestoppt wurden, wird auch
+das Programm beendet.
+
+Die Klasse AKF beinhaltet einige Arrays, welche immer die Größe $N$
+haben werden und von denen eventuell nicht alle immer gebraucht werden.
+Laut Aufgabenstellung stellt der Lesethread (Thread A) alle 0,05 Sekunden
+einen neuen Datensatz bereit, was wahrscheinlich sinnvoller ist als
+\textquotedbl push\textquotedbl{} Methode zu implementieren. Des
+Weiteren habe ich das so verstanden, dass von allen Threads nur jeweils
+eine Instanz gleichzeitig laufen kann, was die Überschreibung und
+Wiederholung der Datensätze erklären würde, jedoch in einem Produktivsystem
+nicht allzu sinnvoll wäre, da ansonsten Datensätze verloren gehen.
+Der Thread B läuft also nur einmal und verarbeitet auch nur einen
+Datensatz gleichzeitig, bevor der nächste geholt oder gepusht wird.
+Eventuell wäre daher auch das Observer-Observable Pattern sinnvoll,
+da der Thread B informiert werden muss, falls Thread A Daten bereitstellt.
+Genau das Gleiche wäre dann natürlich auch für Thread B und C sinnvoll.
+
+Das Pattern könnte dann so abgewandelt werden, dass Thread A ein Observable
+implementiert. worin der Observer Thread B registriert ist und über
+die notify Methode den neuen Datensatz bekommt. Falls der Thread B
+allerdings noch arbeitet, wird das einfach ignoriert. Thread C wird
+denn selbst auch als Observer im Observable Thread B registriert und
+bekommt so die fertig verarbeiteten Daten. Als Abbruchbedingung könnte
+eventuell noch der Thread C als Obervable implementiert werden und
+Thread A als Observer registrieren, um alle bereits geschriebenen
+Dateinamen mitzuteilen. Weiterhin habe ich in dem UML Diagramm alles
+generisch mit dem Type T gelassen, da am besten ein Paar aus Dateinamen
+und AKF übergeben werden sollte, allerdings braucht Thread B zum Beispiel
+nicht die komplette Klassenstruktur, weshalb der generische Typ hier
+noch sinnvoll ist. Theoretisch braucht Thread C dann eben auch nur
+zwei Strings als Übergabe.
+
+\subsection{Einlesen und Initialisieren der Daten\label{subsec:Einlesen-und-Initialisieren}}
+
+Das Einlesen der Daten passiert über die read Methode in Thread A.
+Besonders große Schwierigkeiten gibt es hierbei nicht, da alle Zeilen
+mit einem ,,\#`` startend ignoriert werden können. Die weiteren
+Zeilen bezeichnen die Messwerte, welche mit ,,\textbackslash t``
+getrennt sind. Hierbei ist die erste Zahl der y-Wert, also die Intensität
+des Signals und die zweite Zahl der x-Wert, also die Position des
+Spiegels. Falls während des Einlesevorgangs eine Exception geschmissen
+wird, wird der Vorgang einfach abgebrochen und null zurückgegeben.
+Das habe ich so realisiert, da der ThreadA die Daten schnell lesen
+muss und keine lange Fehlerbehandlung machen kann, falls diese korrupt
+sind. Die Werte von x und y werden zuerst in Paare eingelesen, welche
+in einer Liste gespeichert werden. Laut Aufgabenstellung sind dies
+immer positive, ganzzahlige Werte. Diese Liste von Paaren wird dann
+in zwei Arrays, xStart und yStart, umgewandelt und mit dem Dateinamen
+in ein Data Objekt gegeben und von der Methode zurückgegeben. 
+
+\subsection{Ausgabe gemäß Aufgabenstellung\label{subsec:Ausgabe-gem=0000E4=0000DF-Aufgabenstellung}}
+
+Die Ausgabe der fertigen Autokorrelationsfunktion erledigt dann ThreadC.
+Hierfür habe ich eine Methode in der Klasse AKF geschrieben, welche
+einen formatierten String für die Ausgabe zusammenbaut und zurückgibt.
+Da in der Klasse der Wert für die Pulsbreite, den IndexL und den indexR
+gesetzt ist, ist die erste Zeile kein Problem. Die weiteren Zeilen
+werden dann mit den Arrays ,,xTransformiert``, ,,yNormiert`` und
+,,obereEinhuellende`` zusammengebaut. 
+
+Wenn der String fertig ist, wird das Ganze in eine Datei mit dem Namen
+,,out`` + ,,fileName`` aus der Klasse AKF geschrieben.
+
+\section{Objektorientierter Entwurf}
+
+\subsection{Framework}
+
+Das Paket Framework beinhaltet alle wichtigen Interfaces und eine
+abstrakte Klasse zur Lösung des gegebenen Problems. Somit wird die
+geforderte Austauschbarkeit des Threads A erreicht, man kann aber
+auch alle anderen Threads austauschen. 
+
+Das vorher genannte Observer-Observable-Pattern habe ich mit einem
+Interface ,,Observer`` und einer abstrakten Klasse ,,Observable``
+vorgegeben. Der ,,Observer`` ist generisch und muss die Methode
+,,void update(T t)`` bereitstellen, welche vom ,,Observable``
+aufgerufen werden kann. Ebenfalls generisch gestaltet sich die ,,Observable``
+Klasse, die eine Liste von ,,Observern`` hält. In diese Liste kann
+man über die Methode ,,public void registerObserver(Observer observer)``
+einen ,,Observer`` hinzufügen. Diese werden dann über die Methode
+,,public void notifyObservers(T t)`` über ein verändertes Objekt
+informiert. 
+
+Das Threading ist durch die drei Interfaces ,,ReadRunnable``, ,,WriteRunnable``
+und ,,ProcessRunnable`` implementiert, welche selbst das Interface
+,,Runnable`` erweitern. Der Lesethread soll durch das Interface
+,,ReadRunnable`` implementiert werden, welches die Methode ,,T
+read(Path pathToFile)`` bereitstellt und generisch ist. ,,ProcessRunnable``
+stellt das Interface für den Verarbeitungsthread dar und gibt die
+Methode ,,R process(P p)`` vor, wobei R der Typ des Ergebnisparameters
+ist und P der Type des Eingabeparameters. Schlussendlich wird der
+Schreibthread durch das Interface ,,WriteRunnable`` dargestellt,
+wobei man die Methode ,,boolean write(T t)`` implementieren muss,
+die einen generischen Parameter schreiben soll.
+
+\subsection{Problem}
+
+Problem beinhaltet alle Klassen zur (optimierten) Lösung des gegebenen
+Problems, welche unter anderem von der Klasse und den Interfaces aus
+,,Framework`` erben. 
+
+Die Klasse ,,Algorithms`` beinhaltet alle vier Algorithmen, welche
+über die Methode ,,public static AutoKorrelationsFunktion solve(Data
+data)`` ausgeführt werden können. Die einzelnen Algorithmen sind
+daher auch private, sodass Zugriffe von Außen nicht möglich sind.
+Als Input Parameter nimmt die Funktion ein Objekt der Klasse ,,Data``,
+welches als Record\footnote{\url{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html}}
+implementiert ist und den Namen der Datei, das Array der eingelesenen
+x-Werte und das Array der eingelesenen y-Werte beinhaltet. Diese Werte
+werden dann intern durch die Algorithmen zu einem neuen Objekt vom
+Typen ,,Auto\-Korrelations\-Funktion`` zusammengebaut. Dieser
+Typ ist ebenfalls als Record realisiert und hält den Dateinamen, die
+Pulsbreite, den indexL, den indexR, das double-Array der transformierten
+x-Werte, das double-Array der normierten y-Werte und das double-Array
+der Werte der oberen Einhüllenden.
+
+Die Klasse ,,ThreadA`` implementiert das Interface ,,Runnable<Data>``,
+erweitert die abstrakte Klasse ,,Observable< Pair<Data, Integer>
+>`` und stellt eben genau den Thread A aus der Aufgabenstellung dar.
+Als Konstruktor-Parameter wird der relative Pfad zum Ordner der Eingabedateien
+und der sleepTime Wert als long angegeben. Die Methode ,,public void
+run()`` des Runnable Interfaces wird so überschrieben, dass zuerst
+alle Pfade im Eingabeordner ausgelesen werden und dann eine Endlosschleife
+beginnt. In dieser Endlosschleife wird immer wieder durch die Pfade
+iteriert, die jeweilige Datei eingelesen und alle Observer mit einem
+Paar aus dem erstellten Data Objekt und der Anzahl der Daten im Ordner
+weitergegeben. Danach wartet der Thread so lange, wie es in sleeptime
+angegeben ist, laut Aufgabenstellung $0,05s$, wonach der Schleifendurchlauf
+weitergeht, oder von vorne beginnt. Die Methode zum Einlesen der Daten
+in das Data Objekt ist in \nameref{subsec:Einlesen-und-Initialisieren}
+beschrieben. 
+
+Klasse ,,ThreadB`` erweitert die abstrakte Klasse ,,Ob\-ser\-va\-ble\-<Auto\-Kor\-relations\LyXZeroWidthSpace Funktion>``,
+implementiert die Interfaces ,,Observer<Pair<Data, Integer>\textcompwordmark >``
+und ,,Process\-Runnable<Data, Auto\-Korrelations\-Funktion>``
+und stellt den Thread B der Aufgabenstellung dar. Der Konstruktor
+fordert ,,maxPoolSize`` und ,,maxQueueSize`` als Parameter und
+erstellt dadurch einen neuen ThreadPoolExecutor\footnote{\url{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ThreadPoolExecutor.html}}
+mit den gegebenen Parametern. Dieser Executor wird dann für das Master-Worker
+Pattern genutzt, indem die von ,,ThreadA`` eingelesenen Daten an
+verfügbare Worker zur Weiterbearbeitung verteilt werden. Falls kein
+Worker mehr zur Verfügung steht, wird die aktuelle Datei verworfen
+und die nächste eingelesene Datei bearbeitet, falls bis dahin wieder
+Worker frei sind. Sobald eine Datei fertig bearbeitet ist und das
+Objekt vom Typen ,,Auto\-Korrelations\-funktion`` erstellt wurde,
+werden wieder alle Observer mit dem neuen Objekt informiert.
+
+,,ThreadC`` implementiert die Interfaces ,,Observer<Auto\-Korrelations\-Funktion>``
+und ,,WriteRunnable<Auto\-Korrelations\-Funktion>`` und stellt
+den Thread B der Aufgabenstellung dar. Der Konstruktor nimmt hier
+nur den Pfad des Ausgabeordners. In der Methode ,,public void update(Auto\-Korrelations\-Funktion
+akf)`` wird für jedes neu geschickte Objekt ein Runnable erstellt,
+welches mit ,,CompletableFuture.supplyAsync(()-> this.write(akf))``
+ausgeführt und in ein HashSet gepackt wird. Somit kann jede Schreiboperation
+asynchron ausgeführt werden. Falls der Thread B dann ein null Objekt
+im Update übergibt, so wird auf jedem Worker ,,join`` aufgerufen,
+also auf die Ausführung gewartet und danach das Programm beendet.
+Die Methode ,,public boolean write(Auto\-Korrelations\-Funktion
+akf)`` testet, ob der Ordner existiert, erstellt einen neuen falls
+nicht und testet, ob die Ausgabedatei existiert. Falls ja wird das
+in den Logger geschrieben und die Datei wird mit dem Inhalt der Funktion
+,,public String getOuputString()`` in Auto\-Korrelations\-Funktion
+überschrieben, welche in \nameref{subsec:Ausgabe-gem=0000E4=0000DF-Aufgabenstellung}
+beschrieben wurde.
+
+\subsection{ProblemSimple}
+
+In ,,problemsimple`` findet sich eine alternative Implementierung
+des gegebenen Problems wieder, es wurden allerdings nur die Klassen
+,,ThreadB`` und ,,ThreadC`` neu geschrieben, alle anderen Klassen
+werden weiter benutzt. Wie der Name schon sagt, wird hier naiv und
+mit einer einfachen Fehlerbehandlung an das Problem herangegangen.
+Während dieser Ausführung existieren nur genau diese drei Threads
+A,B und C, wobei das Master-Worker Pattern nicht implementiert ist. 
+
+,,ThreadB`` erweitert nun die abstrakte Klasse ,,Observable<Pair<Auto\-korrelations\-funktion,
+Integer>\textcompwordmark >`` und implementiert die Interfaces ,,Observer
+<Pair<Data, Integer> >`` und ,,ProcessRunnable<Pair<Data, Integer>,
+Auto\-Korrelations\-Funktion>``. Dies ist nötig, da nun die Anzahl
+der zu bearbeitenden Elemente an ThreadC weitergeschickt werden kann.
+
+,,ThreadC`` implementiert nun die zwei Interfaces ,,Observer<Pair<Auto\-Korrelations\-Funktion,
+Integer>\textcompwordmark >`` und ,,WriteRunnable<Auto\-Korrelations\-Funktion>``,
+um die Anzahl der Daten geschickt bekommen zu können. Die Methode
+,,public boolean write(Auto\-Korrelations\-Funktion akf)`` ist
+gleichgeblieben.
+
+\subsection{Utils}
+
+Das Paket ,,utils`` stellt zwei Klassen, ,,CmdLineParser`` und
+,,Pair``. Der ,,CmdLineParser`` bekommt als Konstruktorparameter
+das String-Array der Kommandozeilenargumente des Programmaufrufs übergeben
+und versucht diese auszulesen und zu setzten. Mit den Getter Methoden
+können diese dann z. B. von der Main-Klasse abgerufen werden und in
+die Threads übergeben werden. Des Weiteren existiert noch das Record
+,,Pair``, welches ein nicht veränderliches generisches Objekt von
+zwei Typen K und V darstellt.
+
+\section{Änderungen zur schriftlichen Ausarbeitung}
+
+\subsection{Umbenennungen}
+
+Es sind fast alle der Benennungen so wie in der schriftlichen Ausarbeitung
+geblieben, es wurden nur alle Benennungen an das Deutsche angepasst.
+Die Java-spezifischen Benennungen wie ,,z. B. getAttribut oder setAttribut``
+sind geblieben. Zudem wurden natürlich noch die Umlaute umschrieben.
+
+\subsection{Modifikation der Klassenstruktur}
+
+In der schriftlichen Ausarbeitung wurden noch keine Paketnamen angegeben.
+Wie bereits genannt, existieren die Pakete ,,framework``, ,,problem``
+und ,,utils``. Des Weiteren wollte ich jede Thread Klasse sowohl
+von Observable, Observer, als auch einem der drei Threadinterfaces
+erben lassen. Hier kommt aber das Diamond-Problem zum tragen und Java
+verbietet daher das erben mehrerer Klassen. Ich habe mich also für
+mehrere Interfaces entschieden und benutze jetzt das ,,Runnable``
+Interface anstatt die Thread Klasse. Ansonsten ist die Klassenstruktur
+im Groben gleich geblieben.
+
+\subsection{Modifikation der Logik}
+
+Wie schon gesagt werden mittlerweile Runnables\footnote{\url{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html}}
+anstatt Threads\footnote{\url{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Thread.State.html}}
+genutzt. Dies hat den Vorteil, dass nun die Klassen Thread A, B und
+C von mehreren Interfaces wie Runnable erben können und zusätzlich
+die abstrakte Klasse ,,Observable`` extenden können. Jede Threadklasse
+überschreibt also nur die ,,run()`` Methode und benutzt die Methoden
+des Observer-Observable-Patterns. Eine Weitere Modifikation besteht
+darin, dass nun der Thread A den Thread B als Observer registriert
+hat und der Thread B den Thread C als Observer. Das heißt, dass die
+Threads nun in einer Reihe verkettet sind und nichtmehr wie bei der
+schriftlichen Ausarbeitung in einem Ring. 
+
+Es wurden des Weiteren zwei mögliche Implementierungen dargestellt,
+einmal mit dem Master-Worker Pattern und einmal ohne. Die Implementierung
+des Master-Worker Patterns befindet sich im Paket ,,problem``, während
+die einfache Implementierung im Paket ,,problemsimple`` zu finden
+ist. Beide Implementierungen nutzen die gleiche Klasse ThreadA, unterscheiden
+sich aber in den Klassen ThreadB und ThreadC und vorallem auch in
+der Abbruchbedingung des Programms. 
+
+In ,,problem`` wird das ganze Programm erst von Thread C beendet,
+falls dieser in der ,,update(T t)`` Methode null zurück bekommt,
+da nur der ThreadB weiß, wann keine Daten mehr eingelesen, bzw. verarbeitet
+werden. Sowohl ThreadB, als auch ThreadC implementieren das Master-Worker
+Pattern und bei Thread B kann zusätzlich angegeben werden, wie groß
+der Threadpool sein soll und wie viele Objekte in die Warteschlange
+gepackt werden dürfen. ThreadC schreibt einfach alle gepushten Daten
+asynchron, da davon ausgegangen wird, dass die Verarbeitung länger
+dauert, als das Schreiben. 
+
+In ,,problemsimple`` wird nur mit genau diesen drei Threads gearbeitet
+und keinen Weiteren. Um dies zu realisieren, gibt es in beiden Klassen
+nun eine Variable ,,processing`` oder ,,writing``, welche beide
+vom Typen AtomicBoolean\footnote{\url{https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/atomic/AtomicBoolean.html}}
+sind, da diese Variablen threadsafe sind. Falls nun der ThreadA zu
+schnell Daten pusht, sodass ThreadB in einem bearbeitenden Zustand
+ist, so überspringt ThreadB einfach diese Datei und bearbeitet die
+nächste, sobald er fertig ist. ThreadC macht das ähnlich, woraus auch
+resultiert, dass ThreadC die Abbruchbedingung in diesem Fall verwalten
+muss. Die Anzahl der Input Dateien wird also von ThreadA über ThreadB
+nach ThreadC geschleußt und in ThreadC wird dann immer geprüft, ob
+die aktuelle Datei schon geschrieben wurde und ob schon alle Daten
+geschrieben wurden. Ist dies der Fall, wird das Programm beendet.
+
+\section{Allgemeines zu Multithreading in Java}
+
+In Java kann Multithreading auf verschiedene Arten realisiert werden.
+Das etwas ältere, aber duraus noch genutzte Konzept besteht darin,
+die Thread Klasse zu erweitern und die Methoden, vorallem die ,,run()``
+Methode, zu überschreiben. Der Vorteil hierbei ist, dass von Haus
+aus Basisfunktionalitäten, wie ,,yield()``, oder ,,sleep()`` bereitgestellt
+werden. Eine weitere Methode ist es, das Interface ,,Runnable``
+zu implementieren, was den Vorteil mit sich bringt, dass man mehrere
+Interfaces implementieren kann, aber nur eine Klasse erweitern kann.
+,,Runnable`` wird auch von der Klasse ,,Thread`` implementiert,
+stellt aber nur Basisfunktionalitäten bereit, wie die ,,run()``
+Methode. Ein Objekt vom Typen ,,Runnable`` kann aber dafür genutzt
+werden dieses von mehreren Threads ausführen zu lassen. Das Ausführen
+der beiden Objekte verhält sich auch unterschiedlich. Ein Objekt des
+Types ,,Thread`` kann einfach mit ,,new Thread`` erstellt werden
+und dann mit ,,Thread.start()`` gestartet werden, wodurch jedes
+Mal eine neue Instanz eines Thread Objektes erstellt wird. ,,Runnables``
+hingegen werden entweder einem vorher erstellten ,,new Thread()``
+Objekt als Parameter mitgegeben und dann gestartet, oder aber einem
+Executor Service übergeben, welcher entweder selbst erstellt und verwaltet
+werden kann, oder einem bereits vorgegebenen Service zugeordnet werden
+kann. Vorgegebene Services sind zum Beispiel der ,,newCachedThreadPool()``,
+welcher neue Threads erstellt, solange diese gebraucht werden und
+alte wieder nutzt, oder der ,,newFixedThreadPool(int nThreads)``,
+welcher eine fixe Anzahl an Threads nutzt, um die Aufgaben auszuführen
+und ansonsten eine Queue benutzt, in welcher die Aufgaben gespeichert
+und dann nach und nach abgearbeitet werden. Je nach Programm oder
+Problemstellung kann man also diese Services nutzen. In meinem Programm
+nutze ich in der ,,Main`` zur Ausführung der selbstgeschriebenen
+Thread Klassen, welche das Interface Runnable implementieren, einen
+newFixedThreadPool mit 3 Threads. Diese Runnables werden dann von
+diesem Threadpool verwaltet. Falls man nun nicht nur wie in dieser
+Aufgabenstellung laufende Threads haben möchte, sondern auch ein Ergebnis
+aus diesen Threads erwartet, mit dem dann weitergemacht werden soll,
+kann man die sogenannten ,,CompletableFutures`` nutzen, welche über
+den Funktionsaufruf ,,CompletableFuture.supplyAsync(<Runnable>)``
+erstellt und asynchron ausgeführt werden. Mit dem ,,CompletableFuture``
+Objekt kann dann mit Methoden wie z. B. ,,thenApply()`` weitergearbeitet
+werden. Diese werden in dem ThreadC der Methode mit der Implementierung
+des Master-Worker Patterns genutzt. Um das Ganze allerdings etwas
+lebensechter zu machen habe ich in ThreadB einen eigenen ThreadPoolExecutor
+erstellt, welcher die gewünschte Anzahl an Threads und die gewünschte
+Größe der Warteschlange setzt. Somit kann man gut simulieren, was
+passiert, wenn keine Worker mehr verfügbar sind und die Queue zudem
+auch voll ist. 
+
+\section{Auswertung und Interpretation}
+
+\section{Benutzeranleitung}
+
+Generell befindet sich die Gesamtdokumentation der Klassen und Methoden
+als javadoc im ,,docs`` Ordner. 
+
+\subsection{Ordnerstruktur}
+
+An sich sollten die fertig gebaute ,,.jar`` Datei zusammen mit dem
+ausführbaren Python Skript in einem Ordner liegen. Die Testbeispiele
+sollten ebenfalls auf der gleichen Ebene in einem Ordner vorhanden
+sein, wobei der Ordnername beim Programmstart oder in dem Skript angegeben
+werden kann. Der Ordner für alle Ausgabe Dateien wird dann ebenso
+in dieser Ebene erstellt. Die Ausgabedateien werden pro Eingabedatei
+jeweils in eine Datei namens ,,out<Name der Eingabedatei>.txt``
+im output Ordner gespeichert, welcher entweder über die Programmzeile
+vorher angegeben wird, oder einfach ,,output`` heißt.
+
+\subsection{Benötigte Programme}
+
+Für die Ausführung der ,,.jar`` Datei benötigt der Zielrechner zwingend
+eine Installation des Open JDK 17\footnote{\url{https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html}},
+da das Java-Sprachlevel auf 17 gesetzt wurde. Um das Python Skript
+auszuführen wird eine Python Installation gebraucht, wobei ich die
+Version 3.10\footnote{\url{https://www.python.org/downloads/release/python-3100/}}
+benutzt habe. Um das Projekt zu bauen, wird Gradle\footnote{\url{https://gradle.org/}}
+genutzt.
+
+\subsection{Ausführen als Kommandozeilenprogramm}
+
+Es gibt zwei Wege das Programm auszuführen, einmal direkt über Java
+und einmal über das Python Skript, welches intern die ,,.jar`` Datei
+aufruft.
+
+Das Programm nimmt Argumente entgegen, welche sind:
+\begin{itemize}
+\item -inputfolder \{,,Name des Ordners mit den Eingabedateien``\}, default:
+,,input``
+\item -outputfolder \{,,Name des Ordners, wohin die Ausgabedateien geschrieben
+werden``\}, default: ,,output``
+\item -log \{,,true`` oder ,,false`` oder ,,file``\}, default: ,,file``
+\item -loglvl \{,,warning`` oder ,,info``\}, default: ,,all``
+\item -poolsize \{,,Anzahl der gewünschten Threadpools``\}, default: ,,1``
+\item -sleep \{,,Zeit in Millisekunden mit welcher der ThreadA Daten pusht``\},
+default: ,,50``
+\item -queuesize \{,,Größe der Schlage der Tasks``\}, default: ,,1``
+\item -mw \{,,true`` oder ,,false``\}, default: ,,false``
+\end{itemize}
+Man kann jede dieser Optionen setzen, muss das aber nicht tun. Falls
+eine Option nicht gesetzt wird, wird der default Wert angenommen.
+
+Die Namen der Ordner werden immer relativ zum derzeitigen Ordnerpfad
+ausgewertet. Die Logoption beschreibt das Verhalten des Loggers, beziehungsweise
+wohin die Logs geschrieben werden. Der LogLevel setzt das Level der
+geloggten Nachrichten, sprich welche Nachrichten tatsächlich geloggt
+werden. Poolsize gibt an, wie groß die Anzahl der gewünschten Threads
+sein soll, die der ThreadPool von Thread B maximal bereitstellt. Sleep
+gibt die Zeit in Millisekunden an, die der ThreadA wartet, nachdem
+dieser Daten gepusht hat und Queuesize beschreibt die Größe der Schlange
+des Services des ThreadsB. Die Option ,,-mw`` gibt an, ob das Programm
+die Thread Klassen mit dem intern implementierten Master-Worker Pattern
+nutzen soll, oder die Threads ohne das Master-Worker Pattern.
+
+\subsubsection{Ausführen der JAR}
+
+Um die ,,.jar`` ausführen zu können, muss zumindest unter Windows
+der Pfad zum JDK 17 in den Umgebungsvariablen gesetzt sein. Mit einem
+Doppelklick auf die Datei wird der Code mit Standardargumenten ausgeführt.
+Ansonsten könnte der Benutzer auch über die Kommandozeile gehen und
+die Programmargumente selbst setzen. Das würde dann beispielsweise
+so aussehen: 
+
+\begin{lstlisting}
+	java -jar IHK_Abschlusspruefung.jar -inputfolder input -outputfolder output -log file -loglvl 	warning -poolsize 1 -sleep 50 -queuesize 1
+\end{lstlisting}
+
+\subsubsection{Ausführen des Python-Skripts}
+
+Der Benutzer kann zusätzlich auch noch das Python-Skript ,,execute\_gro\_pro.py``
+ausführen, um das Programm mit den Standardargumenten zu starten.
+Hierfür ist eine Installation von Python notwendig, sowie die Verlinkung
+zur Umgebungsvariablen. Der Kommandozeilencode sieht dann beispielsweise
+so aus:
+
+\begin{lstlisting}
+	python execute_gro_pro.py
+\end{lstlisting}
+
+\section{Zusammenfassung und Ausblick}
+
+\pagebreak{}
+
+\appendix
+
+\section{UML-Diagramme}
+
+\subsection{Klassendiagramme}
+
+\subsubsection{Main}
+
+\begin{figure}[H]
+\caption{Main\label{fig:Main}}
+\includegraphics[width=1\textwidth]{Main_class}
+
+\end{figure}
+\begin{figure}[H]
+\begin{centering}
+\caption{com.de.cae\label{fig:com.de.cae}}
+\includegraphics[angle=90,height=0.8\textheight]{package_com_cae_de}
+\par\end{centering}
+\end{figure}
+
+
+\subsubsection{Pakete}
+
+\begin{figure}[H]
+\caption{framework\label{fig:framework}}
+\includegraphics[width=1\textwidth]{package_framework}
+
+\end{figure}
+\begin{figure}[H]
+\caption{problem\label{fig:problem}}
+\includegraphics[width=1\textwidth]{package_problem}
+
+\end{figure}
+\begin{figure}[H]
+
+\caption{problemsimple\label{fig:problemsimple}}
+
+\begin{centering}
+\includegraphics[width=1\textwidth]{package_problemsimple}
+\par\end{centering}
+\end{figure}
+\begin{figure}[H]
+\caption{utils\label{fig:utils}}
+\includegraphics[width=1\textwidth]{package_utils}
+
+\end{figure}
+
+
+\subsubsection{Klassen im Paket \quotedblbase framework\textquotedblleft}
+
+\begin{figure}[H]
+\caption{Observable\label{fig:Observable}}
+\includegraphics[width=1\textwidth]{Observable_class}
+
+\end{figure}
+\begin{figure}[H]
+
+\caption{Observer\label{fig:Observer}}
+\includegraphics[width=1\textwidth]{Observer_class}
+
+\end{figure}
+\begin{figure}[H]
+\caption{ProcessRunnable\label{fig:ProcessRunnable}}
+\includegraphics[width=1\textwidth]{ProcessRunnable_class}
+
+\end{figure}
+\begin{figure}[H]
+
+\caption{ReadRunnable\label{fig:ReadRunnable}}
+\includegraphics[width=1\textwidth]{ReadRunnable_class}
+
+\end{figure}
+\begin{figure}[H]
+\caption{WriteRunnable\label{fig:WriteRunnable}}
+\includegraphics[width=1\textwidth]{WriteRunnable_class}
+
+\end{figure}
+
+
+\subsubsection{Klassen im Paket \quotedblbase problem\textquotedblleft}
+
+\begin{figure}[H]
+\caption{Algorithms\label{fig:Algorithms}}
+\includegraphics[width=1\textwidth]{Algorithms_class}
+
+\end{figure}
+\begin{figure}[H]
+
+\caption{AutoKorrelationsFunktion\label{fig:AutoKorrelationsFunktion}}
+\includegraphics[width=1\textwidth]{AutoKorrelationsFunktion_class}
+
+\end{figure}
+\begin{figure}[H]
+
+\caption{Data\label{fig:Data}}
+\includegraphics[width=1\textwidth]{Data_class}
+
+\end{figure}
+\begin{figure}[H]
+\caption{ThreadA\label{fig:ThreadA}}
+\includegraphics[width=1\textwidth]{ThreadA_class}
+
+\end{figure}
+\begin{figure}[H]
+
+\caption{ThreadB\label{fig:ThreadB}}
+\includegraphics[width=1\textwidth]{ThreadB_class}
+
+\end{figure}
+\begin{figure}[H]
+
+\caption{ThreadC\label{fig:ThreadC}}
+\includegraphics[width=1\textwidth]{ThreadC_class}
+
+\end{figure}
+
+
+\subsubsection{Klassen im Paket \quotedblbase problemsimple\textquotedblleft}
+
+\begin{figure}[H]
+\caption{ThreadB\_simple\label{fig:ThreadB_simple}}
+
+\begin{centering}
+\includegraphics[width=1\textwidth]{ThreadBsimple_class}
+\par\end{centering}
+\end{figure}
+\begin{figure}[H]
+
+\caption{ThreadC\_simple\label{fig:ThreadC_simple}}
+
+\begin{centering}
+\includegraphics[width=1\textwidth]{ThreadC_simple}
+\par\end{centering}
+\end{figure}
+
+
+\subsubsection{Klassen im Paket \quotedblbase utils\textquotedblleft}
+
+\begin{figure}[H]
+\caption{CmdLineParser\label{fig:CmdLineParser}}
+\includegraphics[width=1\textwidth]{CmdLineParser_class}
+
+\end{figure}
+\begin{figure}[H]
+\begin{centering}
+\caption{Pair\label{fig:Pair}}
+\includegraphics[width=1\textwidth]{Pair_class}
+\par\end{centering}
+\end{figure}
+
+
+\subsection{Nassi-Shneidermann Diagramme}
+
+\begin{figure}[H]
+\caption{Algorithmus 1\label{fig:Algorithmus-1}}
+
+\begin{centering}
+\includegraphics{Algorithmus1}
+\par\end{centering}
+\end{figure}
+\begin{figure}[H]
+\caption{Algorithmus 2}
+
+\begin{centering}
+\includegraphics[height=1\textheight]{Algorithmus2}
+\par\end{centering}
+\end{figure}
+
+
+\subsection{Sequenzdiagramme}
+
+\pagebreak{}
+
+\section{Eigenhändigkeitserklärung}
+
+\bigskip{}
+
+Ich erkläre verbindlich, dass das vorliegende Prüfprodukt von mir
+selbständig erstellt wurde. Die als Arbeitshilfe genutzten Unterlagen
+sind in der Arbeit vollständig aufgeführt. Ich versichere, dass der
+vorgelegte Ausdruck mit dem Inhalt der von mir erstellten digitalen
+Version identisch ist. Weder ganz noch in Teilen wurde die Arbeit
+bereits als Prüfungsleistung vorgelegt. Mir ist bewusst, dass jedes
+Zuwiderhandeln als Täuschungsversuch zu gelten hat, der die Anerkennung
+des Prüfprodukts als Prüfungsleistung ausschließt.
+
+\vfill{}
+
+\begin{tabular}{c}
+Aachen, der{ 13. Mai 2022}\tabularnewline
+\hline 
+Ort, Datum\tabularnewline
+\end{tabular}\hfill{}%
+\begin{tabular}{c}
+\includegraphics[scale=0.5]{eingefügt1}\tabularnewline
+\hline 
+Sven Bergmann\tabularnewline
+\end{tabular}
+\end{document}
