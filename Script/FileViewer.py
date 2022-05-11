@@ -58,7 +58,7 @@ class FileViewer():
             axXY.relim()
             axXY.autoscale_view(True, True, True)
 
-            axXY.set_title("FWHM = " + str(fwhm))
+            axXY.set_title("FWHM = " + str(fwhm) + fileName)
 
             if not plt.fignum_exists(fignum):
                 break

@@ -1548,8 +1548,8 @@ run()
  Methode und benutzt die Methoden des Observer-Observable-Patterns.
  Eine Weitere Modifikation besteht darin, dass nun der Thread A den Thread
  B als Observer registriert hat und der Thread B den Thread C als Observer.
- Das heißt, dass die Threads nun in einer Reihe verkettet sind und nichtmehr
- wie bei der schriftlichen Ausarbeitung in einem Ring.
+ Das heißt, dass die Threads nun in einer Reihe verkettet sind und nicht
+ mehr wie bei der schriftlichen Ausarbeitung in einem Ring.
  
 \end_layout
 
@@ -1574,8 +1574,8 @@ problemsimple
 
  zu finden ist.
  Beide Implementierungen nutzen die gleiche Klasse ThreadA, unterscheiden
- sich aber in den Klassen ThreadB und ThreadC und vorallem auch in der Abbruchbe
-dingung des Programms.
+ sich aber in den Klassen ThreadB und ThreadC und vor allem auch in der
+ Abbruchbedingung des Programms.
  
 \end_layout
 
@@ -1662,7 +1662,7 @@ nden Zustand ist, so überspringt ThreadB einfach diese Datei und bearbeitet
  ThreadC macht das ähnlich, woraus auch resultiert, dass ThreadC die Abbruchbedi
 ngung in diesem Fall verwalten muss.
  Die Anzahl der Input Dateien wird also von ThreadA über ThreadB nach ThreadC
- geschleußt und in ThreadC wird dann immer geprüft, ob die aktuelle Datei
+ geschleust und in ThreadC wird dann immer geprüft, ob die aktuelle Datei
  schon geschrieben wurde und ob schon alle Daten geschrieben wurden.
  Ist dies der Fall, wird das Programm beendet.
 \end_layout
@@ -1673,8 +1673,8 @@ Allgemeines zu Multithreading in Java
 
 \begin_layout Standard
 In Java kann Multithreading auf verschiedene Arten realisiert werden.
- Das etwas ältere, aber duraus noch genutzte Konzept besteht darin, die
- Thread Klasse zu erweitern und die Methoden, vorallem die 
+ Das etwas ältere, aber durchaus noch genutzte Konzept besteht darin, die
+ Thread Klasse zu erweitern und die Methoden, vor allem die 
 \begin_inset Quotes gld
 \end_inset
 
@@ -1746,7 +1746,7 @@ Runnable
  kann aber dafür genutzt werden dieses von mehreren Threads ausführen zu
  lassen.
  Das Ausführen der beiden Objekte verhält sich auch unterschiedlich.
- Ein Objekt des Types 
+ Ein Objekt des Typs 
 \begin_inset Quotes gld
 \end_inset
 
@@ -1872,7 +1872,62 @@ er Patterns genutzt.
 \end_layout
 
 \begin_layout Section
-Auswertung und Interpretation
+Auswertung, Interpretation und Fehlererkennung
+\end_layout
+
+\begin_layout Standard
+Da keine wirklichen Prüfdaten gegeben waren, gegen die man die Algorithmen
+ hätte testen können und zudem jeder Algorithmus eine andere Bedingung hatte,
+ was mit dem Index passiert, falls 
+\begin_inset Formula $k<\tau$
+\end_inset
+
+ oder 
+\begin_inset Formula $k>N-1-\tau$
+\end_inset
+
+, war die Auswertung und vor allem auch die Fehlerbewertung nur bedingt
+ sinnvoll.
+ Es konnte also anhand der resultierenden Bilder ungefähr geprüft werden,
+ ob die Funktion, bzw.
+ die Datenpunkte ähnlich zueinander sind.
+ In diesem Fall sind die resultierenden Bilder ähnlich zu den gegebenen.
+ Des Weiteren war in der Problembeschreibung gegeben, dass die Messdaten
+ immer von der Länge 
+\begin_inset Formula $N$
+\end_inset
+
+ sind, jedoch wurde 
+\begin_inset Formula $N$
+\end_inset
+
+ nicht explizit angegeben.
+ In einem Live System würde 
+\begin_inset Formula $N$
+\end_inset
+
+ feststehen und es könnte direkt auf Korrektheit geprüft werden.
+ Dies wird hier nicht gemacht, da einfach angenommen wird, das die eingelesenen
+ Messdaten die gleiche Länge haben.
+ Wenn ein Ausreißer in den Messdaten vorhanden ist, so wird dies auch vom
+ Algorithmus nicht überprüft, da kein Referenzrahmen existiert oder gegeben
+ ist, wodurch man die Messwerte auf Korrektheit prüfen könnte.
+ Vielmehr ist es der Fall, dass die Kurve durch nur einen Ausreißer mit
+ einem Unterschied von 2 Stellen, egal ob bei den x-, oder y-Werten, sich
+ sehr verzerrt und überhaupt nicht mehr der ursprünglichen Kurve entspricht.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -2354,6 +2409,19 @@ end{lstlisting}
 
 \begin_layout Section
 Zusammenfassung und Ausblick
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+TODO
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3376,13 +3444,485 @@ Algorithmus 2
 \end_inset
 
 
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Algorithmus 3
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Algorithmus-3"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Algorithmus3.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Algorithmus 4
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Algorithmus-4"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Algorithmus4.svg
+	height 100theight%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Subsection
 Sequenzdiagramme
 \end_layout
 
+\begin_layout Section
+Bilder der resultierenden Funktionen
+\end_layout
+
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out0
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out0"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename out0.png
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out1
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename out1.png
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out2
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename out2.png
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out3
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out3"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename out3.png
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out4
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out4"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename out4.png
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out5
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out5"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename out5.png
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out6
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out6"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename out6.png
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out7
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out7"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename out7.png
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out8
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out8"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename out8.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out9
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out9"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename out9.png
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
