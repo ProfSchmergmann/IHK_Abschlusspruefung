@@ -21,15 +21,26 @@ public class Main {
 
     var threadA =
         new ThreadA(Path.of(cmdLineParser.getInputFolder()), cmdLineParser.getSleepTime());
-    var threadB = new ThreadB(cmdLineParser.getThreadPoolSize(), cmdLineParser.getQueueSize());
-    var threadC = new ThreadC(Path.of(cmdLineParser.getOutputFolder()));
-
-    threadA.registerObserver(threadB);
-    threadB.registerObserver(threadC);
-
     var executorService = Executors.newFixedThreadPool(3);
-    executorService.execute(threadA);
-    executorService.execute(threadB);
-    executorService.execute(threadC);
+
+    if (cmdLineParser.isMasterWorker()) {
+      var threadB = new ThreadB(cmdLineParser.getThreadPoolSize(), cmdLineParser.getQueueSize());
+      var threadC = new ThreadC(Path.of(cmdLineParser.getOutputFolder()));
+      threadA.registerObserver(threadB);
+      threadB.registerObserver(threadC);
+
+      executorService.execute(threadA);
+      executorService.execute(threadB);
+      executorService.execute(threadC);
+    } else {
+      var threadB = new com.cae.de.problemsimple.ThreadB();
+      var threadC = new com.cae.de.problemsimple.ThreadC(Path.of(cmdLineParser.getOutputFolder()));
+      threadA.registerObserver(threadB);
+      threadB.registerObserver(threadC);
+
+      executorService.execute(threadA);
+      executorService.execute(threadB);
+      executorService.execute(threadC);
+    }
   }
 }

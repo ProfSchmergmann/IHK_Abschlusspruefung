@@ -1317,16 +1317,21 @@ utils
 \end_inset
 
 .
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-todo
-\end_layout
-
+ Des Weiteren wollte ich jede Thread Klasse sowohl von Observable, Observer,
+ als auch einem der drei Threadinterfaces erben lassen.
+ Hier kommt aber das Diamond-Problem zum tragen und Java verbietet daher
+ das erben mehrerer Klassen.
+ Ich habe mich also für mehrere Interfaces entschieden und benutze jetzt
+ das 
+\begin_inset Quotes gld
 \end_inset
 
+Runnable
+\begin_inset Quotes grd
+\end_inset
 
+ Interface anstatt die Thread Klasse.
+ Ansonsten ist die Klassenstruktur im Groben gleich geblieben.
 \end_layout
 
 \begin_layout Subsection
@@ -1334,16 +1339,94 @@ Modifikation der Logik
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
+Wie schon gesagt werden mittlerweile Runnables
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
 status open
 
 \begin_layout Plain Layout
-todo
+
+https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+ anstatt Threads
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Thread.State.h
+tml
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ genutzt.
+ Dies hat den Vorteil, dass nun die Klassen Thread A, B und C von mehreren
+ Interfaces wie Runnable erben können und zusätzlich die abstrakte Klasse
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Observable
+\begin_inset Quotes grd
+\end_inset
+
+ extenden können.
+ Jede Threadklasse überschreibt also nur die 
+\begin_inset Quotes gld
+\end_inset
+
+run()
+\begin_inset Quotes grd
+\end_inset
+
+ Methode und benutzt die Methoden des Observer-Observable-Patterns.
+ Eine Weitere Modifikation besteht darin, dass nun der Thread A den Thread
+ B als Observer registriert hat und der Thread B den Thread C als Observer.
+ Das heißt, dass die Threads nun in einer Reihe verkettet sind und nichtmehr
+ wie bei der schriftlichen Ausarbeitung in einem Ring.
+ Weiterhin wird das ganze Programm erst von Thread C beendet, falls dieser
+ in der 
+\begin_inset Quotes gld
+\end_inset
+
+update(T t)
+\begin_inset Quotes grd
+\end_inset
+
+ Methode null zurück bekommt, da nur der Thread B weiß, wann keine Daten
+ mehr eingelesen, bzw.
+ verarbeitet werden.
+ Sowohl Thread B, als auch Thread C implementieren das Master-Worker Pattern
+ und bei Thread B kann zusätzlich angegeben werden, wie groß der Threadpool
+ sein soll und wieviele Objekte in die Warteschlange gepackt werden dürfen.
+ Thread C schreibt einfach alle gepushten Daten asynchron, da ich davon
+ ausgehe, dass die Verarbeitung länger dauert, als das Schreiben.
+ 
+\end_layout
+
+\begin_layout Subsection
+Allgemeines zu Multithreading in Java
 \end_layout
 
 \begin_layout Section
@@ -1983,6 +2066,48 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+problemsimple
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:problemsimple"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename package_problemsimple.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
 utils
 \begin_inset CommandInset label
 LatexCommand label
@@ -2491,6 +2616,109 @@ Klassen im Paket
 \begin_inset Quotes gld
 \end_inset
 
+problemsimple
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+ThreadB_simple
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ThreadB_simple"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ThreadBsimple_class.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+ThreadC_simple
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ThreadC_simple"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ThreadC_simple.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Klassen im Paket 
+\begin_inset Quotes gld
+\end_inset
+
 utils
 \begin_inset Quotes grd
 \end_inset
@@ -2669,7 +2897,7 @@ name "fig:main-Methode"
 
 \begin_inset Graphics
 	filename Main_main.svg
-	height 70theight%
+	width 100text%
 
 \end_inset
 
@@ -2732,11 +2960,7 @@ name "fig:runThreadA"
 \begin_inset Float figure
 wide false
 sideways false
-status open
-
-\begin_layout Plain Layout
-
-\end_layout
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -2758,6 +2982,66 @@ name "fig:updateThreadC"
 
 
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ThreadC_update.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset Quotes gld
+\end_inset
+
+write
+\begin_inset Quotes grd
+\end_inset
+
+ Methode der Klasse ThreadC
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:writeThreadC"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename ThreadC_write.svg
+	width 100text%
 
 \end_inset
 

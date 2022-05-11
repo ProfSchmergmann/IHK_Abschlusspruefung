@@ -18,6 +18,7 @@ public class CmdLineParser {
 	private static final String THREAD_POOL_SIZE_STRING = "-poolsize";
 	private static final String QUEUE_SIZE_STRING = "-queuesize";
 	private static final String SLEEP_TIME_STRING = "-sleep";
+	private static final String MASTER_WORKER_STRING = "-mw";
 	private static final Logger ROOT_LOGGER = Logger.getLogger("");
 	private static final Logger LOGGER = Logger.getLogger(CmdLineParser.class.getName());
 	private long sleepTime;
@@ -25,6 +26,8 @@ public class CmdLineParser {
 	private int queueSize;
 	private String inputFolder;
 	private String outputFolder;
+	private boolean masterWorker;
+
 	/**
 	 * Konstruktor, welcher als Parameter das args-Array der main Methode übergeben bekommen soll.
 	 * Hier findet dann auch schon die Analyse statt und auch das Setzen des Loggers.
@@ -37,6 +40,7 @@ public class CmdLineParser {
 		this.threadPoolSize = 1;
 		this.sleepTime = 50;
 		this.queueSize = 1;
+		this.masterWorker = false;
 		var logOption = LogOption.TRUE;
 		for (var i = 0; i < args.length; i++) {
 			if (i + 1 < args.length) {
@@ -62,6 +66,7 @@ public class CmdLineParser {
 					case THREAD_POOL_SIZE_STRING -> this.threadPoolSize = Integer.parseInt(args[++i]);
 					case SLEEP_TIME_STRING -> this.sleepTime = Long.parseLong(args[++i]);
 					case QUEUE_SIZE_STRING -> this.queueSize = Integer.parseInt(args[++i]);
+					case MASTER_WORKER_STRING -> this.masterWorker = Boolean.parseBoolean(args[++i]);
 				}
 			}
 		}
@@ -125,6 +130,14 @@ public class CmdLineParser {
 	 */
 	public int getThreadPoolSize() {
 		return this.threadPoolSize;
+	}
+
+	/**
+	 * Getter für die Master-Worker-Pattern Option
+	 * @return true, falls sie gewünscht ist, false andernfalls
+	 */
+	public boolean isMasterWorker() {
+		return this.masterWorker;
 	}
 
 	/**
