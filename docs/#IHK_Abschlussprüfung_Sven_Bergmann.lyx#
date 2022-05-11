@@ -2669,7 +2669,7 @@ name "fig:main-Methode"
 
 \begin_inset Graphics
 	filename Main_main.svg
-	width 100text%
+	height 70theight%
 
 \end_inset
 
@@ -2735,6 +2735,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -2754,66 +2758,6 @@ name "fig:updateThreadC"
 
 
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ThreadC_update.svg
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset Quotes gld
-\end_inset
-
-write
-\begin_inset Quotes grd
-\end_inset
-
- Methode der Klasse ThreadC
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:writeThreadC"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename ThreadC_write.svg
-	width 100text%
 
 \end_inset
 

@@ -8,10 +8,12 @@ if __name__ == '__main__':
     outputfolder = 'output'
     LOG_STRING = '-log'
     logoption = 'file'
+    LOG_LEVEL_STRING = "-loglvl"
+    loglvl = 'all'
     THREAD_POOL_SIZE_STRING = '-poolsize'
     threadpoolsize = '1'
     SLEEP_TIME_STRING = '-sleep'
-    sleeptime = '1'
+    sleeptime = '50'
     QUEUE_SIZE_STRING = '-queuesize'
     queueSize = '1'
 
@@ -37,6 +39,9 @@ if __name__ == '__main__':
                 elif sys.argv[i] == QUEUE_SIZE_STRING:
                     queueSize = sys.argv[i + 1]
                     i += 1
+                elif sys.argv[i] == LOG_LEVEL_STRING:
+                    loglvl = sys.argv[i + 1]
+                    i += 1
             i += 1
 
     subprocess.call(['java', '-jar', 'IHK_Abschlusspruefung.jar',
@@ -45,4 +50,5 @@ if __name__ == '__main__':
                      LOG_STRING, logoption,
                      THREAD_POOL_SIZE_STRING, threadpoolsize,
                      SLEEP_TIME_STRING, sleeptime,
-                     QUEUE_SIZE_STRING, queueSize])
+                     QUEUE_SIZE_STRING, queueSize,
+                     LOG_LEVEL_STRING, loglvl])

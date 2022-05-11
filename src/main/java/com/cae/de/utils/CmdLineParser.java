@@ -20,13 +20,8 @@ public class CmdLineParser {
 	private static final String SLEEP_TIME_STRING = "-sleep";
 	private static final Logger ROOT_LOGGER = Logger.getLogger("");
 	private static final Logger LOGGER = Logger.getLogger(CmdLineParser.class.getName());
-	private int sleepTime;
+	private long sleepTime;
 	private int threadPoolSize;
-
-	public int getQueueSize() {
-		return this.queueSize;
-	}
-
 	private int queueSize;
 	private String inputFolder;
 	private String outputFolder;
@@ -40,7 +35,7 @@ public class CmdLineParser {
 		this.inputFolder = "input";
 		this.outputFolder = "output";
 		this.threadPoolSize = 1;
-		this.sleepTime = 1;
+		this.sleepTime = 50;
 		this.queueSize = 1;
 		var logOption = LogOption.TRUE;
 		for (var i = 0; i < args.length; i++) {
@@ -65,7 +60,7 @@ public class CmdLineParser {
 						ROOT_LOGGER.setLevel(logLevel);
 					}
 					case THREAD_POOL_SIZE_STRING -> this.threadPoolSize = Integer.parseInt(args[++i]);
-					case SLEEP_TIME_STRING -> this.sleepTime = Integer.parseInt(args[++i]);
+					case SLEEP_TIME_STRING -> this.sleepTime = Long.parseLong(args[++i]);
 					case QUEUE_SIZE_STRING -> this.queueSize = Integer.parseInt(args[++i]);
 				}
 			}
@@ -92,18 +87,42 @@ public class CmdLineParser {
 		}
 	}
 
+	/**
+	 * Getter für den Namen des Eingabeordners.
+	 * @return der Name des Eingabeordners
+	 */
 	public String getInputFolder() {
 		return this.inputFolder;
 	}
 
+	/**
+	 * Getter für den Namen des Ausgabeordners.
+	 * @return der Name des Ausgabeordners
+	 */
 	public String getOutputFolder() {
 		return this.outputFolder;
 	}
 
-	public int getSleepTime() {
+	/**
+	 * Getter für die Queue Size.
+	 * @return die Queue Size
+	 */
+	public int getQueueSize() {
+		return this.queueSize;
+	}
+
+	/**
+	 * Getter für die Sleep Time.
+	 * @return die Sleep Time
+	 */
+	public long getSleepTime() {
 		return this.sleepTime;
 	}
 
+	/**
+	 * Getter für die Größe des Threadpools.
+	 * @return die Größe des Threadpools
+	 */
 	public int getThreadPoolSize() {
 		return this.threadPoolSize;
 	}
@@ -112,15 +131,33 @@ public class CmdLineParser {
 	 * Enumeration für alle Logging Optionen, welche true, false oder file sind.
 	 */
 	public enum LogOption {
+		/**
+		 * True, für den Konsolenlog.
+		 */
 	  TRUE("true"),
+		/**
+		 * False, für keine Logs.
+		 */
 	  FALSE("false"),
+		/**
+		 * File, für die Logs in eine Datei.
+		 */
 	  FILE("file");
 	  private final String value;
 
+		/**
+		 * Konstruktor, welcher den Wert der jeweiligen Option setzt.
+		 * @param value der Wert als String
+		 */
 	  LogOption(String value) {
 	    this.value = value;
 	  }
 
+		/**
+		 * Methode zur Rückgabe einer konstanten Log-Option aus einem String.
+		 * @param value die Log-Option als String
+		 * @return die Konstante
+		 */
 	  public static LogOption getOption(String value) {
 	    for (var option : LogOption.values()) {
 	      if (option.value.equals(value)) {

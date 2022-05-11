@@ -32,8 +32,10 @@ public class ThreadA extends Observable<Pair<Data, Integer>> implements ReadRunn
    * darin zu lesen.
    *
    * @param pathToInputFolder der relative Pfad zum Eingabeordner
+   * @param sleepTime Zeit in Millisekunden, die der Thread schlafen soll, bevor dieser neue Daten
+   *     liest und schickt
    */
-  public ThreadA(Path pathToInputFolder, int sleepTime) {
+  public ThreadA(Path pathToInputFolder, long sleepTime) {
     this.pathToInputFolder = pathToInputFolder;
     this.sleepTime = sleepTime;
   }
@@ -88,8 +90,8 @@ public class ThreadA extends Observable<Pair<Data, Integer>> implements ReadRunn
     if (this.running.get()) return;
     this.running.set(true);
     String[] paths = new File(String.valueOf(this.pathToInputFolder)).list();
-    while (true) {
-      if (paths != null) {
+    if (paths != null) {
+      while (true) {
         for (var pathToFile : paths) {
           var data = this.read(Path.of(this.pathToInputFolder + "/" + pathToFile));
           if (data != null) {

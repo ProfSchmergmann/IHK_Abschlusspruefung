@@ -47,16 +47,16 @@ public class ThreadC
    * Weiterbearbeitung schickt. Wird null übergeben, so wird auf alle Worker Threads gewartet und
    * dann wird das Programm beendet.
    *
-   * @param autoKorrelationsFunktion das Objekt was geschrieben werden soll
+   * @param akf das Objekt was geschrieben werden soll
    */
   @Override
-  public void update(AutoKorrelationsFunktion autoKorrelationsFunktion) {
-    if (autoKorrelationsFunktion == null) {
+  public void update(AutoKorrelationsFunktion akf) {
+    if (akf == null) {
       this.workers.forEach(CompletableFuture::join);
       LOGGER.log(Level.INFO, "Alle Daten wurden geschrieben. Programm wird beendet.");
       System.exit(0);
     } else {
-      this.workers.add(CompletableFuture.supplyAsync(() -> this.write(autoKorrelationsFunktion)));
+      this.workers.add(CompletableFuture.supplyAsync(() -> this.write(akf)));
     }
   }
 
@@ -65,12 +65,12 @@ public class ThreadC
    * gegebene Ordner existiert. Wenn nein wird dieser neu erstellt. Danach wird die Datei
    * geschrieben und wenn eine gleichnamige Datei vorhanden ist, wird diese überschrieben.
    *
-   * @param autoKorrelationsFunktion das zu schreibende Objekt
+   * @param akf das zu schreibende Objekt
    * @return true falls es geklappt hat, false andernfalls
    */
   @Override
-  public boolean write(AutoKorrelationsFunktion autoKorrelationsFunktion) {
-    var pathToFile = this.pathToOutputFolder + "/" + "out" + autoKorrelationsFunktion.fileName();
+  public boolean write(AutoKorrelationsFunktion akf) {
+    var pathToFile = this.pathToOutputFolder + "/" + "out" + akf.fileName();
     try {
       if (!Files.exists(this.pathToOutputFolder)) {
         Files.createDirectory(this.pathToOutputFolder);
@@ -81,7 +81,7 @@ public class ThreadC
         LOGGER.log(Level.INFO, "Schreibe in die Datei: " + pathToFile);
       }
       var br = new BufferedWriter(new FileWriter(pathToFile));
-      br.write(autoKorrelationsFunktion.getOutputString());
+      br.write(akf.getOutputString());
       br.close();
       return true;
     } catch (IOException e) {

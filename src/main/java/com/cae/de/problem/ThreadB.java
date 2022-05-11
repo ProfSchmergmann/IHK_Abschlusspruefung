@@ -74,8 +74,8 @@ public class ThreadB extends Observable<AutoKorrelationsFunktion>
 
   /**
    * Update-Methode, welche testet, ob das neue Objekt schon verarbeitet wurde. Wenn dies der Fall
-   * ist, wird einfach nichts getan, ansonsten wird {@link this#process(Data)} aufgerufen und der
-   * Dateiname der Variable {@link this#processedFiles} hinzugefügt. Falls genauso viele Namen von
+   * ist, wird einfach nichts getan, ansonsten wird {@link ThreadB#process(Data)} aufgerufen und der
+   * Dateiname der Variable {@link ThreadB#processedFiles} hinzugefügt. Falls genauso viele Namen von
    * Dateien darin stehen, wie im Wert des Übergabeobjektes gegeben, wird auf alle Worker gewartet,
    * bis sie ihre Arbeit beendet haben, dann ein Log geschrieben und dann das Programm beendet.
    *

@@ -19,9 +19,9 @@ public class Algorithms {
    */
   public static AutoKorrelationsFunktion solve(Data data) {
     var pair = alg1(data.xStart(), data.yStart());
-    var x = Algorithms.alg2(pair.key());
-    var oE = Algorithms.alg3(pair.value());
-    var res = Algorithms.alg4(x, pair.value(), oE);
+    var x = alg2(pair.key());
+    var oE = alg3(pair.value());
+    var res = alg4(x, pair.value(), oE);
     return new AutoKorrelationsFunktion(
         data.fileName(), res.key(), res.value().key(), res.value().value(), x, pair.value(), oE);
   }
