@@ -1,0 +1,5286 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass scrartcl
+\begin_preamble
+\usepackage{csquotes}
+\end_preamble
+\options numbers=noendperiod
+\use_default_options true
+\maintain_unincluded_children false
+\language ngerman
+\language_package babel
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command biber
+\index_command default
+\float_placement H
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_title "Abschlussprüfung Sommer 2022 - Entwicklung eines Softwaresystems"
+\pdf_author "Sven Bergmann"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks true
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine biblatex
+\cite_engine_type authoryear
+\biblatex_bibstyle authoryear
+\biblatex_citestyle authoryear
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style german
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\listings_params "basicstyle={\small\ttfamily},columns=flexible,breaklines=true"
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{titlepage} % Suppresses headers and footers on the title page 	
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+centering % Centre everything on the title page  	
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+scshape % Use small caps for all text on the title page  	
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+vspace*{
+\backslash
+baselineskip} % White space at the top of the page 
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+rule{
+\backslash
+textwidth}{1.6pt}
+\backslash
+vspace*{-
+\backslash
+baselineskip}
+\backslash
+vspace*{2pt} % Thick horizontal rule
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+vspace{2
+\backslash
+baselineskip} % Whitespace above the title 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	{
+\backslash
+LARGE Abschlussprüfung Sommer 2022
+\backslash
+
+\backslash
+ Entwicklung eines Softwaresystems
+\backslash
+
+\backslash
+} % Title 
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+vspace{2
+\backslash
+baselineskip} % Whitespace below the title
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+rule{
+\backslash
+textwidth}{1.6pt}
+\backslash
+vspace*{-
+\backslash
+baselineskip}
+\backslash
+vspace*{2pt} % Thick horizontal rule
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+vfill{} % Whitespace after the title block  	
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+begin{flushleft} 	
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+begin{tabular}{ll} 		
+\end_layout
+
+\begin_layout Plain Layout
+
+			Vorgelegt von: & Sven Bergmann 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			Vorgelegt am: & 
+\backslash
+today 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			Prüflingsnummer: & 101 20541 
+\backslash
+
+\backslash
+ 		
+\end_layout
+
+\begin_layout Plain Layout
+
+			Ausbildungsbetrieb: & CAE GmbH 	
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+end{tabular} 	
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+end{flushleft} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{titlepage}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Aufgabenbeschreibung
+\end_layout
+
+\begin_layout Subsection
+Aufgabenanalyse
+\end_layout
+
+\begin_layout Standard
+Eine Firma möchte einen optischen Autokorrelator
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://de.wikipedia.org/wiki/Autokorrelator
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ bauen, welcher mit einem Laser, halbdurchlässigen und voll reflektierenden
+ Spiegeln, einem Kristall, einem Filter und einem Detektor funktioniert.
+ Der Detektor misst hierbei die Autokorrelationsfunktion des Eingangssignals,
+ die Aufschluss über die Breite des Laserpulses oder die Ursprungsfrequenz
+ gibt.
+ Die Messdaten werden allerdings vom Detektor permanent und nebenläufig
+ geliefert, was mit einem Thread modelliert werden soll, welcher mit 
+\begin_inset Formula $20Hz$
+\end_inset
+
+, also alle 
+\begin_inset Formula $0,05$
+\end_inset
+
+ Sekunden eine neue Messdatei zur Verfügung stellt und die alte überschreibt.
+ Der Lese-Thread ist hierbei Thread A und läuft ständig weiter, indem die
+ Daten "0.txt" bis "9.txt" immer wieder eingelesen werden und den aktuellen
+ Datensatz überschreiben.
+ Der Thread B soll dann diese Messdaten weiterverarbeiten und mit den später
+ erklärten mathematischen Methoden die Funktion modellieren, bzw.
+ die Messwerte umrechnen und glätten.
+ Schließlich wird die fertige Berechnung dann an Thread C weitergegeben,
+ um die Daten in seinem auch später erklärten Format in eine Datei auszugeben,
+ welche als Präfix "out" besitzt und ansonsten gleich heißt.
+ Das Programm wird dann beendet, wenn alle Messdaten verarbeitet wurden.
+ Es kann durchaus vorkommen, dass eine Messdatei häufiger eingelesen wird.
+ Diese muss dann allerdings nicht erneut verarbeitet werden, es wird dann
+ einfach auf eine noch nicht verarbeitete Datei gewartet.
+\end_layout
+
+\begin_layout Subsection
+Beschreibung der mathematischen Methoden
+\end_layout
+
+\begin_layout Subsubsection
+Algorithmus 1
+\end_layout
+
+\begin_layout Standard
+Als erstes werden alle 
+\begin_inset Formula $\hat{x}$
+\end_inset
+
+-Werte in Pikosekunden umgerechnet, was mit der Formel 
+\begin_inset Formula 
+\[
+\hat{x}_{k}=\frac{\tilde{x}_{k}}{2^{18}-1}\cdot266,3-132,3
+\]
+
+\end_inset
+
+ passieren soll.
+ Zur Zeitersparnis und Verbesserung der Genauigkeit ist hierbei eine Umstellung
+ sinnvoll, sodass der Bruch 
+\begin_inset Formula $\frac{266,3}{2^{18}-1}$
+\end_inset
+
+ nicht immer wieder erneut berechnet werden muss.
+ Also wird es eine Variable 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ geben, welche diesen Bruch beschreibt und die Formel wird zu 
+\begin_inset Formula 
+\[
+\hat{x}_{k}=\alpha\cdot\tilde{x}_{k}-132,3
+\]
+
+\end_inset
+
+Des Weiteren werden noch alle y-Werte normiert, sprich jeder Wert 
+\begin_inset Formula $y_{k}$
+\end_inset
+
+ wird durch das Maximum aller y-Werte geteilt.
+ Die Formel ist in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Algorithmus-1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Algorithmus-1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ in einem Nassi-Shneidermann Diagramm beschrieben.
+\end_layout
+
+\begin_layout Subsubsection
+Algorithmus 2
+\end_layout
+
+\begin_layout Standard
+Danach sollen die Daten geglättet werden, indem der sogenannte gleitende
+ Mittelwert berechnet werden soll.
+ Die Formel hierfür ist 
+\begin_inset Formula 
+\[
+x_{k}=\frac{1}{n}\sum_{i=0}^{n}\hat{x}_{k-\tau+i}
+\]
+
+\end_inset
+
+ mit 
+\begin_inset Formula $\tau=\frac{n-1}{2}$
+\end_inset
+
+ und 
+\begin_inset Formula 
+\[
+n=\begin{cases}
+\lfloor0,002\cdot N\rfloor-1 & für\:\lfloor0,002\cdot N\rfloor\:gerade\\
+\lfloor0,002\cdot N\rfloor & für\:\lfloor0,002\cdot N\rfloor\:ungerade
+\end{cases}
+\]
+
+\end_inset
+
+wobei 
+\begin_inset Formula $n$
+\end_inset
+
+ die Größe des Mittelungsfensters beschreibt, ungerade ist und 
+\begin_inset Formula $0,2\%$
+\end_inset
+
+ von 
+\begin_inset Formula $N$
+\end_inset
+
+ entspricht.
+ Hierbei wird wieder die Optimierung vorgenommen, dass der Bruch 
+\begin_inset Formula $\frac{1}{n}$
+\end_inset
+
+ nicht für jede Iteration erneut berechnet wird, sondern anfangs durch 
+\begin_inset Formula $m=\frac{1}{n}$
+\end_inset
+
+ dargestellt wird.
+ Es soll zudem noch geeignete Werte für 
+\begin_inset Formula $k<\tau$
+\end_inset
+
+ und 
+\begin_inset Formula $k>N-1-\tau$
+\end_inset
+
+ bestimmt werden, sprich den linken und rechten Rand der Messungen.
+ Hierbei habe ich mich dafür entschieden, dass ich Fallunterscheidungen
+ für den index des zu summierenden Elements genommen habe, sprich 
+\begin_inset Formula 
+\[
+index=\begin{cases}
+0 & k-\tau+i<0\\
+N-1 & k-\tau+i>N-1
+\end{cases}
+\]
+
+\end_inset
+
+ Das Symbol 
+\begin_inset Formula $\ensuremath{\lfloor x\rfloor}$
+\end_inset
+
+ heißt untere Gaußklammer und beschreibt, wie auf ganze Zahlen gerundet
+ werden soll.
+ Laut Definition gilt also 
+\begin_inset Formula $\lfloor x\rfloor\coloneqq\max\{k\in\mathbb{Z}\:|\:k\leq x\}$
+\end_inset
+
+, was in Java zu 
+\begin_inset Quotes gld
+\end_inset
+
+Math.floor(double a)
+\begin_inset Quotes grd
+\end_inset
+
+ wird.
+ Die Formel ist in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Algorithmus-2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Algorithmus-2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ in einem Nassi-Shneidermann Diagramm beschrieben.
+\end_layout
+
+\begin_layout Subsubsection
+Algorithmus 3
+\end_layout
+
+\begin_layout Standard
+Als nächstes wird die obere Einhüllende bestimmt, welche die Autokorrelationsfun
+ktion oben komplett einschnürt.
+ Da dies aber numerisch sehr aufwändig ist, reicht es aus, diese Einhüllende
+ einfacher zu approximieren und zwar indem zuerst von links beginnend jedem
+ Positionswert der zuletzt höchste Intensitätswert zugeordnet wird, solange
+ bis man am Maximum ist, dann wird das gleiche Verfahren von rechts wiederholt.
+ Es werden also die lokalen Maxima im Bereich von 
+\begin_inset Formula $\left[0,x\right]$
+\end_inset
+
+ für x gesucht, so lange, wie der x Wert noch nicht das globale Maximum
+ erreicht hat.
+ Auf der anderen Seite wird dann im Bereich von 
+\begin_inset Formula $\left[y,1\right]$
+\end_inset
+
+ so lange lokale Maxima gesucht, wie der y Wert noch nicht das globale Maximum
+ erreicht hat.
+ Am Ende wird noch der x Wert des globalen Maximums gesetzt.
+ Die Formel ist in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Algorithmus-3"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Algorithmus-3"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ in einem Nassi-Shneidermann Diagramm beschrieben.
+\end_layout
+
+\begin_layout Subsubsection
+Algorithmus 4
+\end_layout
+
+\begin_layout Standard
+Zuletzt wird noch die Pulsbreite 
+\begin_inset Formula $b$
+\end_inset
+
+ berechnet, welche sich über den Abstand der beiden Punkte 
+\begin_inset Formula $L$
+\end_inset
+
+ und 
+\begin_inset Formula $R$
+\end_inset
+
+ berechnet.
+ Diese sind Punkte auf der oberen Einhüllenden, wobei die Gerade die durch
+ 
+\begin_inset Formula $L$
+\end_inset
+
+ und 
+\begin_inset Formula $R$
+\end_inset
+
+ geht, genau auf der Hälfte der Grundlinie und des Maximums liegt.
+ Die Grundlinie stellt dabei die mittlere Höhe des äußersten linken Prozents
+ der Intensitätswerte dar.
+ Es müssen also die gemittelten Werte der ersten Berechnung im Intervall
+ 
+\begin_inset Formula $\left[0;0,01\right]$
+\end_inset
+
+ genommen werden.
+ Diese werden dann ebenfalls gemittelt und der daraus resultierende Wert
+ beschreibt die Grundlinie.
+ Realisiert wird das Ganze, indem zuerst die Anzahl der Punkte berechnet
+ wird, die in diesem Bereich liegen.
+ Unter Benutzung der oberen Gaußklammer mit der analogen Definition zur
+ unteren, 
+\begin_inset Formula $,\lceil x\rceil\coloneqq\min\{k\in\mathbb{Z}\:|\:k\geq x\}$
+\end_inset
+
+, ist die Anzahl dann 
+\begin_inset Formula $n=\lceil N\cdot0,01\rceil$
+\end_inset
+
+.
+ Aus dieser Anzahl an Punkten wird dann der Mittelwert gebildet und dann
+ mit 
+\begin_inset Formula $a_{12}=\frac{1-mittelwert}{2}+mittelwert$
+\end_inset
+
+ die halbe Höhe zwischen
+\end_layout
+
+\begin_layout Subsection
+Konzepterstellung zur Nebenläufigkeit von Einlesen, Verarbeiten und Ausgeben
+\end_layout
+
+\begin_layout Standard
+Bei dem gegebenen Problem kann ganz strikt nach dem IPO (Input-Process-Output)
+ oder EVA (Eingabe-Verarbeitung-Ausgabe) Prinzip gearbeitet werden, wobei
+ jedoch nur genau ein Thread für das Liefern der Daten, also den Input zuständig
+ ist.
+ Hierfür wird ein Interface bereitgestellt werden, welches ein Runnable
+ implementiert.
+ Dieses Interface gibt eine 
+\begin_inset Quotes gld
+\end_inset
+
+read
+\begin_inset Quotes grd
+\end_inset
+
+ Methode vor, welche Daten einliest.
+ Die zu implementierende Klasse dieses Threads wird dann diese Methode mit
+ 
+\begin_inset Formula $20Hz$
+\end_inset
+
+ aufrufen.
+ Der Thread B wird dann, wie auch der Thread C, so lange laufen, wie noch
+ Daten nicht verarbeitet wurden.
+ Wenn Thread A also eine Datei bereitstellt, startet Thread B und berechnet
+ das Ergebnis, welches dann vom Thread C geschrieben werden kann.
+ Thread A, B und C können somit gleichzeitig ausgeführt werden, da die Verarbeit
+ung unabhängig voneinander passiert.
+ Für Thread B wird dann also ebenfalls ein Interface bereitgestellt, welches
+ ein Runnable implementiert und die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+process
+\begin_inset Quotes grd
+\end_inset
+
+ mit den Parametern aus Thread A bereitstellen muss.
+ Der Thread C sieht dann ebenfalls ein Interface vor, welches ein Runnable
+ implementiert und die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+write
+\begin_inset Quotes grd
+\end_inset
+
+ bereitstellt.
+ Um die Kommunikation zwischen den einzelnen Thread-Klassen zu realisieren,
+ wird das Observer-Observable Pattern genutzt werden.
+ Der Thread A wird also von Thread B beobachtet und Thread B von Thread
+ C.
+ 
+\end_layout
+
+\begin_layout Standard
+In meiner Ausarbeitung finden sich zwei verschiedene Implementierungen der
+ Threads B und C wieder, eine Implementierung mit dem Master-Worker Pattern
+ und eine ohne.
+ Die Implementierung ohne das Pattern beschreibt genau das gegebene Problem
+ und den (wahrscheinlich) gewünschten Ablauf und die andere Implementierung
+ ist eine etwas optimiertere Lösung, bei welcher beim Programmstart die
+ Größe des Threadpools und der Warteschlange, bzw.
+ die Anzahl der Worker und die Anzahl der später zu bearbeitenden Elemente
+ angegeben werden kann.
+ Dies findet dann in Thread B statt.
+ Beim Thread C wird angenommen, dass das Schreiben der Daten schneller passiert,
+ als die Verarbeitung und daher wird dort auch das Master-Worker Pattern
+ angewandt, jedoch ohne Begrenzung der Anzahl der Worker, oder der Anzahl
+ der Elemente in der Warteschlange.
+ Die Elemente werden dann asynchron geschrieben.
+\end_layout
+
+\begin_layout Standard
+Falls von Thread B alle Messdaten bearbeitet und von Thread C geschrieben
+ wurden, wird das Programm beendet.
+\end_layout
+
+\begin_layout Subsection
+Einlesen und Initialisieren der Daten
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Einlesen-und-Initialisieren"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Das Einlesen der Daten passiert über die 
+\begin_inset Quotes gld
+\end_inset
+
+read
+\begin_inset Quotes grd
+\end_inset
+
+ Methode
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Read_ThreadA"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Read_ThreadA"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ in ThreadA
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:ThreadA"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:ThreadA"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ Besonders große Schwierigkeiten gibt es hierbei nicht, da alle Zeilen mit
+ einem 
+\begin_inset Quotes gld
+\end_inset
+
+#
+\begin_inset Quotes grd
+\end_inset
+
+ startend ignoriert werden können.
+ Die weiteren Zeilen bezeichnen die Messwerte, welche mit 
+\begin_inset Quotes gld
+\end_inset
+
+
+\backslash
+t
+\begin_inset Quotes grd
+\end_inset
+
+ getrennt sind.
+ Hierbei ist die erste Zahl der y-Wert, also die Intensität des Signals
+ und die zweite Zahl der x-Wert, also die Position des Spiegels.
+ Falls während des Einlesevorgangs eine Exception geschmissen wird, wird
+ der Vorgang einfach abgebrochen und null zurückgegeben.
+ Das habe ich so realisiert, da der ThreadA
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:ThreadA"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:ThreadA"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ die Daten schnell lesen muss und keine lange Fehlerbehandlung machen kann,
+ falls diese korrupt sind.
+ Die Werte von 
+\begin_inset Formula $x$
+\end_inset
+
+ und 
+\begin_inset Formula $y$
+\end_inset
+
+ werden zuerst in Paare eingelesen, welche in einer Liste gespeichert werden.
+ Laut Aufgabenstellung sind dies immer positive, ganzzahlige Werte.
+ Diese Liste von Paaren wird dann in zwei Arrays, xStart und yStart, umgewandelt
+ und mit dem Dateinamen in ein Data Objekt gegeben und von der Methode zurückgeg
+eben.
+ 
+\end_layout
+
+\begin_layout Subsection
+Ausgabe gemäß Aufgabenstellung
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Ausgabe-gemäß-Aufgabenstellung"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Ausgabe der fertigen Autokorrelationsfunktion
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:AutoKorrelationsFunktion"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:AutoKorrelationsFunktion"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ erledigt dann ThreadC
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:ThreadC"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:ThreadC"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ Hierfür habe ich eine Methode
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:AKF_OutputString"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:AKF_OutputString"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ in der Klasse AKF geschrieben, welche einen formatierten String für die
+ Ausgabe zusammenbaut und zurückgibt.
+ Da in der Klasse der Wert für die Pulsbreite, den IndexL und den indexR
+ gesetzt ist, ist die erste Zeile kein Problem.
+ Die weiteren Zeilen werden dann mit den Arrays 
+\begin_inset Quotes gld
+\end_inset
+
+xTransformiert
+\begin_inset Quotes grd
+\end_inset
+
+, 
+\begin_inset Quotes gld
+\end_inset
+
+yNormiert
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+obereEinhuellende
+\begin_inset Quotes grd
+\end_inset
+
+ zusammengebaut.
+ 
+\end_layout
+
+\begin_layout Standard
+Wenn der String fertig ist, wird das Ganze in eine Datei mit dem Namen 
+\begin_inset Quotes gld
+\end_inset
+
+out
+\begin_inset Quotes grd
+\end_inset
+
+ + 
+\begin_inset Quotes gld
+\end_inset
+
+fileName
+\begin_inset Quotes grd
+\end_inset
+
+ aus der Klasse AKF geschrieben.
+\end_layout
+
+\begin_layout Section
+Objektorientierter Entwurf
+\end_layout
+
+\begin_layout Subsection
+Framework
+\end_layout
+
+\begin_layout Standard
+Das Paket Framework
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:framework"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:framework"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ beinhaltet alle wichtigen Interfaces und eine abstrakte Klasse zur Lösung
+ des gegebenen Problems.
+ Somit wird die geforderte Austauschbarkeit des Threads A erreicht, man
+ kann aber auch alle anderen Threads austauschen.
+ 
+\end_layout
+
+\begin_layout Standard
+Das vorher genannte Observer-Observable-Pattern habe ich mit einem Interface
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Observer
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Observer"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Observer"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ und einer abstrakten Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Observable
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Observable"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Observable"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ vorgegeben.
+ Der 
+\begin_inset Quotes gld
+\end_inset
+
+Observer
+\begin_inset Quotes grd
+\end_inset
+
+ ist generisch und muss die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+void update(T t)
+\begin_inset Quotes grd
+\end_inset
+
+ bereitstellen, welche vom 
+\begin_inset Quotes gld
+\end_inset
+
+Observable
+\begin_inset Quotes grd
+\end_inset
+
+ aufgerufen werden kann.
+ Ebenfalls generisch gestaltet sich die 
+\begin_inset Quotes gld
+\end_inset
+
+Observable
+\begin_inset Quotes grd
+\end_inset
+
+ Klasse, die eine Liste von 
+\begin_inset Quotes gld
+\end_inset
+
+Observern
+\begin_inset Quotes grd
+\end_inset
+
+ hält.
+ In diese Liste kann man über die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+public void registerObserver(Observer observer)
+\begin_inset Quotes grd
+\end_inset
+
+ einen 
+\begin_inset Quotes gld
+\end_inset
+
+Observer
+\begin_inset Quotes grd
+\end_inset
+
+ hinzufügen.
+ Diese werden dann über die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+public void notifyObservers(T t)
+\begin_inset Quotes grd
+\end_inset
+
+ über ein verändertes Objekt informiert.
+ 
+\end_layout
+
+\begin_layout Standard
+Das Threading ist durch die drei Interfaces 
+\begin_inset Quotes gld
+\end_inset
+
+ReadRunnable
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:ReadRunnable"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:ReadRunnable"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset Quotes gld
+\end_inset
+
+WriteRunnable
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:WriteRunnable"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:WriteRunnable"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+ProcessRunnable
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:ProcessRunnable"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:ProcessRunnable"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ implementiert, welche selbst das Interface 
+\begin_inset Quotes gld
+\end_inset
+
+Runnable
+\begin_inset Quotes grd
+\end_inset
+
+ erweitern.
+ Der Lesethread soll durch das Interface 
+\begin_inset Quotes gld
+\end_inset
+
+ReadRunnable
+\begin_inset Quotes grd
+\end_inset
+
+ implementiert werden, welches die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+T read(Path pathToFile)
+\begin_inset Quotes grd
+\end_inset
+
+ bereitstellt und generisch ist.
+ 
+\begin_inset Quotes gld
+\end_inset
+
+ProcessRunnable
+\begin_inset Quotes grd
+\end_inset
+
+ stellt das Interface für den Verarbeitungsthread dar und gibt die Methode
+ 
+\begin_inset Quotes gld
+\end_inset
+
+R process(P p)
+\begin_inset Quotes grd
+\end_inset
+
+ vor, wobei R der Typ des Ergebnisparameters ist und P der Type des Eingabeparam
+eters.
+ Schlussendlich wird der Schreibthread durch das Interface 
+\begin_inset Quotes gld
+\end_inset
+
+WriteRunnable
+\begin_inset Quotes grd
+\end_inset
+
+ dargestellt, wobei man die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+boolean write(T t)
+\begin_inset Quotes grd
+\end_inset
+
+ implementieren muss, die einen generischen Parameter schreiben soll.
+\end_layout
+
+\begin_layout Subsection
+Problem
+\end_layout
+
+\begin_layout Standard
+Problem
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:problem"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:problem"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ beinhaltet alle Klassen zur (optimierten) Lösung des gegebenen Problems,
+ welche unter anderem von der Klasse und den Interfaces aus 
+\begin_inset Quotes gld
+\end_inset
+
+Framework
+\begin_inset Quotes grd
+\end_inset
+
+ erben.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Algorithms
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Algorithms"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Algorithms"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ beinhaltet alle vier Algorithmen, welche über die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+public static AutoKorrelationsFunktion solve(Data data)
+\begin_inset Quotes grd
+\end_inset
+
+ ausgeführt werden können.
+ Die einzelnen Algorithmen sind daher auch private, sodass Zugriffe von
+ Außen nicht möglich sind.
+ Als Input Parameter nimmt die Funktion ein Objekt der Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Data
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Data"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Data"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, welches als Record
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ implementiert ist und den Namen der Datei, das Array der eingelesenen x-Werte
+ und das Array der eingelesenen y-Werte beinhaltet.
+ Diese Werte werden dann intern durch die Algorithmen zu einem neuen Objekt
+ vom Typen 
+\begin_inset Quotes gld
+\end_inset
+
+Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion
+\begin_inset Quotes grd
+\end_inset
+
+ zusammengebaut.
+ Dieser Typ ist ebenfalls als Record realisiert und hält den Dateinamen,
+ die Pulsbreite, den indexL, den indexR, das double-Array der transformierten
+ x-Werte, das double-Array der normierten y-Werte und das double-Array der
+ Werte der oberen Einhüllenden.
+\end_layout
+
+\begin_layout Standard
+Die Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+ThreadA
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:ThreadA"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:ThreadA"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ implementiert das Interface 
+\begin_inset Quotes gld
+\end_inset
+
+Runnable<Data>
+\begin_inset Quotes grd
+\end_inset
+
+, erweitert die abstrakte Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Observable< Pair<Data, Integer>>
+\begin_inset Quotes grd
+\end_inset
+
+ und stellt eben genau den Thread A aus der Aufgabenstellung dar.
+ Als Konstruktor-Parameter wird der relative Pfad zum Ordner der Eingabedateien
+ und der sleepTime Wert als long angegeben.
+ Die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+public void run()
+\begin_inset Quotes grd
+\end_inset
+
+ des Runnable Interfaces wird so überschrieben, dass zuerst alle Pfade im
+ Eingabeordner ausgelesen werden und dann eine Endlosschleife beginnt.
+ In dieser Endlosschleife wird immer wieder durch die Pfade iteriert, die
+ jeweilige Datei eingelesen
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Read_ThreadA"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Read_ThreadA"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ und alle Observer mit einem Paar aus dem erstellten Data Objekt und der
+ Anzahl der Daten im Ordner weitergegeben.
+ Danach wartet der ThreadA so lange, wie es in sleeptime angegeben ist,
+ laut Aufgabenstellung 
+\begin_inset Formula $0,05s$
+\end_inset
+
+, wonach der Schleifendurchlauf weitergeht, oder von vorne beginnt.
+ Die Methode zum Einlesen der Daten in das Data Objekt ist in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "subsec:Einlesen-und-Initialisieren"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ beschrieben.
+ 
+\end_layout
+
+\begin_layout Standard
+Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+ThreadB
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:ThreadB"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:ThreadB"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ erweitert die abstrakte Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Observable<AutoKorrelations\SpecialChar allowbreak
+Funktion>
+\begin_inset Quotes grd
+\end_inset
+
+, implementiert die Interfaces 
+\begin_inset Quotes gld
+\end_inset
+
+Observer<Pair<Data, Integer>>
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+Process\SpecialChar softhyphen
+Runnable<Data, Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion>
+\begin_inset Quotes grd
+\end_inset
+
+ und stellt den Thread B der Aufgabenstellung dar.
+ Der Konstruktor fordert 
+\begin_inset Quotes gld
+\end_inset
+
+maxPoolSize
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+maxQueueSize
+\begin_inset Quotes grd
+\end_inset
+
+ als Parameter und erstellt dadurch einen neuen ThreadPoolExecutor
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/T
+hreadPoolExecutor.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ mit den gegebenen Parametern.
+ Dieser Executor wird dann für das Master-Worker Pattern genutzt, indem
+ die von 
+\begin_inset Quotes gld
+\end_inset
+
+ThreadA
+\begin_inset Quotes grd
+\end_inset
+
+ eingelesenen Daten an verfügbare Worker zur Weiterbearbeitung verteilt
+ werden.
+ Falls kein Worker mehr zur Verfügung steht, wird die aktuelle Datei verworfen
+ und die nächste eingelesene Datei bearbeitet, falls bis dahin wieder Worker
+ frei sind.
+ Sobald eine Datei fertig bearbeitet ist und das Objekt vom Typen 
+\begin_inset Quotes gld
+\end_inset
+
+Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+funktion
+\begin_inset Quotes grd
+\end_inset
+
+ erstellt wurde, werden wieder alle Observer mit dem neuen Objekt informiert.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes gld
+\end_inset
+
+ThreadC
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:ThreadC"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:ThreadC"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ implementiert die Interfaces 
+\begin_inset Quotes gld
+\end_inset
+
+Observer<Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion>
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+WriteRunnable<Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion>
+\begin_inset Quotes grd
+\end_inset
+
+ und stellt den Thread B der Aufgabenstellung dar.
+ Der Konstruktor nimmt hier nur den Pfad des Ausgabeordners.
+ In der Methode 
+\begin_inset Quotes gld
+\end_inset
+
+public void update(Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion akf)
+\begin_inset Quotes grd
+\end_inset
+
+ wird für jedes neu geschickte Objekt ein Runnable erstellt, welches mit
+ 
+\begin_inset Quotes gld
+\end_inset
+
+CompletableFuture.supplyAsync(()-> this.write(akf))
+\begin_inset Quotes grd
+\end_inset
+
+ ausgeführt und in ein HashSet gepackt wird.
+ Somit kann jede Schreiboperation asynchron ausgeführt werden.
+ Falls der Thread B dann ein null Objekt im Update übergibt, so wird auf
+ jedem Worker 
+\begin_inset Quotes gld
+\end_inset
+
+join
+\begin_inset Quotes grd
+\end_inset
+
+ aufgerufen, also auf die Ausführung gewartet und danach das Programm beendet.
+ Die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+public boolean write(Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion akf)
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:write_ThreadC"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:write_ThreadC"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ wurde bereits in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "subsec:Ausgabe-gemäß-Aufgabenstellung"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ beschrieben.
+ 
+\end_layout
+
+\begin_layout Subsection
+ProblemSimple
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset Quotes gld
+\end_inset
+
+problemsimple
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:problemsimple"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:problemsimple"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ findet sich eine alternative Implementierung des gegebenen Problems wieder,
+ es wurden allerdings nur die Klassen 
+\begin_inset Quotes gld
+\end_inset
+
+ThreadB
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:ThreadB_simple"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:ThreadB_simple"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+ThreadC
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:ThreadC_simple"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:ThreadC_simple"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ neu geschrieben, alle anderen Klassen werden weiter benutzt.
+ Wie der Name schon sagt, wird hier naiv und mit einer einfachen Fehlerbehandlun
+g an das Problem herangegangen.
+ Während dieser Ausführung existieren nur genau diese drei Threads A, B
+ und C, wobei das Master-Worker Pattern nicht implementiert ist.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes gld
+\end_inset
+
+ThreadB
+\begin_inset Quotes grd
+\end_inset
+
+ erweitert nun die abstrakte Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Observable<Pair<Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion, Integer>>
+\begin_inset Quotes grd
+\end_inset
+
+ und implementiert die Interfaces 
+\begin_inset Quotes gld
+\end_inset
+
+Observer <Pair<Data, Integer> >
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+ProcessRunnable<Pair<Data, Integer>, Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion>
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Dies ist nötig, da nun die Anzahl der zu bearbeitenden Elemente an 
+\begin_inset Quotes gld
+\end_inset
+
+ThreadC
+\begin_inset Quotes grd
+\end_inset
+
+ weitergeschickt werden muss.
+ Die update Methode dieses Threads wird nun so ausgeführt, dass zuerst geprüft
+ wird, ob der Thread gerade eine Datei bearbeitet.
+ Wenn ja, wird die Datei einfach übersprungen und aus der Funktion herausgesprun
+gen.
+ Falls der Thread frei ist, wird die übergebene Datei bearbeitet und das
+ Ergebnis inklusive der Anzahl der Dateien in dem Eingabeordner an den Thread
+ C zur Weiterbearbeitung geschickt.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes gld
+\end_inset
+
+ThreadC
+\begin_inset Quotes grd
+\end_inset
+
+ implementiert nun die zwei Interfaces 
+\begin_inset Quotes gld
+\end_inset
+
+Observer<Pair<Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion, Integer>>
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+WriteRunnable<Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion>
+\begin_inset Quotes grd
+\end_inset
+
+, um die Anzahl der Daten geschickt bekommen zu können.
+ Die Methode 
+\begin_inset Quotes gld
+\end_inset
+
+public boolean write(Auto\SpecialChar softhyphen
+Korrelations\SpecialChar softhyphen
+Funktion akf)
+\begin_inset Quotes grd
+\end_inset
+
+ ist gleichgeblieben, allerdings wird nun die update Methode anders implementier
+t.
+ Falls ein Observable ein Update schickt, wird zuerst geschaut, ob der Thread
+ schreibend oder frei ist.
+ Falls der Thread schreibend ist, wird die Datei einfach nicht weiterbearbeitet,
+ andernfalls wird zuerst geprüft, ob die Anzahl der Daten der Größe der
+ Menge von Dateinamen entspricht.
+ Ist dem so, so wird das Programm beendet, andernfalls wird geprüft, ob
+ der Dateiname in der Menge der Dateinamen vorhanden ist, bzw.
+ schon geschrieben wurde.
+ Trifft das zu, wird einfach aus der Methode herausgesprungen, ansonsten
+ wird das Objekt der Methode write übergeben und der Dateiname in der Menge
+ der Dateinamen gespeichert.
+\end_layout
+
+\begin_layout Subsection
+Utils
+\end_layout
+
+\begin_layout Standard
+Das Paket 
+\begin_inset Quotes gld
+\end_inset
+
+utils
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:utils"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:utils"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ beinhaltet zwei Klassen, 
+\begin_inset Quotes gld
+\end_inset
+
+CmdLineParser
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:CmdLineParser"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:CmdLineParser"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+Pair
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Pair"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Pair"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ Der 
+\begin_inset Quotes gld
+\end_inset
+
+CmdLineParser
+\begin_inset Quotes grd
+\end_inset
+
+ bekommt als Konstruktorparameter das String-Array der Kommandozeilenargumente
+ des Programmaufrufs übergeben, versucht diese auszulesen und zu setzen.
+ Mit den Getter Methoden können diese dann z.
+ B.
+ von der Main-Klasse abgerufen, und in die Threads übergeben werden.
+ Des Weiteren existiert noch das Record 
+\begin_inset Quotes gld
+\end_inset
+
+Pair
+\begin_inset Quotes grd
+\end_inset
+
+, welches ein nicht veränderliches generisches Objekt von zwei Typen K und
+ V darstellt.
+\end_layout
+
+\begin_layout Section
+Änderungen zur schriftlichen Ausarbeitung
+\end_layout
+
+\begin_layout Subsection
+Umbenennungen
+\end_layout
+
+\begin_layout Standard
+Es sind fast alle der Benennungen so wie in der schriftlichen Ausarbeitung
+ geblieben, es wurden nur alle Benennungen an das Deutsche angepasst.
+ Die Java-spezifischen Benennungen wie z.
+ B.
+ 
+\begin_inset Quotes gld
+\end_inset
+
+getAttribut
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+setAttribut
+\begin_inset Quotes grd
+\end_inset
+
+ sind geblieben.
+ Zudem wurden natürlich noch die Umlaute umschrieben.
+\end_layout
+
+\begin_layout Subsection
+Modifikation der Klassenstruktur
+\end_layout
+
+\begin_layout Standard
+In der schriftlichen Ausarbeitung wurden noch keine Paketnamen angegeben.
+ Wie bereits genannt, existieren die Pakete 
+\begin_inset Quotes gld
+\end_inset
+
+framework
+\begin_inset Quotes grd
+\end_inset
+
+, 
+\begin_inset Quotes gld
+\end_inset
+
+problem
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+utils
+\begin_inset Quotes grd
+\end_inset
+
+.
+ Des Weiteren wollte ich jede Thread Klasse sowohl von Observable, Observer,
+ als auch einem der drei Threadinterfaces erben lassen.
+ Hier kommt aber das Diamond-Problem zum tragen und Java verbietet daher
+ das Erben mehrerer absrakter Klassen.
+ Ich habe mich also für mehrere Interfaces entschieden und benutze jetzt
+ das 
+\begin_inset Quotes gld
+\end_inset
+
+Runnable
+\begin_inset Quotes grd
+\end_inset
+
+ Interface anstatt die Thread Klasse.
+ Ansonsten ist die Klassenstruktur im Groben gleich geblieben.
+\end_layout
+
+\begin_layout Subsection
+Modifikation der Logik
+\end_layout
+
+\begin_layout Standard
+Wie schon gesagt werden mittlerweile Runnables
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ anstatt Threads
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Thread.State.h
+tml
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ genutzt.
+ Dies hat den Vorteil, dass nun die Klassen Thread A, B und C von mehreren
+ Interfaces wie z.
+ B.
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Runnable
+\begin_inset Quotes grd
+\end_inset
+
+ und 
+\begin_inset Quotes gld
+\end_inset
+
+Observer
+\begin_inset Quotes grd
+\end_inset
+
+ erben können und zusätzlich die abstrakte Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Observable
+\begin_inset Quotes grd
+\end_inset
+
+ erweitern können.
+ Jede Threadklasse überschreibt also nur die 
+\begin_inset Quotes gld
+\end_inset
+
+run()
+\begin_inset Quotes grd
+\end_inset
+
+ Methode und benutzt die Methoden des Observer-Observable Patterns.
+ Eine weitere Modifikation besteht darin, dass nun der Thread A den Thread
+ B als Observer registriert hat und der Thread B den Thread C als Observer.
+ Das heißt, dass die Threads nun in einer Reihe verkettet sind und nicht
+ mehr wie bei der schriftlichen Ausarbeitung in einem Ring.
+ 
+\end_layout
+
+\begin_layout Standard
+Es wurden zwei mögliche Implementierungen dargestellt, einmal mit dem Master-Wor
+ker Pattern und einmal ohne.
+ Die Implementierung des Master-Worker Patterns befindet sich im Paket 
+\begin_inset Quotes gld
+\end_inset
+
+problem
+\begin_inset Quotes grd
+\end_inset
+
+, während die einfache Implementierung im Paket 
+\begin_inset Quotes gld
+\end_inset
+
+problemsimple
+\begin_inset Quotes grd
+\end_inset
+
+ zu finden ist.
+ Beide Implementierungen nutzen die gleiche Klasse ThreadA, unterscheiden
+ sich aber in den Klassen ThreadB und ThreadC und vor allem auch in der
+ Abbruchbedingung des Programms.
+ 
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset Quotes gld
+\end_inset
+
+problem
+\begin_inset Quotes grd
+\end_inset
+
+ wird das ganze Programm erst von Thread C beendet, falls dieser in der
+ 
+\begin_inset Quotes gld
+\end_inset
+
+update(T t)
+\begin_inset Quotes grd
+\end_inset
+
+ Methode null zurück bekommt, da nur der ThreadB weiß, wann keine Daten
+ mehr eingelesen, bzw.
+ verarbeitet werden.
+ Sowohl ThreadB, als auch ThreadC implementieren das Master-Worker Pattern
+ und bei Thread B kann zusätzlich angegeben werden, wie groß der Threadpool
+ sein soll und wie viele Objekte in die Warteschlange gepackt werden dürfen.
+ ThreadC schreibt einfach alle gepushten Daten asynchron, da davon ausgegangen
+ wird, dass die Verarbeitung länger dauert, als das Schreiben.
+ 
+\end_layout
+
+\begin_layout Standard
+In 
+\begin_inset Quotes gld
+\end_inset
+
+problemsimple
+\begin_inset Quotes grd
+\end_inset
+
+ wird nur mit genau diesen drei Threads gearbeitet und keinen Weiteren.
+ Um dies zu realisieren, gibt es in beiden Klassen nun eine Variable 
+\begin_inset Quotes gld
+\end_inset
+
+processing
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+writing
+\begin_inset Quotes grd
+\end_inset
+
+, welche beide vom Typen AtomicBoolean
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/a
+tomic/AtomicBoolean.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ sind, da diese Variablen threadsafe sind.
+ Falls nun der ThreadA zu schnell Daten pusht, sodass ThreadB in einem bearbeite
+nden Zustand ist, so überspringt ThreadB einfach diese Datei und bearbeitet
+ die nächste, sobald er fertig ist.
+ ThreadC macht das ähnlich, woraus auch resultiert, dass ThreadC die Abbruchbedi
+ngung in diesem Fall verwalten muss.
+ Die Anzahl der Input Dateien wird also von ThreadA über ThreadB nach ThreadC
+ geschleust und in ThreadC wird dann immer geprüft, ob die aktuelle Datei
+ schon geschrieben wurde und ob schon alle Daten geschrieben wurden.
+ Ist dies der Fall, wird das Programm beendet.
+\end_layout
+
+\begin_layout Standard
+Die Änderungen habe ich vorallem vorgenommen, da ich für meine Lösung zwingend
+ das Oberver-Observable Pattern brauche und daher ein Observable die Klasse
+ erweitern muss.
+ In Java ist es wie schon gesagt nicht möglich, mehrere Klassen zu erweitern,
+ wodurch Threads ausgeschlossen wurden.
+ Ich habe mich daher zur Implementierung von Runnables entschieden.
+ Weiterhin habe ich zwei Lösungen für das gegebene Problem implementiert,
+ da ich denke, dass es – vorallem auf einem Multicoresystem – sinnvoll sein
+ könnte, das Master-Worker Pattern zu implementieren.
+ So kann nämlich der Thread B nur die Aufgaben verteilen und überwachen,
+ ob noch Kapazitäten frei sind.
+ In der 
+\begin_inset Quotes gld
+\end_inset
+
+simplen
+\begin_inset Quotes grd
+\end_inset
+
+ Lösung können nicht alle Resourcen genutzt werden und der Thread B ist
+ einfach blockiert.
+ Ähnlich läuft das mit Thread C, bei dem allerdings asynchrone Methodenaufrufe
+ genutzt wurden.
+ Da heutzutage nahezu jedes System ein Multicoresystem ist wäre das denke
+ ich auch die bessere Lösung.
+\end_layout
+
+\begin_layout Section
+Allgemeines zu Multithreading in Java
+\end_layout
+
+\begin_layout Standard
+In Java kann Multithreading auf verschiedene Arten realisiert werden.
+ Das etwas ältere, aber durchaus noch genutzte Konzept besteht darin, die
+ Thread Klasse zu erweitern und die Methoden, vor allem die 
+\begin_inset Quotes gld
+\end_inset
+
+run()
+\begin_inset Quotes grd
+\end_inset
+
+ Methode, zu überschreiben.
+ Der Vorteil hierbei ist, dass von Haus aus Basisfunktionalitäten, wie 
+\begin_inset Quotes gld
+\end_inset
+
+yield()
+\begin_inset Quotes grd
+\end_inset
+
+, oder 
+\begin_inset Quotes gld
+\end_inset
+
+sleep()
+\begin_inset Quotes grd
+\end_inset
+
+ bereitgestellt werden.
+ Eine weitere Methode ist es, das Interface 
+\begin_inset Quotes gld
+\end_inset
+
+Runnable
+\begin_inset Quotes grd
+\end_inset
+
+ zu implementieren, was den Vorteil mit sich bringt, dass man mehrere Interfaces
+ implementieren kann, aber nur eine Klasse erweitern kann.
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Runnable
+\begin_inset Quotes grd
+\end_inset
+
+ wird auch von der Klasse 
+\begin_inset Quotes gld
+\end_inset
+
+Thread
+\begin_inset Quotes grd
+\end_inset
+
+ implementiert, stellt aber nur Basisfunktionalitäten bereit, wie die 
+\begin_inset Quotes gld
+\end_inset
+
+run()
+\begin_inset Quotes grd
+\end_inset
+
+ Methode.
+ Ein Objekt vom Typen 
+\begin_inset Quotes gld
+\end_inset
+
+Runnable
+\begin_inset Quotes grd
+\end_inset
+
+ kann aber dafür genutzt werden dieses von mehreren Threads ausführen zu
+ lassen.
+ Das Ausführen der beiden Objekte verhält sich auch unterschiedlich.
+ Ein Objekt des Typs 
+\begin_inset Quotes gld
+\end_inset
+
+Thread
+\begin_inset Quotes grd
+\end_inset
+
+ kann einfach mit 
+\begin_inset Quotes gld
+\end_inset
+
+new Thread
+\begin_inset Quotes grd
+\end_inset
+
+ erstellt werden und dann mit 
+\begin_inset Quotes gld
+\end_inset
+
+Thread.start()
+\begin_inset Quotes grd
+\end_inset
+
+ gestartet werden, wodurch jedes Mal eine neue Instanz eines Thread Objektes
+ erstellt wird.
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Runnables
+\begin_inset Quotes grd
+\end_inset
+
+ hingegen werden entweder einem vorher erstellten 
+\begin_inset Quotes gld
+\end_inset
+
+new Thread()
+\begin_inset Quotes grd
+\end_inset
+
+ Objekt als Parameter mitgegeben und dann gestartet, oder aber einem Executor
+ Service übergeben, welcher entweder selbst erstellt und verwaltet werden
+ kann, oder einem bereits vorgegebenen Service zugeordnet werden kann.
+ Vorgegebene Services sind zum Beispiel der 
+\begin_inset Quotes gld
+\end_inset
+
+newCachedThreadPool()
+\begin_inset Quotes grd
+\end_inset
+
+, welcher neue Threads erstellt, solange diese gebraucht werden und alte
+ wieder nutzt, oder der 
+\begin_inset Quotes gld
+\end_inset
+
+newFixedThreadPool(int nThreads)
+\begin_inset Quotes grd
+\end_inset
+
+, welcher eine fixe Anzahl an Threads nutzt, um die Aufgaben auszuführen
+ und ansonsten eine Queue benutzt, in welcher die Aufgaben gespeichert und
+ dann nach und nach abgearbeitet werden.
+ Je nach Programm oder Problemstellung kann man also diese Services nutzen.
+ In meinem Programm nutze ich in der 
+\begin_inset Quotes gld
+\end_inset
+
+Main
+\begin_inset Quotes grd
+\end_inset
+
+ zur Ausführung der selbstgeschriebenen Thread Klassen, welche das Interface
+ 
+\begin_inset Quotes gld
+\end_inset
+
+Runnable
+\begin_inset Quotes grd
+\end_inset
+
+ implementieren, einen 
+\begin_inset Quotes gld
+\end_inset
+
+newFixedThreadPool
+\begin_inset Quotes grd
+\end_inset
+
+ mit 3 Threads.
+ Diese Runnables werden dann von diesem Threadpool verwaltet.
+ Falls man nun nicht nur wie in dieser Aufgabenstellung laufende Threads
+ haben möchte, sondern auch ein Ergebnis aus diesen Threads erwartet, mit
+ dem dann weitergemacht werden soll, kann man die sogenannten 
+\begin_inset Quotes gld
+\end_inset
+
+CompletableFutures
+\begin_inset Quotes grd
+\end_inset
+
+ nutzen, welche über den Funktionsaufruf 
+\begin_inset Quotes gld
+\end_inset
+
+CompletableFuture.supplyAsync(<Runnable>)
+\begin_inset Quotes grd
+\end_inset
+
+ erstellt und asynchron ausgeführt werden.
+ Mit dem 
+\begin_inset Quotes gld
+\end_inset
+
+CompletableFuture
+\begin_inset Quotes grd
+\end_inset
+
+
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/C
+ompletableFuture.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ Objekt kann dann mit Methoden wie z.
+ B.
+ 
+\begin_inset Quotes gld
+\end_inset
+
+thenApply()
+\begin_inset Quotes grd
+\end_inset
+
+ weitergearbeitet werden.
+ Diese werden in dem ThreadC der Methode mit der Implementierung des Master-Work
+er Patterns genutzt.
+ Um das Ganze allerdings etwas lebensechter zu machen habe ich in ThreadB
+ einen eigenen ThreadPoolExecutor erstellt, welcher die gewünschte Anzahl
+ an Threads und die gewünschte Größe der Warteschlange setzt.
+ Somit kann man gut simulieren, was passiert, wenn keine Worker mehr verfügbar
+ sind und die Queue zudem auch voll ist.
+ 
+\end_layout
+
+\begin_layout Section
+Auswertung, Interpretation und Fehlererkennung
+\end_layout
+
+\begin_layout Standard
+Da keine wirklichen Prüfdaten gegeben waren, gegen die man die Algorithmen
+ hätte testen können und zudem jeder Algorithmus eine andere Bedingung hatte,
+ was mit dem Index passiert, falls 
+\begin_inset Formula $k<\tau$
+\end_inset
+
+ oder 
+\begin_inset Formula $k>N-1-\tau$
+\end_inset
+
+, war die Auswertung und vor allem auch die Fehlerbewertung nur bedingt
+ sinnvoll.
+ Es konnte also anhand der resultierenden Bilder
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+s.
+ 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "sec:res-bilder"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ ungefähr geprüft werden, ob die Funktion, bzw.
+ die Datenpunkte ähnlich zueinander sind.
+ In diesem Fall sind die resultierenden Bilder ähnlich zu den Gegebenen.
+ Des Weiteren war in der Problembeschreibung festgelegt, dass die Messdaten
+ immer von der Länge 
+\begin_inset Formula $N$
+\end_inset
+
+ sind, jedoch wurde 
+\begin_inset Formula $N$
+\end_inset
+
+ nicht explizit angegeben.
+ In einem Live System würde 
+\begin_inset Formula $N$
+\end_inset
+
+ feststehen und die Daten könnten direkt auf Korrektheit geprüft werden.
+ Dies wird hier nicht gemacht, da einfach angenommen wird, dass die eingelesenen
+ Messdaten die gleiche Länge haben.
+ Wenn ein Ausreißer in den Messdaten vorhanden ist, so wird dies auch vom
+ Algorithmus nicht überprüft, da kein Referenzrahmen existiert oder gegeben
+ ist, wodurch man die Messwerte auf Korrektheit prüfen könnte.
+ Vielmehr ist es der Fall, dass die Kurve durch nur einen Ausreißer mit
+ einem Unterschied von 2 Stellen, egal ob bei den x-, oder y-Werten, sich
+ sehr verzerrt und überhaupt nicht mehr der ursprünglichen Kurve entspricht.
+\end_layout
+
+\begin_layout Section
+Benutzeranleitung
+\end_layout
+
+\begin_layout Standard
+Generell befindet sich die Gesamtdokumentation der Klassen und Methoden
+ als javadoc im 
+\begin_inset Quotes gld
+\end_inset
+
+docs
+\begin_inset Quotes grd
+\end_inset
+
+ Ordner.
+ 
+\end_layout
+
+\begin_layout Subsection
+Ordnerstruktur
+\end_layout
+
+\begin_layout Standard
+An sich sollten die fertig gebaute 
+\begin_inset Quotes gld
+\end_inset
+
+.jar
+\begin_inset Quotes grd
+\end_inset
+
+ Datei zusammen mit dem ausführbaren Python Skript in einem Ordner liegen.
+ Die Testbeispiele sollten ebenfalls auf der gleichen Ebene in einem Ordner
+ vorhanden sein, wobei der Ordnername beim Programmstart oder in dem Skript
+ angegeben werden kann.
+ Der Ordner für alle Ausgabe Dateien wird dann ebenso in dieser Ebene erstellt.
+ Die Ausgabedateien werden pro Eingabedatei jeweils in eine Datei namens
+ 
+\begin_inset Quotes gld
+\end_inset
+
+out<Name der Eingabedatei>.txt
+\begin_inset Quotes grd
+\end_inset
+
+ im output Ordner gespeichert, welcher entweder über die Programmzeile vorher
+ angegeben wird, oder einfach 
+\begin_inset Quotes gld
+\end_inset
+
+output
+\begin_inset Quotes grd
+\end_inset
+
+ heißt.
+\end_layout
+
+\begin_layout Subsection
+Benötigte Programme
+\end_layout
+
+\begin_layout Standard
+Für die Ausführung der 
+\begin_inset Quotes gld
+\end_inset
+
+.jar
+\begin_inset Quotes grd
+\end_inset
+
+ Datei benötigt der Zielrechner zwingend eine Installation des Open JDK
+ 17
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, da das Java-Sprachlevel auf 17 gesetzt wurde.
+ Um das Python Skript auszuführen wird eine Python Installation gebraucht,
+ wobei ich die Version 3.10
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://www.python.org/downloads/release/python-3100/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ benutzt habe.
+ Um das Projekt zu bauen, wird Gradle
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://gradle.org/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ genutzt.
+\end_layout
+
+\begin_layout Subsection
+Ausführen als Kommandozeilenprogramm
+\end_layout
+
+\begin_layout Standard
+Es gibt zwei Wege das Programm auszuführen, einmal direkt über Java und
+ einmal über das Python Skript, welches intern die 
+\begin_inset Quotes gld
+\end_inset
+
+.jar
+\begin_inset Quotes grd
+\end_inset
+
+ Datei aufruft.
+\end_layout
+
+\begin_layout Standard
+Das Programm nimmt Argumente entgegen, welche sind:
+\end_layout
+
+\begin_layout Itemize
+-inputfolder {
+\begin_inset Quotes gld
+\end_inset
+
+Name des Ordners mit den Eingabedateien
+\begin_inset Quotes grd
+\end_inset
+
+}, default: 
+\begin_inset Quotes gld
+\end_inset
+
+input
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+-outputfolder {
+\begin_inset Quotes gld
+\end_inset
+
+Name des Ordners, wohin die Ausgabedateien geschrieben werden
+\begin_inset Quotes grd
+\end_inset
+
+}, default: 
+\begin_inset Quotes gld
+\end_inset
+
+output
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+-log {
+\begin_inset Quotes gld
+\end_inset
+
+true
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+false
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+file
+\begin_inset Quotes grd
+\end_inset
+
+}, default: 
+\begin_inset Quotes gld
+\end_inset
+
+file
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+-loglvl {
+\begin_inset Quotes gld
+\end_inset
+
+warning
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+info
+\begin_inset Quotes grd
+\end_inset
+
+}, default: 
+\begin_inset Quotes gld
+\end_inset
+
+all
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+-poolsize {
+\begin_inset Quotes gld
+\end_inset
+
+Anzahl der gewünschten Threadpools
+\begin_inset Quotes grd
+\end_inset
+
+}, default: 
+\begin_inset Quotes gld
+\end_inset
+
+1
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+-sleep {
+\begin_inset Quotes gld
+\end_inset
+
+Zeit in Millisekunden mit welcher der ThreadA Daten pusht
+\begin_inset Quotes grd
+\end_inset
+
+}, default: 
+\begin_inset Quotes gld
+\end_inset
+
+50
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+-queuesize {
+\begin_inset Quotes gld
+\end_inset
+
+Größe der Schlage der Tasks
+\begin_inset Quotes grd
+\end_inset
+
+}, default: 
+\begin_inset Quotes gld
+\end_inset
+
+1
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+-mw {
+\begin_inset Quotes gld
+\end_inset
+
+true
+\begin_inset Quotes grd
+\end_inset
+
+ oder 
+\begin_inset Quotes gld
+\end_inset
+
+false
+\begin_inset Quotes grd
+\end_inset
+
+}, default: 
+\begin_inset Quotes gld
+\end_inset
+
+false
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Man kann jede dieser Optionen setzen, muss das aber nicht tun.
+ Falls eine Option nicht gesetzt wird, wird der default Wert angenommen.
+\end_layout
+
+\begin_layout Standard
+Die Namen der Ordner werden immer relativ zum derzeitigen Ordnerpfad ausgewertet.
+ Die Logoption beschreibt das Verhalten des Loggers, beziehungsweise wohin
+ die Logs geschrieben werden.
+ Der LogLevel setzt das Level der geloggten Nachrichten, sprich welche Nachricht
+en tatsächlich geloggt werden.
+ Poolsize gibt an, wie groß die Anzahl der gewünschten Threads sein soll,
+ die der ThreadPool von Thread B maximal bereitstellt.
+ Sleep gibt die Zeit in Millisekunden an, die der ThreadA wartet, nachdem
+ dieser Daten gepusht hat und Queuesize beschreibt die Größe der Schlange
+ des Services des ThreadsB.
+ Die Option 
+\begin_inset Quotes gld
+\end_inset
+
+-mw
+\begin_inset Quotes grd
+\end_inset
+
+ gibt an, ob das Programm die Thread Klassen mit dem intern implementierten
+ Master-Worker Pattern nutzen soll, oder die Threads ohne das Master-Worker
+ Pattern.
+\end_layout
+
+\begin_layout Subsubsection
+Ausführen der JAR
+\end_layout
+
+\begin_layout Standard
+Um die 
+\begin_inset Quotes gld
+\end_inset
+
+.jar
+\begin_inset Quotes grd
+\end_inset
+
+ ausführen zu können, muss zumindest unter Windows der Pfad zum JDK 17 in
+ den Umgebungsvariablen gesetzt sein.
+ Mit einem Doppelklick auf die Datei wird der Code mit Standardargumenten
+ ausgeführt.
+ Ansonsten könnte der Benutzer auch über die Kommandozeile gehen und die
+ Programmargumente selbst setzen.
+ Das würde dann beispielsweise so aussehen: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lstlisting}
+\end_layout
+
+\begin_layout Plain Layout
+
+	java -jar IHK_Abschlusspruefung.jar -inputfolder input -outputfolder output
+ -log file -loglvl 	warning -poolsize 1 -sleep 50 -queuesize 1
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lstlisting}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Ausführen des Python-Skripts
+\end_layout
+
+\begin_layout Standard
+Der Benutzer kann zusätzlich auch noch das Python-Skript 
+\begin_inset Quotes gld
+\end_inset
+
+execute_gro_pro.py
+\begin_inset Quotes grd
+\end_inset
+
+ ausführen, um das Programm mit den Standardargumenten zu starten.
+ Hierfür ist eine Installation von Python notwendig, sowie die Verlinkung
+ zur Umgebungsvariablen.
+ Der Kommandozeilencode sieht dann beispielsweise so aus:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lstlisting}
+\end_layout
+
+\begin_layout Plain Layout
+
+	python execute_gro_pro.py
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lstlisting}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Zusammenfassung und Ausblick
+\end_layout
+
+\begin_layout Standard
+In dieser großen Programmieraufgabe musste ein Softwaresystem erstellt werden,
+ welches theoretisch aus drei unabhängigen Systemen besteht.
+ Gegeben war die Aufgabe, einen Autokorrelator zu simulieren, welcher mit
+ 20Hz neue Messdaten liefert, was durch einen eigenständigen Thread realisiert
+ werden sollte.
+ Um die Daten zu verarbeiten wurde ein weiterer Thread benötigt, der neue
+ Messdaten überspringen sollte, falls diese zu schnell geschickt werden
+ und dieser Thread die Daten nicht schnell genug verarbeiten kann.
+ Die verarbeiteten Daten mussten danach vom letzten Thread noch geschrieben
+ werden.
+ Um die Übergabe einer unbegrenzten Anzahl von Daten simulieren zu können,
+ wurde ein Ordner mit Dateien von Messwerten gegeben, welche ständig eingelesen
+ und Thread B zur Verfügung gestellt werden sollten.
+ Falls nun jede Datei bearbeitet und geschrieben wurde, kann das Programm
+ beendet werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Algorithmen im verarbeitenden Thread zu implementieren war keine wirklich
+ große Schwierigkeit, einzig für das Verhalten des Indexes bei Algorithmus
+ 2 für 
+\begin_inset Formula $k<\tau$
+\end_inset
+
+ und 
+\begin_inset Formula $k>N-1-\tau$
+\end_inset
+
+ musste eine geeignete Wahl getroffen werden.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+\start_of_appendix
+UML-Diagramme
+\end_layout
+
+\begin_layout Subsection
+Klassendiagramme
+\end_layout
+
+\begin_layout Subsubsection
+Main
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Main
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Main"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/Main_class.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+com.de.cae
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:com.de.cae"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/package_com_cae_de.svg
+	height 80theight%
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Pakete
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+framework
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:framework"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/package_framework.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+problem
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:problem"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/package_problem.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+problemsimple
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:problemsimple"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/package_problemsimple.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+utils
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:utils"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/package_utils.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Klassen im Paket 
+\begin_inset Quotes gld
+\end_inset
+
+framework
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Observable
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Observable"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/Observable_class.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Observer
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Observer"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/Observer_class.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+ProcessRunnable
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ProcessRunnable"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/ProcessRunnable_class.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+ReadRunnable
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ReadRunnable"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/ReadRunnable_class.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+WriteRunnable
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:WriteRunnable"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/WriteRunnable_class.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Klassen im Paket 
+\begin_inset Quotes gld
+\end_inset
+
+problem
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Algorithms
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Algorithms"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/Algorithms_class.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+AutoKorrelationsFunktion
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:AutoKorrelationsFunktion"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/AutoKorrelationsFunktion_class.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Data
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Data"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/Data_class.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+ThreadA
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ThreadA"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/ThreadA_class.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+ThreadB
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ThreadB"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/ThreadB_class.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+ThreadC
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ThreadC"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/ThreadC_class.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Klassen im Paket 
+\begin_inset Quotes gld
+\end_inset
+
+problemsimple
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+ThreadB_simple
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ThreadB_simple"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/ThreadBsimple_class.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+ThreadC_simple
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:ThreadC_simple"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/ThreadC_simple.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Klassen im Paket 
+\begin_inset Quotes gld
+\end_inset
+
+utils
+\begin_inset Quotes grd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+CmdLineParser
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CmdLineParser"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/CmdLineParser_class.svg
+	height 80theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pair
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Pair"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename input/Pair_class.svg
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Subsection
+Nassi-Shneidermann Diagramme
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Methode 
+\begin_inset Quotes gld
+\end_inset
+
+read
+\begin_inset Quotes grd
+\end_inset
+
+ von ThreadA
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Read_ThreadA"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/ThreadA_read.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Algorithmus 1
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Algorithmus-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/Algorithmus1.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Algorithmus 2
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Algorithmus-2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/Algorithmus2.svg
+	height 100theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Algorithmus 3
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Algorithmus-3"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/Algorithmus3.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Algorithmus 4
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Algorithmus-4"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/Algorithmus4.svg
+	height 100theight%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Methode 
+\begin_inset Quotes gld
+\end_inset
+
+getOutputString
+\begin_inset Quotes grd
+\end_inset
+
+ von AutoKorrelationsFunktion
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:AKF_OutputString"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/AKF_getOutputString.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Methode 
+\begin_inset Quotes gld
+\end_inset
+
+write
+\begin_inset Quotes grd
+\end_inset
+
+ von ThreadC
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:write_ThreadC"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/ThreadC_write.svg
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Subsection
+Sequenzdiagramme
+\end_layout
+
+\begin_layout Section
+Bilder der resultierenden Funktionen
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:res-bilder"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out0
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out0"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/out0.png
+	height 40theight%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out1
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/out1.png
+	height 40theight%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out2
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out2"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/out2.png
+	height 40theight%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out3
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out3"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/out3.png
+	height 40theight%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out4
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out4"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/out4.png
+	height 40theight%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out5
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out5"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/out5.png
+	height 40theight%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out6
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out6"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/out6.png
+	height 40theight%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out7
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out7"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/out7.png
+	height 40theight%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out8
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out8"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/out8.png
+	height 40theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out9
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out9"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/out9.png
+	height 40theight%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Eigenhändigkeitserklärung
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ich erkläre verbindlich, dass das vorliegende Prüfprodukt von mir selbständig
+ erstellt wurde.
+ Die als Arbeitshilfe genutzten Unterlagen sind in der Arbeit vollständig
+ aufgeführt.
+ Ich versichere, dass der vorgelegte Ausdruck mit dem Inhalt der von mir
+ erstellten digitalen Version identisch ist.
+ Weder ganz noch in Teilen wurde die Arbeit bereits als Prüfungsleistung
+ vorgelegt.
+ Mir ist bewusst, dass jedes Zuwiderhandeln als Täuschungsversuch zu gelten
+ hat, der die Anerkennung des Prüfprodukts als Prüfungsleistung ausschließt.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Aachen, der 13.
+ Mai 2022
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ort, Datum
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename input/eingefügt1.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sven Bergmann
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

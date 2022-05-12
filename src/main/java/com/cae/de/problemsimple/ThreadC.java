@@ -16,9 +16,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Implementierung eines {@link WriteRunnable}s und {@link Observer}s.
- */
+/** Implementierung eines {@link WriteRunnable}s und {@link Observer}s. */
 public class ThreadC
     implements Observer<Pair<AutoKorrelationsFunktion, Integer>>,
         WriteRunnable<AutoKorrelationsFunktion> {
@@ -70,7 +68,6 @@ public class ThreadC
       return;
     }
     this.write(akfip.key());
-    this.writtenFiles.add(akfip.key().fileName());
     this.writing.set(false);
   }
 
@@ -97,6 +94,7 @@ public class ThreadC
       var br = new BufferedWriter(new FileWriter(pathToFile));
       br.write(akf.getOutputString());
       br.close();
+      this.writtenFiles.add(akf.fileName());
       return true;
     } catch (IOException e) {
       LOGGER.log(Level.SEVERE, "Konnte nicht in die Datei: \"" + pathToFile + "\" schreiben!");
