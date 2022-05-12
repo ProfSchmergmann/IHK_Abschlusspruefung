@@ -687,7 +687,27 @@ noprefix "false"
 
 \end_inset
 
- in einem Nassi-Shneidermann Diagramm beschrieben.
+ in einem Nassi-Shneidermann Diagramm beschrieben und in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:out4-kommentiert"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:out4-kommentiert"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ ist nochmal das Ganze grafisch anhand des Beispiels 4 zu erkennen.
 \end_layout
 
 \begin_layout Subsection
@@ -926,7 +946,123 @@ noprefix "false"
  Diese Liste von Paaren wird dann in zwei Arrays, xStart und yStart, umgewandelt
  und mit dem Dateinamen in ein Data Objekt gegeben und von der Methode zurückgeg
 eben.
- 
+ Das Template einer Eingabedatei sieht dann insgesamt so aus:
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+# int
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\backslash
+t
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+pos
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Intensität des Messsignals (y-Wert)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\backslash
+t
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Position des Spiegels (x-Wert)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+...
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\backslash
+t
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+...
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1037,8 +1173,8 @@ noprefix "false"
 
  in der Klasse AKF geschrieben, welche einen formatierten String für die
  Ausgabe zusammenbaut und zurückgibt.
- Da in der Klasse der Wert für die Pulsbreite, den IndexL und den indexR
- gesetzt ist, ist die erste Zeile kein Problem.
+ Da in der Klasse der Wert für die Pulsbreite, der IndexL und der indexR
+ gesetzt sind, ist die erste Zeile kein Problem.
  Die weiteren Zeilen werden dann mit den Arrays 
 \begin_inset Quotes gld
 \end_inset
@@ -1064,7 +1200,260 @@ obereEinhuellende
 \end_inset
 
  zusammengebaut.
- 
+ Die Ausgabe soll dann insgesamt so aussehen:
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="5">
+<features tabularvalignment="middle" tabularwidth="100text%">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<column alignment="left" valignment="top" width="0pt">
+<row>
+<cell multicolumn="1" alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+# FWHM = <reller Wert der Pulsbreite>, <indexL>, <indexR>
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+# pos int
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+
+\backslash
+t
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="left" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+env
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+<transformiertes Positionssignal>
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+
+\backslash
+t
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+<normierte Intensität>
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+
+\backslash
+t
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+<Wert der oberen Einhüllenden>
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+...
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+
+\backslash
+t
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+...
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\size scriptsize
+
+\backslash
+t
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+...
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1384,8 +1773,8 @@ R process(P p)
 \begin_inset Quotes grd
 \end_inset
 
- vor, wobei R der Typ des Ergebnisparameters ist und P der Type des Eingabeparam
-eters.
+ vor, wobei R der Typ des Ergebnisparameters ist und P der Typ des Eingabeparame
+ters.
  Schlussendlich wird der Schreibthread durch das Interface 
 \begin_inset Quotes gld
 \end_inset
@@ -2396,7 +2785,8 @@ utils
 
 .
  Des Weiteren wollte ich jede Thread Klasse sowohl von Observable, Observer,
- als auch einem der drei Threadinterfaces erben lassen.
+ als auch einem der drei Thread\SpecialChar softhyphen
+interfaces erben lassen.
  Hier kommt aber das Diamond-Problem zum tragen und Java verbietet daher
  das Erben mehrerer absrakter Klassen.
  Ich habe mich also für mehrere Interfaces entschieden und benutze jetzt
@@ -4516,7 +4906,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Darstellung der Zusammenarbeitung der Threads in Problem Simple
+Darstellung der Zusammenarbeit der Threads in Problem Simple
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:seq-problemsimple"
@@ -4558,7 +4948,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Darstellung der Zusammenarbeitung der Threads in Problem
+Darstellung der Zusammenarbeit der Threads in Problem
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:seq-problem"
@@ -4587,6 +4977,53 @@ name "fig:seq-problem"
 \end_inset
 
 
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Vergrößerte Zusammenarbeit der Threads in der Loop in Problem
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:seq-problem-gross"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/Problem_sequence_loop.svg
+	height 80theight%
+	rotateAngle 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -4604,7 +5041,7 @@ name "sec:res-bilder"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -4756,7 +5193,7 @@ name "fig:out3"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -4785,6 +5222,52 @@ name "fig:out4"
 
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+out4 kommentiert
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:out4-kommentiert"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/out4_kommentiert.png
+	height 40theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
@@ -4870,7 +5353,7 @@ name "fig:out6"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
