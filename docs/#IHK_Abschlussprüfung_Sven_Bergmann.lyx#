@@ -427,6 +427,13 @@ noprefix "false"
 
 \begin_layout Subsubsection
 Algorithmus 2
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Algorithmus-2"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -604,7 +611,7 @@ Zuletzt wird noch die Pulsbreite
 \begin_inset Formula $R$
 \end_inset
 
- berechnet.
+ bestimmen lässt.
  Diese sind Punkte auf der oberen Einhüllenden, wobei die Gerade die durch
  
 \begin_inset Formula $L$
@@ -642,7 +649,45 @@ Zuletzt wird noch die Pulsbreite
 \begin_inset Formula $a_{12}=\frac{1-mittelwert}{2}+mittelwert$
 \end_inset
 
- die halbe Höhe zwischen
+ die halbe Höhe zwischen Grundlinie und Maximum bestimmt.
+ Daraus kann dann der index von 
+\begin_inset Formula $L$
+\end_inset
+
+ und 
+\begin_inset Formula $R$
+\end_inset
+
+ bestimmt werden, indem jeweils von links, bzw.
+ rechts beginnend, solange der Wert des Arrays der oberen Einhüllenden ausgelese
+n wird, bis 
+\begin_inset Formula $a_{12}$
+\end_inset
+
+erreicht ist.
+ In meinem Algorithmus wird der erste Wert genommen, der darüber ist, man
+ könnte allerdings auch den letzten Wert nehmen, welcher darunter ist.
+ Die Formel ist in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:Algorithmus-4"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:Algorithmus-4"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ in einem Nassi-Shneidermann Diagramm beschrieben.
 \end_layout
 
 \begin_layout Subsection
@@ -1051,55 +1096,15 @@ Framework
 \end_layout
 
 \begin_layout Standard
-Das Paket Framework
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-s.
- 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "fig:framework"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- 
-\begin_inset CommandInset ref
-LatexCommand vpageref
-reference "fig:framework"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
- beinhaltet alle wichtigen Interfaces und eine abstrakte Klasse zur Lösung
- des gegebenen Problems.
+Das Paket Framework beinhaltet alle wichtigen Interfaces und eine abstrakte
+ Klasse zur Lösung des gegebenen Problems.
  Somit wird die geforderte Austauschbarkeit des Threads A erreicht, man
  kann aber auch alle anderen Threads austauschen.
  
 \end_layout
 
 \begin_layout Standard
-Das vorher genannte Observer-Observable-Pattern habe ich mit einem Interface
- 
-\begin_inset Quotes gld
-\end_inset
-
-Observer
-\begin_inset Quotes grd
-\end_inset
-
-
+Das vorher genannte Observer-Observable-Pattern
 \begin_inset Foot
 status collapsed
 
@@ -1108,7 +1113,7 @@ s.
  
 \begin_inset CommandInset ref
 LatexCommand formatted
-reference "fig:Observer"
+reference "fig:Obs-Obs"
 plural "false"
 caps "false"
 noprefix "false"
@@ -1118,7 +1123,7 @@ noprefix "false"
  
 \begin_inset CommandInset ref
 LatexCommand vpageref
-reference "fig:Observer"
+reference "fig:Obs-Obs"
 plural "false"
 caps "false"
 noprefix "false"
@@ -1128,6 +1133,14 @@ noprefix "false"
 
 \end_layout
 
+\end_inset
+
+ habe ich mit einem Interface 
+\begin_inset Quotes gld
+\end_inset
+
+Observer
+\begin_inset Quotes grd
 \end_inset
 
  und einer abstrakten Klasse 
@@ -1136,37 +1149,6 @@ noprefix "false"
 
 Observable
 \begin_inset Quotes grd
-\end_inset
-
-
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-s.
- 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "fig:Observable"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- 
-\begin_inset CommandInset ref
-LatexCommand vpageref
-reference "fig:Observable"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-
-\end_layout
-
 \end_inset
 
  vorgegeben.
@@ -1428,38 +1410,7 @@ Problem
 \end_layout
 
 \begin_layout Standard
-Problem
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-s.
- 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "fig:problem"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- 
-\begin_inset CommandInset ref
-LatexCommand vpageref
-reference "fig:problem"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
- beinhaltet alle Klassen zur (optimierten) Lösung des gegebenen Problems,
+Problem beinhaltet alle Klassen zur (optimierten) Lösung des gegebenen Problems,
  welche unter anderem von der Klasse und den Interfaces aus 
 \begin_inset Quotes gld
 \end_inset
@@ -2006,6 +1957,30 @@ noprefix "false"
  
 \end_layout
 
+\begin_layout Standard
+Die Zusammenarbeit dieser Threads wird auch nochmal in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:seq-problem"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:seq-problem"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ grafisch beschrieben.
+\end_layout
+
 \begin_layout Subsection
 ProblemSimple
 \end_layout
@@ -2017,37 +1992,6 @@ In
 
 problemsimple
 \begin_inset Quotes grd
-\end_inset
-
-
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-s.
- 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "fig:problemsimple"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- 
-\begin_inset CommandInset ref
-LatexCommand vpageref
-reference "fig:problemsimple"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-
-\end_layout
-
 \end_inset
 
  findet sich eine alternative Implementierung des gegebenen Problems wieder,
@@ -2246,6 +2190,30 @@ t.
  der Dateinamen gespeichert.
 \end_layout
 
+\begin_layout Standard
+Die Zusammenarbeit dieser Threads wird auch nochmal in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:seq-problemsimple"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:seq-problemsimple"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ grafisch beschrieben.
+\end_layout
+
 \begin_layout Subsection
 Utils
 \end_layout
@@ -2257,37 +2225,6 @@ Das Paket
 
 utils
 \begin_inset Quotes grd
-\end_inset
-
-
-\begin_inset Foot
-status collapsed
-
-\begin_layout Plain Layout
-s.
- 
-\begin_inset CommandInset ref
-LatexCommand formatted
-reference "fig:utils"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
- 
-\begin_inset CommandInset ref
-LatexCommand vpageref
-reference "fig:utils"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-
-\end_layout
-
 \end_inset
 
  beinhaltet zwei Klassen, 
@@ -3517,8 +3454,17 @@ In dieser großen Programmieraufgabe musste ein Softwaresystem erstellt werden,
 
 \begin_layout Standard
 Die Algorithmen im verarbeitenden Thread zu implementieren war keine wirklich
- große Schwierigkeit, einzig für das Verhalten des Indexes bei Algorithmus
- 2 für 
+ große Schwierigkeit, einzig für das Verhalten des Indexes bei 
+\begin_inset CommandInset ref
+LatexCommand nameref
+reference "fig:Algorithmus-2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ für 
 \begin_inset Formula $k<\tau$
 \end_inset
 
@@ -3547,48 +3493,10 @@ Klassendiagramme
 \end_layout
 
 \begin_layout Subsubsection
-Main
+Übersicht
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Main
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Main"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename input/Main_class.svg
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
 \begin_inset Float figure
 wide false
 sideways false
@@ -3632,169 +3540,6 @@ name "fig:com.de.cae"
 \end_layout
 
 \begin_layout Subsubsection
-Pakete
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-framework
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:framework"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename input/package_framework.svg
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-problem
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:problem"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename input/package_problem.svg
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-problemsimple
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:problemsimple"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename input/package_problemsimple.svg
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-utils
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:utils"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename input/package_utils.svg
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
 Klassen im Paket 
 \begin_inset Quotes gld
 \end_inset
@@ -3816,10 +3561,10 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Observable
+Observer-Observable
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Observable"
+name "fig:Obs-Obs"
 
 \end_inset
 
@@ -3830,7 +3575,7 @@ name "fig:Observable"
 
 
 \begin_inset Graphics
-	filename input/Observable_class.svg
+	filename input/Observer_Observable_classes.svg
 	width 100text%
 
 \end_inset
@@ -3851,44 +3596,7 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Observer
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Observer"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Graphics
-	filename input/Observer_class.svg
-	width 100text%
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
+\align center
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -3907,7 +3615,7 @@ name "fig:ProcessRunnable"
 
 \begin_inset Graphics
 	filename input/ProcessRunnable_class.svg
-	width 100text%
+	height 40theight%
 
 \end_inset
 
@@ -3927,6 +3635,7 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -3945,7 +3654,7 @@ name "fig:ReadRunnable"
 
 \begin_inset Graphics
 	filename input/ReadRunnable_class.svg
-	width 100text%
+	height 40theight%
 
 \end_inset
 
@@ -3965,6 +3674,7 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -3983,7 +3693,7 @@ name "fig:WriteRunnable"
 
 \begin_inset Graphics
 	filename input/WriteRunnable_class.svg
-	width 100text%
+	height 40theight%
 
 \end_inset
 
@@ -4018,6 +3728,7 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -4036,7 +3747,7 @@ name "fig:Algorithms"
 
 \begin_inset Graphics
 	filename input/Algorithms_class.svg
-	width 100text%
+	height 40theight%
 
 \end_inset
 
@@ -4056,6 +3767,7 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -4074,7 +3786,7 @@ name "fig:AutoKorrelationsFunktion"
 
 \begin_inset Graphics
 	filename input/AutoKorrelationsFunktion_class.svg
-	width 100text%
+	height 40theight%
 
 \end_inset
 
@@ -4094,6 +3806,7 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -4112,7 +3825,7 @@ name "fig:Data"
 
 \begin_inset Graphics
 	filename input/Data_class.svg
-	width 100text%
+	height 30theight%
 
 \end_inset
 
@@ -4132,6 +3845,7 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -4150,14 +3864,10 @@ name "fig:ThreadA"
 
 \begin_inset Graphics
 	filename input/ThreadA_class.svg
-	width 100text%
+	height 40theight%
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -4170,6 +3880,7 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -4188,7 +3899,7 @@ name "fig:ThreadB"
 
 \begin_inset Graphics
 	filename input/ThreadB_class.svg
-	width 100text%
+	height 40theight%
 
 \end_inset
 
@@ -4208,6 +3919,7 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -4226,7 +3938,7 @@ name "fig:ThreadC"
 
 \begin_inset Graphics
 	filename input/ThreadC_class.svg
-	width 100text%
+	height 40theight%
 
 \end_inset
 
@@ -4379,7 +4091,7 @@ name "fig:CmdLineParser"
 
 \begin_inset Graphics
 	filename input/CmdLineParser_class.svg
-	height 80theight%
+	height 60theight%
 
 \end_inset
 
@@ -4418,7 +4130,7 @@ name "fig:Pair"
 
 \begin_inset Graphics
 	filename input/Pair_class.svg
-	width 100text%
+	height 20theight%
 
 \end_inset
 
@@ -4479,6 +4191,7 @@ name "fig:Read_ThreadA"
 \align center
 \begin_inset Graphics
 	filename input/ThreadA_read.svg
+	height 80theight%
 
 \end_inset
 
@@ -4495,7 +4208,7 @@ name "fig:Read_ThreadA"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -4536,7 +4249,7 @@ name "fig:Algorithmus-1"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -4768,6 +4481,89 @@ name "fig:write_ThreadC"
 
 \begin_layout Subsection
 Sequenzdiagramme
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Darstellung der Zusammenarbeitung der Threads in Problem Simple
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:seq-problemsimple"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/ProblemSimple_sequence.svg
+	height 80theight%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Darstellung der Zusammenarbeitung der Threads in Problem
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:seq-problem"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/Problem_sequence.svg
+	height 90theight%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
