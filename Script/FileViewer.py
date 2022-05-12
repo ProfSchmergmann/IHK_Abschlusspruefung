@@ -63,8 +63,8 @@ class FileViewer():
             if not plt.fignum_exists(fignum):
                 break
 
-            plt.pause(0.05)
-            time.sleep(0.05)
+            plt.pause(5.05)
+            time.sleep(5.05)
 
             currNum += 1
             currNum = (currNum - startNum) % (endNum - startNum + 1) + startNum

@@ -636,7 +636,7 @@ Zuletzt wird noch die Pulsbreite
  wird, die in diesem Bereich liegen.
  Unter Benutzung der oberen Gaußklammer mit der analogen Definition zur
  unteren, 
-\begin_inset Formula $,\lceil x\rceil\coloneqq\min\{k\in\mathbb{Z}\:|\:k\geq x\}$
+\begin_inset Formula $\lceil x\rceil\coloneqq\min\{k\in\mathbb{Z}\:|\:k\geq x\}$
 \end_inset
 
 , ist die Anzahl dann 
@@ -2905,7 +2905,7 @@ Da keine wirklichen Prüfdaten gegeben waren, gegen die man die Algorithmen
  sinnvoll.
  Es konnte also anhand der resultierenden Bilder
 \begin_inset Foot
-status open
+status collapsed
 
 \begin_layout Plain Layout
 s.
@@ -3474,6 +3474,29 @@ noprefix "false"
 
  musste eine geeignete Wahl getroffen werden.
  
+\end_layout
+
+\begin_layout Standard
+Falls das Programm später tatsächlich in einem Produktivsystem genutzt werden
+ würde, könnte man sich überlegen, die Daten welche letztendlich in Thread
+ C ankommen, direkt anzeigen zu lassen.
+ So hätte man immer einen grafischen Bezug zum aktuellen Versuchsaufbau.
+ Des Weiteren könnte eine Client-Server Architektur implementiert werden,
+ wobei der Server den Thread A darstellt und mit diesen 20Hz Daten über
+ ein beliebiges Protokoll überträgt.
+ Diese Daten könnten dann wiederum von unterschiedlichen Clients, sprich
+ unterschiedlich implementierten Auswertungsprogrammen, abgeholt und verarbeitet
+ werden.
+ Somit hätte man eine weitere Ebene zur Austauschbarkeit geschaffen.
+ Diese Clients könnten dann natürlich immer andere Algorithmen implementieren
+ und selbst sozusagen wieder als Server funktionieren, da nun auch unterschiedli
+che Schreibthreads als Client fungieren könnten.
+ Braucht der Benutzer beispielsweise nur die eben angesprochene grafische
+ Ausgabe wäre es ja wenig sinnvoll, immer alle Daten zu schreiben, besser
+ könnten die Daten dann einfach direkt vom Clienten angezeigt werden.
+ Andersrum, wenn die Daten noch weiter ausgewerten werden sollten, oder
+ auch nur abgespeichert werden sollten, wäre es auch nicht sinnvoll, diese
+ immer wieder anzeigen zu lassen.
 \end_layout
 
 \begin_layout Standard
@@ -4581,7 +4604,7 @@ name "sec:res-bilder"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
