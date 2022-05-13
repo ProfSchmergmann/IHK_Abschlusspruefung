@@ -109,6 +109,13 @@ public class ThreadA extends Observable<Pair<Data, Integer>> implements ReadRunn
           }
         }
       }
+    } else {
+      LOGGER.log(
+          Level.SEVERE,
+          "Keine Daten im Ordner "
+              + this.pathToInputFolder
+              + " oder Ordner nicht verfügbar! Beende das Programm!");
+      System.exit(0);
     }
   }
 }

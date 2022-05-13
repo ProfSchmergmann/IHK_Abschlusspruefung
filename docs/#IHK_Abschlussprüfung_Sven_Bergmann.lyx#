@@ -222,7 +222,26 @@ begin{flushleft}
 
 		
 \backslash
-begin{tabular}{ll} 		
+begin{tabular}{ll}
+\end_layout
+
+\begin_layout Plain Layout
+
+			Vorgelegt an: & Industrie- und Handelskammer Aachen 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			Ausbildungsberuf: & Mathematisch-technische(r) Softwareentwickler(in)
+ 
+\backslash
+
+\backslash
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -236,9 +255,7 @@ begin{tabular}{ll}
 
 \begin_layout Plain Layout
 
-			Vorgelegt am: & 
-\backslash
-today 
+			Azubinummer: & 0000905905 
 \backslash
 
 \backslash
@@ -256,7 +273,18 @@ today
 
 \begin_layout Plain Layout
 
-			Ausbildungsbetrieb: & CAE GmbH 	
+			Ausbildungsbetrieb: & CAE GmbH 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+			Vorgelegt am: & 
+\backslash
+today
 \end_layout
 
 \begin_layout Plain Layout
@@ -397,11 +425,19 @@ Als erstes werden alle
 
 \end_inset
 
-Des Weiteren werden noch alle y-Werte normiert, sprich jeder Wert 
+Des Weiteren werden noch alle 
+\begin_inset Formula $y$
+\end_inset
+
+-Werte normiert, sprich jeder Wert 
 \begin_inset Formula $y_{k}$
 \end_inset
 
- wird durch das Maximum aller y-Werte geteilt.
+ wird durch das Maximum aller 
+\begin_inset Formula $y$
+\end_inset
+
+-Werte geteilt.
  Die Formel ist in 
 \begin_inset CommandInset ref
 LatexCommand formatted
@@ -562,15 +598,29 @@ ktion oben komplett einschnürt.
 \begin_inset Formula $\left[0,x\right]$
 \end_inset
 
- für x gesucht, so lange, wie der x Wert noch nicht das globale Maximum
- erreicht hat.
+ für 
+\begin_inset Formula $x$
+\end_inset
+
+ gesucht, so lange, wie der 
+\begin_inset Formula $x$
+\end_inset
+
+-Wert noch nicht das globale Maximum erreicht hat.
  Auf der anderen Seite wird dann im Bereich von 
 \begin_inset Formula $\left[y,1\right]$
 \end_inset
 
- so lange lokale Maxima gesucht, wie der y Wert noch nicht das globale Maximum
- erreicht hat.
- Am Ende wird noch der x Wert des globalen Maximums gesetzt.
+ so lange lokale Maxima gesucht, wie der 
+\begin_inset Formula $y$
+\end_inset
+
+-Wert noch nicht das globale Maximum erreicht hat.
+ Am Ende wird noch der 
+\begin_inset Formula $x$
+\end_inset
+
+-Wert des globalen Maximums gesetzt.
  Die Formel ist in 
 \begin_inset CommandInset ref
 LatexCommand formatted
@@ -688,6 +738,26 @@ noprefix "false"
 \end_inset
 
  in einem Nassi-Shneidermann Diagramm beschrieben und in 
+\begin_inset CommandInset ref
+LatexCommand formatted
+reference "fig:out4-kommentiert"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "fig:out4-kommentiert"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ ist nochmal das Ganze grafisch anhand des Beispiels 4 zu erkennen.
 \end_layout
 
 \begin_layout Subsection
@@ -876,8 +946,15 @@ t
 \end_inset
 
  getrennt sind.
- Hierbei ist die erste Zahl der y-Wert, also die Intensität des Signals
- und die zweite Zahl der x-Wert, also die Position des Spiegels.
+ Hierbei ist die erste Zahl der 
+\begin_inset Formula $y$
+\end_inset
+
+-Wert, also die Intensität des Signals und die zweite Zahl der 
+\begin_inset Formula $x$
+\end_inset
+
+-Wert, also die Position des Spiegels.
  Falls während des Einlesevorgangs eine Exception geschmissen wird, wird
  der Vorgang einfach abgebrochen und null zurückgegeben.
  Das habe ich so realisiert, da der ThreadA
@@ -981,7 +1058,11 @@ pos
 \begin_inset Text
 
 \begin_layout Plain Layout
-Intensität des Messsignals (y-Wert)
+Intensität des Messsignals (
+\begin_inset Formula $y$
+\end_inset
+
+-Wert)
 \end_layout
 
 \end_inset
@@ -1001,7 +1082,11 @@ t
 \begin_inset Text
 
 \begin_layout Plain Layout
-Position des Spiegels (x-Wert)
+Position des Spiegels (
+\begin_inset Formula $x$
+\end_inset
+
+-Wert)
 \end_layout
 
 \end_inset
@@ -1902,8 +1987,15 @@ https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Record.ht
 
 \end_inset
 
- implementiert ist und den Namen der Datei, das Array der eingelesenen x-Werte
- und das Array der eingelesenen y-Werte beinhaltet.
+ implementiert ist und den Namen der Datei, das Array der eingelesenen 
+\begin_inset Formula $x$
+\end_inset
+
+-Werte und das Array der eingelesenen 
+\begin_inset Formula $y$
+\end_inset
+
+-Werte beinhaltet.
  Diese Werte werden dann intern durch die Algorithmen zu einem neuen Objekt
  vom Typen 
 \begin_inset Quotes gld
@@ -1918,8 +2010,15 @@ Funktion
  zusammengebaut.
  Dieser Typ ist ebenfalls als Record realisiert und hält den Dateinamen,
  die Pulsbreite, den indexL, den indexR, das double-Array der transformierten
- x-Werte, das double-Array der normierten y-Werte und das double-Array der
- Werte der oberen Einhüllenden.
+ 
+\begin_inset Formula $x$
+\end_inset
+
+-Werte, das double-Array der normierten 
+\begin_inset Formula $y$
+\end_inset
+
+-Werte und das double-Array der Werte der oberen Einhüllenden.
 \end_layout
 
 \begin_layout Standard
@@ -1974,7 +2073,7 @@ Runnable<Data>
 \begin_inset Quotes gld
 \end_inset
 
-Observable< Pair<Data, Integer>>
+Observable<Pair<Data, Integer>>
 \begin_inset Quotes grd
 \end_inset
 
@@ -2472,7 +2571,11 @@ Funktion, Integer>>
 \begin_inset Quotes gld
 \end_inset
 
-Observer <Pair<Data, Integer> >
+Ob\SpecialChar softhyphen
+ser\SpecialChar softhyphen
+ver<Pair<Data, \SpecialChar softhyphen
+Integer>\SpecialChar softhyphen
+>
 \begin_inset Quotes grd
 \end_inset
 
@@ -3318,8 +3421,16 @@ noprefix "false"
  Algorithmus nicht überprüft, da kein Referenzrahmen existiert oder gegeben
  ist, wodurch man die Messwerte auf Korrektheit prüfen könnte.
  Vielmehr ist es der Fall, dass die Kurve durch nur einen Ausreißer mit
- einem Unterschied von 2 Stellen, egal ob bei den x-, oder y-Werten, sich
- sehr verzerrt und überhaupt nicht mehr der ursprünglichen Kurve entspricht.
+ einem Unterschied von 2 Stellen, egal ob bei den 
+\begin_inset Formula $x$
+\end_inset
+
+-, oder 
+\begin_inset Formula $y$
+\end_inset
+
+-Werten, sich sehr verzerrt und überhaupt nicht mehr der ursprünglichen
+ Kurve entspricht.
 \end_layout
 
 \begin_layout Section
@@ -3807,7 +3918,11 @@ Zusammenfassung und Ausblick
 In dieser großen Programmieraufgabe musste ein Softwaresystem erstellt werden,
  welches theoretisch aus drei unabhängigen Systemen besteht.
  Gegeben war die Aufgabe, einen Autokorrelator zu simulieren, welcher mit
- 20Hz neue Messdaten liefert, was durch einen eigenständigen Thread realisiert
+ 
+\begin_inset Formula $20Hz$
+\end_inset
+
+ neue Messdaten liefert, was durch einen eigenständigen Thread realisiert
  werden sollte.
  Um die Daten zu verarbeiten wurde ein weiterer Thread benötigt, der neue
  Messdaten überspringen sollte, falls diese zu schnell geschickt werden
@@ -4880,7 +4995,7 @@ Sequenzdiagramme
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -4905,7 +5020,7 @@ name "fig:seq-problemsimple"
 \align center
 \begin_inset Graphics
 	filename input/ProblemSimple_sequence.svg
-	height 80theight%
+	height 90theight%
 
 \end_inset
 
@@ -4922,7 +5037,7 @@ name "fig:seq-problemsimple"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -4947,7 +5062,7 @@ name "fig:seq-problem"
 \align center
 \begin_inset Graphics
 	filename input/Problem_sequence.svg
-	height 90theight%
+	height 100theight%
 
 \end_inset
 
@@ -4960,11 +5075,7 @@ name "fig:seq-problem"
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
+status open
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -4989,7 +5100,7 @@ name "fig:seq-problem-gross"
 \align center
 \begin_inset Graphics
 	filename input/Problem_sequence_loop.svg
-	height 80theight%
+	height 100theight%
 	rotateAngle 90
 
 \end_inset
@@ -5173,7 +5284,7 @@ name "fig:out3"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
@@ -5211,7 +5322,7 @@ name "fig:out4"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -5230,6 +5341,17 @@ name "fig:out4-kommentiert"
 
 
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename input/out4_kommentiert.png
+	height 40theight%
 
 \end_inset
 
@@ -5322,7 +5444,7 @@ name "fig:out6"
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Caption Standard
