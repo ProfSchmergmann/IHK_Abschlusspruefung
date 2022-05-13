@@ -115,7 +115,7 @@ public class ThreadA extends Observable<Pair<Data, Integer>> implements ReadRunn
           "Keine Daten im Ordner "
               + this.pathToInputFolder
               + " oder Ordner nicht verfügbar! Beende das Programm!");
-      System.exit(0);
     }
+    System.exit(0);
   }
 }
